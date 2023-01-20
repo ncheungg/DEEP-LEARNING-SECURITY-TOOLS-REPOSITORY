@@ -1,0 +1,11 @@
+{
+  "attack_name" : "FGM",
+  "model_name" : "test_model",
+  "dataset_name" : "cifar10-test.tfrecord-00000-of-00001",
+  "epsilon" : 0.05,
+  "epsilon_iter" : 0.01,
+  "attack_iter" : 40,
+  "order_of_norm" : "inf",
+  "decay_factor" : 1.0
+}
+
