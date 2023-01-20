@@ -2,6 +2,8 @@
 
 [2022 COE ENGINEERING DESIGN PROJECT (RSA02)](https://www.ecb.torontomu.ca/capstone/topics/2022/RSA02.html)
 
+[https://rsa02.netlify.app/](https://rsa02.netlify.app/)
+
 ## FACULTY LAB COORDINATOR
 
 [Reza Samavi](https://www.ecb.torontomu.ca/~samavi/)
