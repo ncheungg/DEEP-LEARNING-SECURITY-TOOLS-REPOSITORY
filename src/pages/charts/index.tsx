@@ -176,7 +176,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.description}>Sample Charts</div>
+        <div className={styles.description}>Example Charts</div>
         <div className={styles.Chart}>
           <Bar
             data={data}
