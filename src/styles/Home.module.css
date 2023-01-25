@@ -1,4 +1,5 @@
 .main {
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -6,16 +7,56 @@
   padding: 6rem;
   min-height: 100vh;
 }
+.Chart {
+  position: absolute;
+  top: 100px;
+  right: 75%; /*Positions 50% from right (right edge will be at center) */
+  margin-right: -45px;
+  align-items: inherit;
+  height: 400px;
+  width: 400px;
+  max-width: var(--max-width);
+  /* width: 100%; */
+  /* background-color: powderblue; */
+}
 
+.Chart2 {
+  position: absolute;
+  top: 100px;
+  right: 75%; /*Positions 50% from right (right edge will be at center) */
+  margin-right: -500px;
+  align-items: inherit;
+  height: 400px;
+  width: 400px;
+  max-width: var(--max-width);
+  /* width: 100%; */
+  /* background-color: powderblue; */
+}
+
+.Chart3 {
+  position: absolute;
+  top: 100px;
+  right: 75%; /*Positions 50% from right (right edge will be at center) */
+  margin-right: -945px;
+  align-items: inherit;
+  height: 400px;
+  width: 400px;
+  max-width: var(--max-width);
+  /* width: 100%; */
+  /* background-color: powderblue; */
+}
 .description {
   display: inherit;
-  justify-content: inherit;
+  position: absolute;
+  top: 5px;
+  justify-content: center;
   align-items: inherit;
-  font-size: 0.85rem;
+  font-size: 1.85rem;
   max-width: var(--max-width);
   width: 100%;
   z-index: 2;
   font-family: var(--font-mono);
+  color: black;
 }
 
 .description a {
@@ -97,7 +138,7 @@
 
 .center::before,
 .center::after {
-  content: '';
+  content: "";
   left: 50%;
   position: absolute;
   filter: blur(45px);
@@ -125,7 +166,7 @@
 
 .thirteen::before,
 .thirteen::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
 }
