@@ -2,6 +2,54 @@ import tensorflow as tf
 import foolbox as fb
 import numpy as np
 import matplotlib.pyplot as plt
+import tensorflow_datasets as tfds
+
+import shutil
+import io
+import zipfile
+
+from google.cloud import storage
+import functions_framework
+
+# constants
+GCP_PROJECT_ID = "silken-campus-375517"
+BUCKET_NAME = "capstone-test-bucket"
+
+
+def download_blob(bucket_name, source_blob_name, destination_folder_name):
+    storage_client = storage.Client(project=GCP_PROJECT_ID)
+
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(source_blob_name)
+    data = io.BytesIO(blob.download_as_string())
+
+    with zipfile.ZipFile(data) as z:
+        z.extractall('/tmp/')
+
+
+@functions_framework.http
+def attack_endpoint(request):
+    request_json = request.get_json(silent=True)
+
+    model_name = request_json['model_name']
+    dataset_name = request_json['dataset_name']
+
+    # load model from gcp bucket
+    download_blob(BUCKET_NAME, model_name, model_name[:-4])
+    model = tf.keras.models.load_model(f'/tmp/{model_name[:-4]}')
+
+    # remove model from tmp cloud function storage
+    shutil.rmtree(f"/tmp/{model_name[:-4]}", ignore_errors=True)
+
+    # load dataset from gcp bucket
+    download_blob(BUCKET_NAME, model_name, dataset_name[:-4])
+    builder = tfds.builder_from_directory(f'/tmp/{dataset_name[:-4]}')
+    dataset = builder.as_dataset(split='test[:2%]', batch_size=128)
+
+    # remove model from tmp cloud function storage
+    # shutil.rmtree(f"/tmp/{dataset_name[:-4]}", ignore_errors=True)
+
+
 
 
 def linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
@@ -28,7 +76,11 @@ def linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, l
 
 
 if __name__ == "__main__":
-    model = tf.keras.applications.ResNet50V2(weights="imagenet")
+    model = tf.keras.models.load_model(r'D:\Nathan\Downloads\resnet_50_v2')
+
+    builder = tfds.builder_from_directory(r'D:\Nathan\Downloads\cifar10')
+    dataset = builder.as_dataset(split='test[:2%]', batch_size=128)
+
     model_lower_bound = -1
     model_upper_bound = 1
     images, labels = fb.utils.samples(
@@ -36,5 +88,6 @@ if __name__ == "__main__":
         batchsize=30)
     epsilon_max = 0.01
     epsilon_num = 21
+
 
     linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num)
