@@ -1,0 +1,4 @@
+tensorflow
+foolbox
+matplotlib
+numpy
