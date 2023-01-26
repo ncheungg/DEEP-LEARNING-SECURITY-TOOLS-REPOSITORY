@@ -13,8 +13,6 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import faker from "faker";
-
 import React, { useState, useEffect, use } from "react";
 
 ChartJS.register(
@@ -176,7 +174,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.description}>Example Charts</div>
+        <div className={styles.description}>Sample Charts</div>
         <div className={styles.Chart}>
           <Bar
             data={data}
