@@ -76,9 +76,7 @@ def linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, l
 
 
 if __name__ == "__main__":
-    # model = tf.keras.applications.ResNet50V2(weights="imagenet")
-
-    model = tf.keras.models.load_model(r'D:\Nathan\Downloads\test_model')
+    model = tf.keras.models.load_model(r'D:\Nathan\Downloads\resnet_50_v2')
 
     builder = tfds.builder_from_directory(r'D:\Nathan\Downloads\cifar10')
     dataset = builder.as_dataset(split='test[:2%]', batch_size=128)
@@ -91,6 +89,5 @@ if __name__ == "__main__":
     epsilon_max = 0.01
     epsilon_num = 21
 
-    print(images)
 
-    # linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num)
+    linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num)
