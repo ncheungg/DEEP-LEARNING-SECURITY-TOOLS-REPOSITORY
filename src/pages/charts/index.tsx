@@ -52,13 +52,10 @@ const data = {
 };
 
 const options = {
-  osition: "right",
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: {
-      position: "top",
-    },
+    legend: {},
     title: {
       display: true,
       text: "Foolbox Attack Strength",
@@ -97,13 +94,10 @@ const data2 = {
 };
 
 const options2 = {
-  osition: "right",
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: {
-      position: "top",
-    },
+    legend: {},
     title: {
       display: true,
       //position: "center",
@@ -143,13 +137,10 @@ const data3 = {
 };
 
 const options3 = {
-  osition: "right",
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: {
-      position: "top",
-    },
+    legend: {},
     title: {
       display: true,
       //position: "center",
@@ -176,31 +167,13 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>Sample Charts</div>
         <div className={styles.Chart}>
-          <Bar
-            data={data}
-            options={options}
-            position="left"
-            height="300px"
-            width="300px"
-          />
+          <Bar data={data} options={options} height="300px" width="300px" />
         </div>
         <div className={styles.Chart2}>
-          <Bar
-            data={data2}
-            options={options2}
-            position="left"
-            height="300px"
-            width="300px"
-          />
+          <Bar data={data2} options={options2} height="300px" width="300px" />
         </div>
         <div className={styles.Chart3}>
-          <Bar
-            data={data3}
-            options={options3}
-            position="left"
-            height="300px"
-            width="300px"
-          />
+          <Bar data={data3} options={options3} height="300px" width="300px" />
         </div>
         <div className={styles.grid}></div>
       </main>
