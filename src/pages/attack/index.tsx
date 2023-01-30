@@ -7,8 +7,6 @@ export default function Home() {
     <Layout>
       <Navbar />
 
-      
-
       <Footer />
     </Layout>
   );
