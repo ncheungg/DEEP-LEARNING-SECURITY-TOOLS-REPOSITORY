@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
+import Image from 'next/image'
 
 // const items: MenuProps["items"] = [
 //   {
@@ -63,6 +64,21 @@ import { Menu } from "antd";
 const items: MenuProps["items"] = [
   {
     label: (
+      <img
+        style={{
+          // justifyContent: "center",
+          // alignItems: "center",
+          width: 40,
+          height: 40,
+        }}
+        src="https://www.dropbox.com/s/veip84995nzd0mb/navlogo.png?raw=1"
+        alt="Logo"
+      />
+    ),
+    key: "logo",
+  },
+  {
+    label: (
       <a href="/" rel="noopener noreferrer">
         Home
       </a>
@@ -107,7 +123,18 @@ const Navbar: React.FC = () => {
     setCurrent(e.key);
   };
 
-  return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+  return (
+    <Menu
+      onClick={onClick}
+      selectedKeys={[current]}
+      mode="horizontal"
+      items={items}
+      style={{
+        justifyContent: "right",
+        paddingRight: "2em",
+      }}
+    />
+  );
 };
 
 export default Navbar;
