@@ -32,6 +32,19 @@ def process_data(x, dataset_info):
 
 @functions_framework.http
 def cleverhans_fgm_func(request):
+
+    if request.method == 'OPTIONS':
+        # Allows POST requests from any origin with the Content-Type
+        # header and caches preflight response for an 3600s
+        headers = {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Max-Age': '3600'
+        }
+
+        return ('', 204, headers)
+
     request_json = request.get_json(silent=True)
     
     bucket_name = "dlstr-bucket"
@@ -78,8 +91,12 @@ def cleverhans_fgm_func(request):
 
         progress_bar_test.add(x.shape[0])
        
-    message = "test acc on Fast Gradient Method adversarial examples (%): {:.3f}".format(test_acc_fgm.result() * 100)
+    data = {"accuracy" : round(float(test_acc_fgm.result()) * 100, 2)}
   
-    return { 
-        'result: ' : message
-    } 
+    # Set CORS headers for the main request
+    headers = {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+        }
+
+    return (json.dumps(data), 200, headers)
