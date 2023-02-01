@@ -122,7 +122,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <Col span={18} offset={3}>
+    <div>
       <a style={{ width: 40, height: 40, position: "absolute", paddingLeft: "1em", paddingTop: "2px" }} href="/">
         <img style={{ width: 40, height: 40 }} src="https://www.dropbox.com/s/veip84995nzd0mb/navlogo.png?raw=1" alt="Logo" />
       </a>
@@ -134,9 +134,10 @@ const Navbar: React.FC = () => {
         style={{
           justifyContent: "right",
           paddingRight: "2em",
+          width: "65em",
         }}
       />
-    </Col>
+    </div>
   );
 };
 
