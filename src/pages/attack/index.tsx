@@ -12,6 +12,9 @@ import BasicIterativeForm from "@/component/AttackForms/BasicIterativeForm";
 import UploadModel from "@/component/upload/UploadModel";
 import UploadTest from "@/component/upload/UploadTest";
 import FormSubmitBtn from "@/component/Button/FormSubmitBtn";
+import SPSAForm from "@/component/AttackForms/SPSAForm";
+import CleverhansRepoForm from "@/component/AttackRepoForms/AccordionAttack";
+import AccordionAttack from "@/component/AttackRepoForms/AccordionAttack";
 
 const { Title } = Typography;
 
@@ -46,13 +49,19 @@ export default function Home() {
           <Title level={3} style={{ paddingTop: "1em", paddingBottom: "0.5em" }}>
             Step 3: Select attacks to run on your model (Include Parameters)
           </Title>
-          <FastGradientForm />
+
+          {/* <FastGradientForm />
           <br />
           <BasicIterativeForm />
           <br />
           <MomentumIterativeForm />
           <br />
           <MadryetalForm />
+          <br />
+          <SPSAForm />
+          <br /> */}
+
+          <AccordionAttack />
 
           <Title level={3} style={{ paddingTop: "1em", paddingBottom: "0.5em" }}>
             Step 4: Submit the form to start attacking model
