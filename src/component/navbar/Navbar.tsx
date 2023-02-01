@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
+import { AppstoreOutlined, CloudSyncOutlined, HomeOutlined, InfoCircleOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons";
+import { Col, MenuProps } from "antd";
 import { Menu } from "antd";
-import Image from 'next/image'
+import Image from "next/image";
 
 // const items: MenuProps["items"] = [
 //   {
@@ -62,21 +62,19 @@ import Image from 'next/image'
 // ];
 
 const items: MenuProps["items"] = [
-  {
-    label: (
-      <img
-        style={{
-          // justifyContent: "center",
-          // alignItems: "center",
-          width: 40,
-          height: 40,
-        }}
-        src="https://www.dropbox.com/s/veip84995nzd0mb/navlogo.png?raw=1"
-        alt="Logo"
-      />
-    ),
-    key: "logo",
-  },
+  // {
+  //   label: (
+  //     <img
+  //       style={{
+  //         width: 40,
+  //         height: 40,
+  //       }}
+  //       src="https://www.dropbox.com/s/veip84995nzd0mb/navlogo.png?raw=1"
+  //       alt="Logo"
+  //     />
+  //   ),
+  //   key: "logo",
+  // },
   {
     label: (
       <a href="/" rel="noopener noreferrer">
@@ -84,7 +82,7 @@ const items: MenuProps["items"] = [
       </a>
     ),
     key: "home",
-    // icon: <MailOutlined />,
+    icon: <HomeOutlined />,
   },
   {
     label: (
@@ -93,7 +91,7 @@ const items: MenuProps["items"] = [
       </a>
     ),
     key: "attack",
-    // icon: <MailOutlined />,
+    icon: <CloudSyncOutlined />,
   },
   {
     label: (
@@ -102,7 +100,7 @@ const items: MenuProps["items"] = [
       </a>
     ),
     key: "about",
-    // icon: <MailOutlined />,
+    icon: <InfoCircleOutlined />,
   },
   {
     label: (
@@ -111,7 +109,7 @@ const items: MenuProps["items"] = [
       </a>
     ),
     key: "contact",
-    // icon: <MailOutlined />,
+    icon: <MailOutlined />,
   },
 ];
 
@@ -124,16 +122,21 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <Menu
-      onClick={onClick}
-      selectedKeys={[current]}
-      mode="horizontal"
-      items={items}
-      style={{
-        justifyContent: "right",
-        paddingRight: "2em",
-      }}
-    />
+    <Col span={18} offset={3}>
+      <a style={{ width: 40, height: 40, position: "absolute", paddingLeft: "1em", paddingTop: "2px" }} href="/">
+        <img style={{ width: 40, height: 40 }} src="https://www.dropbox.com/s/veip84995nzd0mb/navlogo.png?raw=1" alt="Logo" />
+      </a>
+      <Menu
+        onClick={onClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={items}
+        style={{
+          justifyContent: "right",
+          paddingRight: "2em",
+        }}
+      />
+    </Col>
   );
 };
 
