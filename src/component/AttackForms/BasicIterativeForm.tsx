@@ -15,7 +15,7 @@ const BasicIterativeForm: React.FC = () => {
   return (
     <>
       <Checkbox checked={componentDisabled} onChange={(e) => setComponentDisabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
-        Basic Iterative Method Attack
+        <b>Basic Iterative Method Attack</b>
       </Checkbox>
       <Form
         labelCol={{ span: 6 }}

@@ -13,9 +13,9 @@ const FastGradientForm: React.FC = () => {
   };
 
   return (
-    <>
+    <div style={{ paddingBottom: "1.3em" }}>
       <Checkbox checked={componentDisabled} onChange={(e) => setComponentDisabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
-        Fast Gradient Method Attack
+        <b>Fast Gradient Method Attack</b>
       </Checkbox>
       <Form
         labelCol={{ span: 6 }}
@@ -40,7 +40,7 @@ const FastGradientForm: React.FC = () => {
           </Form.Item>
         </Tooltip>
       </Form>
-    </>
+    </div>
   );
 };
 

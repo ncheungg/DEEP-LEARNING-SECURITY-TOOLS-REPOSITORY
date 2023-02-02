@@ -1,7 +1,9 @@
 import React from "react";
 import { Collapse } from "antd";
-import CleverhansRepoFormCollapse from "./CleverhansRepoFormCollapse";
-import CleverhansRepoForm from "./CleverhansRepoFormCollapse";
+import CleverhansRepoFormCollapse from "./CleverhansLib";
+import CleverhansRepoForm from "./CleverhansLib";
+import CleverhansLib from "./CleverhansLib";
+import FoolboxLib from "./FoolboxLib";
 
 const { Panel } = Collapse;
 
@@ -14,16 +16,16 @@ const text = `
 const AccordionAttack: React.FC = () => (
   <Collapse accordion>
     <Panel header="Cleverhans Attack Library" key="1">
-      <CleverhansRepoForm />
+      <CleverhansLib />
     </Panel>
     <Panel header="Foolbox Attack Library" key="2">
-      <CleverhansRepoForm />
+      <FoolboxLib />
     </Panel>
     <Panel header="ML Privacy Meter Attack Library" key="3">
-      <CleverhansRepoForm />
+      <CleverhansLib />
     </Panel>
     <Panel header="Dioptra" key="4">
-      <CleverhansRepoForm />
+      <CleverhansLib />
     </Panel>
   </Collapse>
 );

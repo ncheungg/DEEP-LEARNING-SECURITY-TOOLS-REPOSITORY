@@ -15,7 +15,7 @@ const MomentumIterativeForm: React.FC = () => {
   return (
     <>
       <Checkbox checked={componentDisabled} onChange={(e) => setComponentDisabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
-        Momentum Iterative Method Attack
+        <b>Momentum Iterative Method Attack</b>
       </Checkbox>
       <Form
         labelCol={{ span: 6 }}

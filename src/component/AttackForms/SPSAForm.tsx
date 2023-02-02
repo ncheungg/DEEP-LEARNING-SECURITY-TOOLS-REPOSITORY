@@ -15,7 +15,7 @@ const SPSAForm: React.FC = () => {
   return (
     <>
       <Checkbox checked={componentDisabled} onChange={(e) => setComponentDisabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
-        SPSA Method Attack
+        <b>SPSA Method Attack</b>
       </Checkbox>
       <Form
         labelCol={{ span: 6 }}

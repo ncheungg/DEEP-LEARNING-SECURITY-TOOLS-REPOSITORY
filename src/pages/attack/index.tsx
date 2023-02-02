@@ -50,17 +50,6 @@ export default function Home() {
           Step 3: Select attacks to run on your model (Include Parameters)
         </Title>
 
-        {/* <FastGradientForm />
-          <br />
-          <BasicIterativeForm />
-          <br />
-          <MomentumIterativeForm />
-          <br />
-          <MadryetalForm />
-          <br />
-          <SPSAForm />
-          <br /> */}
-
         <AccordionAttack />
 
         <Title level={3} style={{ paddingTop: "1em", paddingBottom: "0.5em" }}>
