@@ -7,10 +7,12 @@ const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 const MomentumIterativeForm: React.FC = () => {
-  const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
+  const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
     setComponentDisabled(disabled);
   };
+
+  MomentumIterativeForm.displayName = "MomentumIterativeForm";
 
   return (
     <>
@@ -22,7 +24,7 @@ const MomentumIterativeForm: React.FC = () => {
         wrapperCol={{ span: 14 }}
         layout="horizontal"
         onValuesChange={onFormLayoutChange}
-        disabled={componentDisabled}
+        disabled={!componentDisabled}
         style={{ maxWidth: 600 }}
       >
         <Tooltip title="Epsilon Definition: The maximum distortion of adversarial example compared to original input.">
@@ -59,4 +61,4 @@ const MomentumIterativeForm: React.FC = () => {
   );
 };
 
-export default () => <MomentumIterativeForm />;
+export default MomentumIterativeForm;

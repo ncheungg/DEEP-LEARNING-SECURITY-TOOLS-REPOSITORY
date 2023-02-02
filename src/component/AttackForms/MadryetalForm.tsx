@@ -7,10 +7,12 @@ const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 const MadryetalForm: React.FC = () => {
-  const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
+  const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
     setComponentDisabled(disabled);
   };
+
+  MadryetalForm.displayName = "MadryetalForm";
 
   return (
     <>
@@ -22,7 +24,7 @@ const MadryetalForm: React.FC = () => {
         wrapperCol={{ span: 14 }}
         layout="horizontal"
         onValuesChange={onFormLayoutChange}
-        disabled={componentDisabled}
+        disabled={!componentDisabled}
         style={{ maxWidth: 600 }}
       >
         <Tooltip title="Epsilon Definition: The maximum distortion of adversarial example compared to original input.">
@@ -54,4 +56,4 @@ const MadryetalForm: React.FC = () => {
   );
 };
 
-export default () => <MadryetalForm />;
+export default MadryetalForm;

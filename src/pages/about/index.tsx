@@ -33,7 +33,7 @@ export default function Home() {
         <br />
         <br />
         <Title level={3}>
-          We utilize the web's most trusted machine model security APIs to ensure that you get the most thorough error detection.
+          We utilize the web&apos;s most trusted machine model security APIs to ensure that you get the most thorough error detection.
         </Title>
         <br />
         <Title level={3}>
@@ -41,7 +41,9 @@ export default function Home() {
           within our webapp.
         </Title>
         <br />
-        <Title level={3}>With our website's sleek and simple design, you can quickly scan your machine learning models with ease.</Title>
+        <Title level={3}>
+          With our website&apos;s sleek and simple design, you can quickly scan your machine learning models with ease.
+        </Title>
       </Content>
 
       <Footer />

@@ -7,10 +7,12 @@ const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 const SPSAForm: React.FC = () => {
-  const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
+  const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
     setComponentDisabled(disabled);
   };
+
+  SPSAForm.displayName = "SPSAForm";
 
   return (
     <>
@@ -22,7 +24,7 @@ const SPSAForm: React.FC = () => {
         wrapperCol={{ span: 14 }}
         layout="horizontal"
         onValuesChange={onFormLayoutChange}
-        disabled={componentDisabled}
+        disabled={!componentDisabled}
         style={{ maxWidth: 600 }}
       >
         <Tooltip title="Epsilon Definition: The maximum distortion of adversarial example compared to original input.">
@@ -35,4 +37,4 @@ const SPSAForm: React.FC = () => {
   );
 };
 
-export default () => <SPSAForm />;
+export default SPSAForm;

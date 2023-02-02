@@ -33,7 +33,7 @@ export default function Home() {
           width: "65em",
         }}
       >
-        <Title>Let's get started!</Title>
+        <Title>Let&apos;s get started!</Title>
         <Title level={2}>Follow the steps below to scan your machine learning model</Title>
 
         <Title level={3} style={{ paddingTop: "1em" }}>

@@ -7,10 +7,12 @@ const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 const FastGradientForm: React.FC = () => {
-  const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
+  const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
     setComponentDisabled(disabled);
   };
+
+  FastGradientForm.displayName = "FastGradientForm";
 
   return (
     <div style={{ paddingBottom: "1.3em" }}>
@@ -22,7 +24,7 @@ const FastGradientForm: React.FC = () => {
         wrapperCol={{ span: 14 }}
         layout="horizontal"
         onValuesChange={onFormLayoutChange}
-        disabled={componentDisabled}
+        disabled={!componentDisabled}
         style={{ maxWidth: 600 }}
       >
         <Tooltip title="Epsilon Definition: The maximum distortion of adversarial example compared to original input.">
@@ -44,4 +46,4 @@ const FastGradientForm: React.FC = () => {
   );
 };
 
-export default () => <FastGradientForm />;
+export default FastGradientForm;

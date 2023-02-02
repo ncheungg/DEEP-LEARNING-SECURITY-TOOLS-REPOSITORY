@@ -29,7 +29,7 @@ export default function FoolboxLib() {
           <b>Decoupled Direction and Norm L2 Adversarial Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1811.09600" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -95,7 +95,7 @@ export default function FoolboxLib() {
           <b>L2 Clipping Aware Additive Gaussian Noise Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/2007.07677" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -105,7 +105,7 @@ export default function FoolboxLib() {
           <b>L2 Clipping Aware Additive Uniform Noise Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/2007.07677" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -136,7 +136,7 @@ export default function FoolboxLib() {
           <b>L2 Clipping Aware Repeated Additive Gaussian Noise Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/2007.07677" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -146,7 +146,7 @@ export default function FoolboxLib() {
           <b>L2 Clipping Aware Repeated Additive Uniform Noise Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/2007.07677" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -163,7 +163,7 @@ export default function FoolboxLib() {
           <b>Inversion Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1607.02533" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/1607.02533" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -187,7 +187,7 @@ export default function FoolboxLib() {
           <b>L2 Carlini Wagner Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1608.04644" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/1608.04644" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -197,7 +197,7 @@ export default function FoolboxLib() {
           <b>Newton Fool Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://dl.acm.org/citation.cfm?id=3134635" target="_blank" style={{ color: "gray" }}>
+      <a href="https://dl.acm.org/citation.cfm?id=3134635" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -207,7 +207,12 @@ export default function FoolboxLib() {
           <b>EAD Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPaper/16893" target="_blank" style={{ color: "gray" }}>
+      <a
+        href="https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPaper/16893"
+        target="_blank"
+        rel="noreferrer noopener"
+        style={{ color: "gray" }}
+      >
         <InfoCircleOutlined />
       </a>
       <br />
@@ -224,7 +229,7 @@ export default function FoolboxLib() {
           <b>L2 Deep Fool Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1511.04599" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/1511.04599" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -269,7 +274,7 @@ export default function FoolboxLib() {
           <b>Boundary Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1712.04248" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/1712.04248" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -279,7 +284,7 @@ export default function FoolboxLib() {
           <b>L0 Brendel Bethge Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1907.01003" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/1907.01003" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -289,7 +294,7 @@ export default function FoolboxLib() {
           <b>L1 Brendel Bethge Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1907.01003" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/1907.01003" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -299,7 +304,7 @@ export default function FoolboxLib() {
           <b>L2 Brendel Bethge Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1907.01003" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/1907.01003" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -309,7 +314,7 @@ export default function FoolboxLib() {
           <b>L-infinity Brendel Bethge Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1907.01003" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/1907.01003" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -319,7 +324,7 @@ export default function FoolboxLib() {
           <b>L0 FMN Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/2102.12827" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/2102.12827" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -329,7 +334,7 @@ export default function FoolboxLib() {
           <b>L1 FMN Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/2102.12827" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/2102.12827" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -339,7 +344,7 @@ export default function FoolboxLib() {
           <b>L2 FMN Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/2102.12827" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/2102.12827" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -349,7 +354,7 @@ export default function FoolboxLib() {
           <b>L-infinity FMN Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/2102.12827" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/2102.12827" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />
@@ -359,7 +364,7 @@ export default function FoolboxLib() {
           <b>Pointwise Attack</b>
         </Checkbox>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1805.09190" target="_blank" style={{ color: "gray" }}>
+      <a href="https://arxiv.org/abs/1805.09190" target="_blank" rel="noreferrer noopener" style={{ color: "gray" }}>
         <InfoCircleOutlined />
       </a>
       <br />

@@ -3,6 +3,7 @@ import { AppstoreOutlined, CloudSyncOutlined, HomeOutlined, InfoCircleOutlined, 
 import { Col, MenuProps } from "antd";
 import { Menu } from "antd";
 import Image from "next/image";
+import Link from "next/link";
 
 // const items: MenuProps["items"] = [
 //   {
@@ -53,9 +54,9 @@ import Image from "next/image";
 //   },
 //   {
 //     label: (
-//       <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+//       <Link href="https://Link nt.design" target="_blank" rel="noopener noreferrer">
 //         Navigation Four - Link
-//       </a>
+//       </Link >
 //     ),
 //     key: "alipay",
 //   },
@@ -77,36 +78,36 @@ const items: MenuProps["items"] = [
   // },
   {
     label: (
-      <a href="/" rel="noopener noreferrer">
+      <Link href="/" rel="noopener noreferrer">
         Home
-      </a>
+      </Link>
     ),
     key: "home",
     icon: <HomeOutlined />,
   },
   {
     label: (
-      <a href="/attack" rel="noopener noreferrer">
+      <Link href="/attack" rel="noopener noreferrer">
         Attack
-      </a>
+      </Link>
     ),
     key: "attack",
     icon: <CloudSyncOutlined />,
   },
   {
     label: (
-      <a href="/about" rel="noopener noreferrer">
+      <Link href="/about" rel="noopener noreferrer">
         About
-      </a>
+      </Link>
     ),
     key: "about",
     icon: <InfoCircleOutlined />,
   },
   {
     label: (
-      <a href="/contact" rel="noopener noreferrer">
+      <Link href="/contact" rel="noopener noreferrer">
         Contact Us
-      </a>
+      </Link>
     ),
     key: "contact",
     icon: <MailOutlined />,
@@ -123,9 +124,9 @@ const Navbar: React.FC = () => {
 
   return (
     <div>
-      <a style={{ width: 40, height: 40, position: "absolute", paddingLeft: "1em", paddingTop: "2px" }} href="/">
+      <Link style={{ width: 40, height: 40, position: "absolute", paddingLeft: "1em", paddingTop: "2px" }} href="/">
         <img style={{ width: 40, height: 40 }} src="https://www.dropbox.com/s/veip84995nzd0mb/navlogo.png?raw=1" alt="Logo" />
-      </a>
+      </Link>
       <Menu
         onClick={onClick}
         selectedKeys={[current]}
