@@ -20,21 +20,20 @@ def preprocess_dataset(dataset):
     return images, labels
 
 
-def linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
+def salt_and_pepper_noise_attack(model, model_lower_bound, model_upper_bound, images, labels):
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
     # fmodel = fmodel.transform_bounds((0, 1))
 
-    attack = fb.attacks.LinfDeepFoolAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
+    attack = fb.attacks.SaltAndPepperNoiseAttack()
 
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
+    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=None)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
 
-    return epsilons, robust_accuracy
+    return robust_accuracy
 
 
 @functions_framework.http
@@ -63,8 +62,6 @@ def attack_endpoint(request):
     # attack input parameters
     model_lower_bound = request_json['model_lower_bound']
     model_upper_bound = request_json['model_upper_bound']
-    epsilon_max = request_json['epsilon_max']
-    epsilon_num = request_json['epsilon_num']
 
     # load model from gcp bucket
     model = tf.keras.models.load_model(f'gs://{BUCKET_NAME}/{model_name}')
@@ -78,11 +75,9 @@ def attack_endpoint(request):
     images, labels = preprocess_dataset(dataset)
 
     # run the attack
-    epsilons, accuracy = linf_deep_fool_attack(model, model_lower_bound, model_upper_bound,
-                                               images, labels, epsilon_max, epsilon_num)
+    accuracy = salt_and_pepper_noise_attack(model, model_lower_bound, model_upper_bound, images, labels)
 
     response_body = {
-        'epsilons': epsilons.tolist(),
         'accuracy': accuracy.tolist()
     }
 

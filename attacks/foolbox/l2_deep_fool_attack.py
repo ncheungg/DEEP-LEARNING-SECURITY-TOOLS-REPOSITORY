@@ -20,7 +20,7 @@ def preprocess_dataset(dataset):
     return images, labels
 
 
-def linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
+def l2_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
@@ -78,8 +78,8 @@ def attack_endpoint(request):
     images, labels = preprocess_dataset(dataset)
 
     # run the attack
-    epsilons, accuracy = linf_deep_fool_attack(model, model_lower_bound, model_upper_bound,
-                                               images, labels, epsilon_max, epsilon_num)
+    epsilons, accuracy = l2_deep_fool_attack(model, model_lower_bound, model_upper_bound,
+                                             images, labels, epsilon_max, epsilon_num)
 
     response_body = {
         'epsilons': epsilons.tolist(),
