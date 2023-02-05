@@ -24,7 +24,7 @@ const FormSubmitBtn: React.FC = () => {
   return (
     <Space direction="vertical">
       <Space wrap>
-        <Button type="primary" icon={<PlayCircleFilled />} loading={loadings[1]} onClick={() => enterLoading(1)}>
+        <Button type="primary" icon={<PlayCircleFilled />} href="/results" loading={loadings[1]} onClick={() => enterLoading(1)}>
           Scan Model
         </Button>
       </Space>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PlusOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Radio, Select, Cascader, DatePicker, InputNumber, TreeSelect, Switch, Checkbox, Upload } from "antd";
 import { Tooltip } from "antd";
 
@@ -27,11 +27,15 @@ const SPSAForm: React.FC = () => {
         disabled={!componentDisabled}
         style={{ maxWidth: 600 }}
       >
-        <Tooltip title="Epsilon Definition: The maximum distortion of adversarial example compared to original input.">
-          <Form.Item label="Epsilon:">
-            <Input />
-          </Form.Item>
-        </Tooltip>
+        <Form.Item label="Epsilon:">
+          <Input
+            suffix={
+              <Tooltip title="Epsilon Definition: The maximum distortion of adversarial example compared to original input.">
+                <InfoCircleOutlined style={{ color: "gray" }} />
+              </Tooltip>
+            }
+          />
+        </Form.Item>
       </Form>
     </>
   );

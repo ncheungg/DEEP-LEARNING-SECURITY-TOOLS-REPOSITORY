@@ -2,7 +2,7 @@ import Navbar from "@/component/navbar/Navbar";
 import Footer from "@/component/footer/Footer";
 import { Button, Col, Layout, message, UploadProps } from "antd";
 import { Typography } from "antd";
-import { DownloadOutlined, InboxOutlined } from "@ant-design/icons";
+import { DownloadOutlined, HomeFilled, HomeOutlined, InboxOutlined } from "@ant-design/icons";
 import Dragger from "antd/es/upload/Dragger";
 import UploadCompoent from "@/component/upload/UploadModel";
 import FastGradientForm from "@/component/AttackForms/FastGradientForm";
@@ -33,10 +33,28 @@ export default function Home() {
           width: "65em",
         }}
       >
-        <Title>Let&apos;s get started!</Title>
-        <Title level={2}>Follow the steps below to scan your machine learning model</Title>
+        <Title>Results:</Title>
+        <Title level={2}>Here&apos;s what we found during the model scanning process:</Title>
+        <br />
 
-        <Title level={3} style={{ paddingTop: "1em" }}>
+        <Title level={2}>Content...</Title>
+        <Title level={2}>Content...</Title>
+        <Title level={2}>Content...</Title>
+        <br />
+
+        <Button type="primary" icon={<DownloadOutlined />} size="large" /*href=""*/>
+          Download PDF
+        </Button>
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <Button type="primary" icon={<HomeOutlined />} size="large" href="/">
+          Return Home
+        </Button>
+
+        {/* <Title level={3} style={{ paddingTop: "1em" }}>
           Step 1: Upload your machine learning model below
         </Title>
         <UploadModel />
@@ -55,8 +73,7 @@ export default function Home() {
         <Title level={3} style={{ paddingTop: "1em", paddingBottom: "0.5em" }}>
           Step 4: Submit the form to start attacking model
         </Title>
-
-        <FormSubmitBtn />
+        <FormSubmitBtn /> */}
       </Content>
 
       <Footer />
