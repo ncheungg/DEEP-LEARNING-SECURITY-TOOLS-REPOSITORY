@@ -29,14 +29,14 @@ def preprocess_dataset(dataset, dataset_info):
     return images, labels
 
 
-def fgm_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon, norm):
+def fgm_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilons, norm):
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
     
     attack = norm_dict[norm]
 
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilon)
+    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
@@ -70,7 +70,8 @@ def foolbox_fgm_func(request):
     # attack input parameters
     model_lower_bound = request_json['model_lower_bound']
     model_upper_bound = request_json['model_upper_bound']
-    epsilon = request_json['epsilon']
+    epsilons = request_json['epsilons']
+    print(type(epsilons))
     norm = request_json['norm']
 
     # load model from gcp bucket
@@ -98,9 +99,10 @@ def foolbox_fgm_func(request):
 
     # run the attack
     accuracy = fgm_attack(model, model_lower_bound, model_upper_bound,
-                                               images, labels, epsilon, norm)
+                                               images, labels, epsilons, norm)
 
     response_body = {
+        'epsilons' : epsilons,
         'accuracy': accuracy.tolist()
     }
 
