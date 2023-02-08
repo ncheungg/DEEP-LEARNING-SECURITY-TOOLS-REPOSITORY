@@ -15,6 +15,12 @@ import FormSubmitBtn from "@/component/Button/FormSubmitBtn";
 import SPSAForm from "@/component/AttackForms/SPSAForm";
 import CleverhansRepoForm from "@/component/AttackRepoForms/AccordionAttack";
 import AccordionAttack from "@/component/AttackRepoForms/AccordionAttack";
+import styles from "@/styles/Home.module.css";
+import Chart_1 from "@/component/Charts/Chart_1";
+import CleverhansTable from "@/component/ResultTables/CleverhansTable";
+import FoolboxTable from "@/component/ResultTables/FoolboxTable";
+import MLPrivacyMeterTable from "@/component/ResultTables/MLPrivacyMeterTable";
+import DioptraTable from "@/component/ResultTables/DioptraTable";
 
 const { Title } = Typography;
 
@@ -33,14 +39,19 @@ export default function Home() {
           width: "65em",
         }}
       >
-        <Title>Results:</Title>
+        <Title>Summary of Attack Results:</Title>
         <Title level={2}>Here&apos;s what we found during the model scanning process:</Title>
         <br />
 
-        <Title level={2}>Content...</Title>
-        <Title level={2}>Content...</Title>
-        <Title level={2}>Content...</Title>
-        <br />
+        <Title level={2}>Post-Attack Accuracy Summary Tables:</Title>
+        <Title level={3}>CleverHans:</Title>
+        <CleverhansTable />
+        <Title level={3}>Foolbox:</Title>
+        <FoolboxTable />
+        <Title level={3}>ML Privacy Meter (Population Attack Audit Results):</Title>
+        <MLPrivacyMeterTable />
+        <Title level={3}>Dioptra:</Title>
+        <DioptraTable />
 
         <Button type="primary" icon={<DownloadOutlined />} size="large" /*href=""*/>
           Download PDF
@@ -50,30 +61,15 @@ export default function Home() {
         <br />
         <br />
 
+        <Title level={2}>Post-Attack Accuracy Summary Graphs:</Title>
+        <Chart_1 />
+
+        <Title>Advanced Summary of Attack Results:</Title>
+
+        <br />
         <Button type="primary" icon={<HomeOutlined />} size="large" href="/">
           Return Home
         </Button>
-
-        {/* <Title level={3} style={{ paddingTop: "1em" }}>
-          Step 1: Upload your machine learning model below
-        </Title>
-        <UploadModel />
-
-        <Title level={3} style={{ paddingTop: "1em" }}>
-          Step 2: Upload your test file
-        </Title>
-        <UploadTest />
-
-        <Title level={3} style={{ paddingTop: "1em", paddingBottom: "0.5em" }}>
-          Step 3: Select attacks to run on your model (Include Parameters)
-        </Title>
-
-        <AccordionAttack />
-
-        <Title level={3} style={{ paddingTop: "1em", paddingBottom: "0.5em" }}>
-          Step 4: Submit the form to start attacking model
-        </Title>
-        <FormSubmitBtn /> */}
       </Content>
 
       <Footer />

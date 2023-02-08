@@ -73,7 +73,7 @@ const FastGradientForm: React.FC = () => {
           />
         </Form.Item>
 
-        <Form.Item label="Order of the Norm:" rules={[{ required: true, message: "Please input Order of the Norm Value." }]}>
+        <Form.Item label="Order of the Norm:" rules={[{ required: true, message: "Please input Order of the Norm value." }]}>
           <Checkbox.Group style={{ width: "100%" }} onChange={onChange}>
             <Row>
               <Col span={6} style={{ paddingRight: "2em" }}>

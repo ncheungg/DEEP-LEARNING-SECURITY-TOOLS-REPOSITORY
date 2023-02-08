@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { InfoCircleOutlined, LinkOutlined, PlusOutlined } from "@ant-design/icons";
 import {
   Form,
@@ -22,6 +22,14 @@ import { CheckboxValueType } from "antd/es/checkbox/Group";
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
+const onFinish = (values: any) => {
+  console.log("Success:", values);
+};
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log("Failed:", errorInfo);
+};
+
 const onChange = (checkedValues: CheckboxValueType[]) => {
   console.log("checked = ", checkedValues);
 };
@@ -31,6 +39,8 @@ const BasicIterativeForm: React.FC = () => {
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
     setComponentDisabled(disabled);
   };
+
+  const submitRef = useRef();
 
   BasicIterativeForm.displayName = "BasicIterativeForm";
 
@@ -46,8 +56,12 @@ const BasicIterativeForm: React.FC = () => {
         onValuesChange={onFormLayoutChange}
         disabled={!componentDisabled}
         style={{ maxWidth: 600 }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
       >
-        <Form.Item label="Epsilon:">
+        <Form.Item label="Epsilon:" rules={[{ required: true, message: "Please input Epsilon value." }]}>
           <Input
             suffix={
               <Tooltip title="Epsilon Definition: The maximum distortion of adversarial example compared to original input.">
@@ -57,7 +71,7 @@ const BasicIterativeForm: React.FC = () => {
           />
         </Form.Item>
 
-        <Form.Item label="Epsilon Step Size:">
+        <Form.Item label="Epsilon Step Size:" rules={[{ required: true, message: "Please input Epsilon Step Size value." }]}>
           <Input
             suffix={
               <Tooltip title="Epsilon Step Size Definition: The step size for epsilon for each attack iteration.">
@@ -67,7 +81,7 @@ const BasicIterativeForm: React.FC = () => {
           />
         </Form.Item>
 
-        <Form.Item label="Attack Iterations:">
+        <Form.Item label="Attack Iterations:" rules={[{ required: true, message: "Please input Attack Iterations value." }]}>
           <Input
             suffix={
               <Tooltip title="Attack Iterations Definition: The number of attack iterations.">
@@ -77,7 +91,7 @@ const BasicIterativeForm: React.FC = () => {
           />
         </Form.Item>
 
-        <Form.Item label="Order of the Norm:" rules={[{ required: true, message: "Please input Order of the Norm Value." }]}>
+        <Form.Item label="Order of the Norm:" rules={[{ required: true, message: "Please input Order of the Norm value." }]}>
           <Checkbox.Group style={{ width: "100%" }} onChange={onChange}>
             <Row>
               <Col span={6} style={{ paddingRight: "2em" }}>
@@ -97,6 +111,12 @@ const BasicIterativeForm: React.FC = () => {
             </Row>
           </Checkbox.Group>
         </Form.Item>
+
+        {/* <Form.Item>
+          <Button type="primary" htmlType="submit" ref={submitRef}>
+            Submit
+          </Button>
+        </Form.Item> */}
       </Form>
 
       <br />

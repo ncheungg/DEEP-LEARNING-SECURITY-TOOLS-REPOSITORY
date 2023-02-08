@@ -4,6 +4,7 @@ import CleverhansRepoFormCollapse from "./CleverhansLib";
 import CleverhansRepoForm from "./CleverhansLib";
 import CleverhansLib from "./CleverhansLib";
 import FoolboxLib from "./FoolboxLib";
+import MLLib from "./MLLib";
 
 const { Panel } = Collapse;
 
@@ -22,7 +23,7 @@ const AccordionAttack: React.FC = () => (
       <FoolboxLib />
     </Panel>
     <Panel header="ML Privacy Meter Attack Library" key="3">
-      <CleverhansLib />
+      <MLLib />
     </Panel>
     <Panel header="Dioptra" key="4">
       <CleverhansLib />

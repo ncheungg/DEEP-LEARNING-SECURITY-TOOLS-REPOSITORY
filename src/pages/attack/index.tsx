@@ -55,7 +55,6 @@ export default function Home() {
         <Title level={3} style={{ paddingTop: "1em", paddingBottom: "0.5em" }}>
           Step 4: Submit the form to start attacking model
         </Title>
-
         <FormSubmitBtn />
       </Content>
 

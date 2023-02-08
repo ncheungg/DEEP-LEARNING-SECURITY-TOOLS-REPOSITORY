@@ -22,6 +22,14 @@ import { CheckboxValueType } from "antd/es/checkbox/Group";
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
+const onFinish = (values: any) => {
+  console.log("Success:", values);
+};
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log("Failed:", errorInfo);
+};
+
 const onChange = (checkedValues: CheckboxValueType[]) => {
   console.log("checked = ", checkedValues);
 };
@@ -46,8 +54,12 @@ const MadryetalForm: React.FC = () => {
         onValuesChange={onFormLayoutChange}
         disabled={!componentDisabled}
         style={{ maxWidth: 600 }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
       >
-        <Form.Item label="Epsilon:">
+        <Form.Item label="Epsilon:" rules={[{ required: true, message: "Please input Order of the Norm value." }]}>
           <Input
             suffix={
               <Tooltip title="Epsilon Definition: The maximum distortion of adversarial example compared to original input.">
@@ -57,7 +69,7 @@ const MadryetalForm: React.FC = () => {
           />
         </Form.Item>
 
-        <Form.Item label="Epsilon Step Size:">
+        <Form.Item label="Epsilon Step Size:" rules={[{ required: true, message: "Please input Epsilon Step Size value." }]}>
           <Input
             suffix={
               <Tooltip title="Epsilon Step Size Definition: The step size for epsilon for each attack iteration.">
@@ -67,7 +79,7 @@ const MadryetalForm: React.FC = () => {
           />
         </Form.Item>
 
-        <Form.Item label="Attack Iterations:">
+        <Form.Item label="Attack Iterations:" rules={[{ required: true, message: "Please input Attack Iterations value." }]}>
           <Input
             suffix={
               <Tooltip title="Attack Iterations Definition: The number of attack iterations.">
