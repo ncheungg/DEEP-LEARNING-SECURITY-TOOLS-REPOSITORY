@@ -6,7 +6,7 @@ import { DownloadOutlined, HomeFilled, HomeOutlined, InboxOutlined } from "@ant-
 import Dragger from "antd/es/upload/Dragger";
 import UploadCompoent from "@/component/upload/UploadModel";
 import FastGradientForm from "@/component/AttackForms/FastGradientForm";
-import MomentumIterativeForm from "@/component/AttackForms/MomentumIterativeForm";
+import MomentumIterativeForm from "@/component/AttackForms/AdvLib";
 import MadryetalForm from "@/component/AttackForms/MadryetalForm";
 import BasicIterativeForm from "@/component/AttackForms/BasicIterativeForm";
 import UploadModel from "@/component/upload/UploadModel";

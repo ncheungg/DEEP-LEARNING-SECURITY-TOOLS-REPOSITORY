@@ -2,10 +2,9 @@ import React from "react";
 import { CloudSyncOutlined, CloudUploadOutlined, DatabaseOutlined, FileMarkdownOutlined, InboxOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
 import { message, Upload } from "antd";
-import path from "node:path/win32";
 
-// const { Storage } = require("@google-cloud/storage");
-// const gc = new Storage({
+//const { Storage } = require("@google-cloud/storage");
+//const gc = new Storage({
 //   keyFilename: "./credible-tesla-375823-3923de5f4106.json",
 //   projectId: "credible-tesla-375823",
 // });
