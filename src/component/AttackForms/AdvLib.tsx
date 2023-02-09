@@ -17,6 +17,7 @@ import {
   Col,
   Dropdown,
   Space,
+  Slider,
 } from "antd";
 import { Tooltip } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
@@ -120,9 +121,22 @@ const onChange = (checkedValues: CheckboxValueType[]) => {
 };
 
 const AdvLib: React.FC = () => {
+  // enable/disable form checkbox
   const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
     setComponentDisabled(disabled);
+  };
+
+  // // for order of the norm checkbox (front -> back)
+  // const [normVal, setNormVal] = useState([0, 0.5]);
+  // const onSliderChange = (value: any) => {
+  //   console.log(value);
+  // };
+
+  // for slider values (front -> back)
+  const [sliderVal, setSliderVal] = useState([0, 0.5]);
+  const onSliderChange = (value: any) => {
+    console.log(value);
   };
 
   AdvLib.displayName = "MomentumIterativeForm";
@@ -161,6 +175,14 @@ const AdvLib: React.FC = () => {
         autoComplete="off"
       >
         <Form.Item label="Epsilon:" rules={[{ required: true, message: "Please input Epsilon value." }]}>
+          <Slider range defaultValue={[0, 0.5]} disabled={!componentDisabled} onChange={onSliderChange} step={0.02} />
+        </Form.Item>
+
+        <Form.Item label="Epsilon Step Size:" rules={[{ required: true, message: "Please input Epsilon value." }]}>
+          <Slider range defaultValue={[20, 50]} disabled={!componentDisabled} />
+        </Form.Item>
+
+        {/* <Form.Item label="Epsilon:" rules={[{ required: true, message: "Please input Epsilon value." }]}>
           <Input
             suffix={
               <Tooltip
@@ -171,9 +193,9 @@ const AdvLib: React.FC = () => {
               </Tooltip>
             }
           />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item label="Epsilon Step Size:" rules={[{ required: true, message: "Please input Epsilon Step Size value." }]}>
+        {/* <Form.Item label="Epsilon Step Size:" rules={[{ required: true, message: "Please input Epsilon Step Size value." }]}>
           <Input
             suffix={
               <Tooltip placement="right" title="Epsilon Step Size Definition: The step size for epsilon for each attack iteration.">
@@ -181,7 +203,7 @@ const AdvLib: React.FC = () => {
               </Tooltip>
             }
           />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item label="Attack Iterations:" rules={[{ required: true, message: "Please input Attack Iterations value." }]}>
           <Input

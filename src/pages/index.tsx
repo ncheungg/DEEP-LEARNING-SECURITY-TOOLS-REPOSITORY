@@ -18,7 +18,7 @@ export default function Home() {
           backgroundColor: "white",
           minHeight: "calc(100vh - 4em)",
           padding: "3em",
-          maxWidth: "65em",
+          width: "65em",
           //justifyContent: "center !important",
           //width: "80%"
         }}

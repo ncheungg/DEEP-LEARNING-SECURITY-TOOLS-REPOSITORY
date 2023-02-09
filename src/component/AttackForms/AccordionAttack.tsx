@@ -12,7 +12,7 @@ const text = `
 `;
 
 const AccordionAttack: React.FC = () => (
-  <Collapse accordion>
+  <Collapse accordion defaultActiveKey={["1"]}>
     <Panel header="Adversarial Example Attacks" key="1">
       <AdvLib />
     </Panel>

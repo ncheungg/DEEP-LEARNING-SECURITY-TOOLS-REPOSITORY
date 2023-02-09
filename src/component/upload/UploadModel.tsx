@@ -34,8 +34,13 @@ const props: UploadProps = {
 
 const UploadModel: React.FC = (props) => {
   return (
-    <Dragger {...props}>
+    <Dragger {...props} style={{ width: "100%" }}>
       <p className="ant-upload-drag-icon">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         {/* <InboxOutlined /> */}
         {/* <CloudSyncOutlined /> */}
         {/* <CloudUploadOutlined /> */}
@@ -43,6 +48,12 @@ const UploadModel: React.FC = (props) => {
       </p>
       <p className="ant-upload-text">Click or drag to upload machine learning model here</p>
       <p className="ant-upload-hint">Single files for models supported in formats such as: ...</p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </Dragger>
   );
 };
