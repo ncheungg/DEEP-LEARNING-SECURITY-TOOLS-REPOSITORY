@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { Button, message, Steps, theme } from "antd";
 
-import UploadModel from "../upload/UploadModel";
-import UploadTest from "../upload/UploadTest";
-import AccordionAttack from "../AttackForms/AccordionAttack";
-import FormSubmitBtn from "../Button/FormSubmitBtn";
 import UploadModelCard from "./AttackCards/UploadModelCard";
 import UploadTestCard from "./AttackCards/UploadTestCard";
 import AttacksLibCard from "./AttackCards/AttacksLibCard";

@@ -3,7 +3,7 @@ import { Divider, List, Tooltip, Typography } from "antd";
 import { Card, Space } from "antd";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 
-const FoolboxCards: React.FC = () => (
+const CleverHansCards: React.FC = () => (
   <>
     <Space direction="vertical" size={16} style={{ display: "flex" }}>
       <Card
@@ -120,4 +120,4 @@ const FoolboxCards: React.FC = () => (
   </>
 );
 
-export default FoolboxCards;
+export default CleverHansCards;

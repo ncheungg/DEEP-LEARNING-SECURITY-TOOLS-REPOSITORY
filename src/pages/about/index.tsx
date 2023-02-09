@@ -3,7 +3,8 @@ import Footer from "@/component/footer/Footer";
 import { Button, Col, Layout } from "antd";
 import { Typography } from "antd";
 import { CloudSyncOutlined, DownloadOutlined } from "@ant-design/icons";
-import InfoAccordion from "@/component/info/InfoAccordion";
+import InfoAccordion from "@/component/info/InfoCollapse";
+import InfoCollapse from "@/component/info/InfoCollapse";
 
 const { Title } = Typography;
 
@@ -47,7 +48,7 @@ export default function Home() {
           With our website&apos;s sleek and simple design, you can quickly scan your machine learning models with ease.
         </Title> */}
 
-        <InfoAccordion />
+        <InfoCollapse />
       </Content>
 
       <Footer />

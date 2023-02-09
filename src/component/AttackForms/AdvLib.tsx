@@ -25,7 +25,6 @@ import type { MenuProps } from "antd";
 const items: MenuProps["items"] = [
   {
     key: "1",
-    type: "sub menu",
     label: "CleverHans",
     children: [
       {

@@ -2,10 +2,6 @@ import Navbar from "@/component/navbar/Navbar";
 import Footer from "@/component/footer/Footer";
 import { Button, Col, Layout, message, UploadProps } from "antd";
 import { Typography } from "antd";
-import UploadModel from "@/component/upload/UploadModel";
-import UploadTest from "@/component/upload/UploadTest";
-import FormSubmitBtn from "@/component/Button/FormSubmitBtn";
-import AccordionAttack from "@/component/AttackForms/AccordionAttack";
 import AttackSteps from "@/component/Steps/AttackSteps";
 
 const { Title } = Typography;
