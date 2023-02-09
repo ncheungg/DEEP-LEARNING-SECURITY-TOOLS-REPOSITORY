@@ -3,3 +3,4 @@ tensorflow
 foolbox
 tensorflow-datasets
 numpy
+google-cloud-storage

@@ -38,16 +38,35 @@ def preprocess_dataset(dataset, dataset_info):
     return images, labels
 
 
-def linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
+def l2_basic_iterative_attack(model, model_lower_bound, model_upper_bound, images,
+                              labels, epsilon_max, epsilon_num, random_start):
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
     # fmodel = fmodel.transform_bounds((0, 1))
 
-    attack = fb.attacks.LinfDeepFoolAttack()
+    attack = fb.attacks.L2BasicIterativeAttack()
     epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
 
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
+    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons, random_start=random_start)
+
+    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
+    robust_accuracy *= 100
+
+    return epsilons, robust_accuracy
+
+
+def linf_basic_iterative_attack(model, model_lower_bound, model_upper_bound, images,
+                                labels, epsilon_max, epsilon_num, random_start):
+    model_bounds = (model_lower_bound, model_upper_bound)
+
+    fmodel = fb.TensorFlowModel(model, model_bounds)
+    # fmodel = fmodel.transform_bounds((0, 1))
+
+    attack = fb.attacks.LinfBasicIterativeAttack()
+    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
+
+    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons, random_start=random_start)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
@@ -83,11 +102,13 @@ def attack_endpoint(request):
     model_upper_bound = request_json['model_upper_bound']
     epsilon_max = request_json['epsilon_max']
     epsilon_num = request_json['epsilon_num']
+    random_start = request_json['random_start']
+    norms = request_json['norms']
 
     # get dataset metadata from bucket
     client = storage.Client()
     bucket = client.get_bucket(BUCKET_NAME)
-    file_obj = bucket.get_blob(f'{dataset_name}/{model_name}')
+    file_obj = bucket.get_blob(f'{dataset_name}/dataset_info.json')
     dataset_info = json.loads(file_obj.download_as_string())
 
     # split the dataset into min(1%, 50)
@@ -108,14 +129,25 @@ def attack_endpoint(request):
     # extract images and labels
     images, labels = preprocess_dataset(dataset, dataset_info)
 
-    # run the attack
-    epsilons, accuracy = linf_deep_fool_attack(model, model_lower_bound, model_upper_bound,
-                                               images, labels, epsilon_max, epsilon_num)
+    response_body = {}
 
-    response_body = {
-        'epsilons': epsilons.tolist(),
-        'accuracy': accuracy.tolist()
-    }
+    # run the attacks
+    for norm in norms:
+        if norm == '2':
+            epsilons, accuracy = l2_basic_iterative_attack(model, model_lower_bound, model_upper_bound,
+                                                           images, labels, epsilon_max, epsilon_num, random_start)
+            response_body[norm] = {
+                'epsilons': epsilons.tolist(),
+                'accuracy': accuracy.tolist()
+            }
+
+        elif norm == 'inf':
+            epsilons, accuracy = linf_basic_iterative_attack(model, model_lower_bound, model_upper_bound,
+                                                             images, labels, epsilon_max, epsilon_num, random_start)
+            response_body[norm] = {
+                'epsilons': epsilons.tolist(),
+                'accuracy': accuracy.tolist()
+            }
 
     # Set CORS headers for the main request
     headers = {
