@@ -15,7 +15,7 @@ import tensorflow_datasets as tfds
 from tensorflow.keras import Model
 from keras.layers import Input
 
-from cleverhans.tf2.attacks.fast_gradient_method import fast_gradient_method
+from cleverhans.tf2.attacks.spsa import spsa
 
 def process_data(x, dataset_info):
     if(dataset_info['schema']['feature'][1]['type'] == "INT"):
@@ -31,7 +31,7 @@ def process_data(x, dataset_info):
     return x
 
 @functions_framework.http
-def cleverhans_fgm_func(request):
+def cleverhans_spsa_func(request):
 
     if request.method == 'OPTIONS':
         # Allows POST requests from any origin with the Content-Type
@@ -64,20 +64,17 @@ def cleverhans_fgm_func(request):
     split = 'test'
     for i in dataset_info['splits']:
         if(i['name'] == "test"):
-            if(int(i['shardLengths'][0]) > 200):
-                percent = int(200/int(i['shardLengths'][0])*100)
-                split = f'test[:{percent}%]'
-                print(split)
+            absolute = min(20,int(i['shardLengths'][0]))
+            split = f'test[:{absolute}]'
+            print(split)
 
     builder = tfds.builder_from_directory(gcs_path)
-    test_data = builder.as_dataset(split = split, batch_size=128)
+    #spsa attack requires batch size = 1
+    test_data = builder.as_dataset(split = split, batch_size=1)
    
-    test_acc_fgm = tf.metrics.SparseCategoricalAccuracy()
+    test_acc_spsa = tf.metrics.SparseCategoricalAccuracy()
 
-    order_of_norm_lookup = {"inf" : np.inf, "1" : 1, "2" : 2}
-    order_of_norm = order_of_norm_lookup[request_json['order_of_norm']]
-
-    progress_bar_test = tf.keras.utils.Progbar(200)
+    progress_bar_test = tf.keras.utils.Progbar(absolute)
     for sample in test_data:
 
         x = sample['image']
@@ -85,13 +82,13 @@ def cleverhans_fgm_func(request):
 
         x = process_data(x, dataset_info)
 
-        x_fgm = fast_gradient_method(model_fn = model, x = x, eps = request_json["epsilon"], norm = order_of_norm)
-        y_pred_fgm = model(x_fgm)
-        test_acc_fgm(y, y_pred_fgm)
+        x_spsa = spsa(model_fn = model, x = x, y = y, eps = request_json['epsilon'], nb_iter = request_json["attack_iter"], clip_min = -1.0, clip_max = 1.0)
+        y_pred_spsa = model(x_spsa)
+        test_acc_spsa(y, y_pred_spsa)
 
         progress_bar_test.add(x.shape[0])
        
-    data = {"accuracy" : round(float(test_acc_fgm.result()) * 100, 2)}
+    data = {"accuracy" : round(float(test_acc_spsa.result()) * 100, 2)}
   
     # Set CORS headers for the main request
     headers = {

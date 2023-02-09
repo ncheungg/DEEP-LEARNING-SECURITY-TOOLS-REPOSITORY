@@ -33,9 +33,10 @@ def process_data(x, dataset_info):
 
 
 @functions_framework.http
-def cleverhans_fgm_func(request):
+def original_func(request):
+
     if request.method == 'OPTIONS':
-        # Allows GET requests from any origin with the Content-Type
+        # Allows POST requests from any origin with the Content-Type
         # header and caches preflight response for an 3600s
         headers = {
             'Access-Control-Allow-Origin': '*',
@@ -51,30 +52,27 @@ def cleverhans_fgm_func(request):
     bucket_name = "dlstr-bucket"
     model_name = request_json['model_name']
     dataset_name = request_json['dataset_name']
-
-    # download_blob("capstone-test-bucket", model_name, model_name[:-4])
+    
     gcs_path = "gs://{}/{}".format(bucket_name, model_name)
-    # model = tf.keras.models.load_model(f"/tmp/{model_name[:-4]}")
     model = tf.keras.models.load_model(gcs_path)
-    # shutil.rmtree(f"/tmp/{model_name[:-4]}", ignore_errors=True)
-
-    # download_blob("capstone-test-bucket", dataset_name, dataset_name[:-4])
+    
     gcs_path = "gs://{}/{}".format(bucket_name, dataset_name)
-    # builder = tfds.builder_from_directory(f"/tmp/{dataset_name[:-4]}")
-    builder = tfds.builder_from_directory(gcs_path)
-    test_data = builder.as_dataset(split='test[:2%]', batch_size=128)
-
     client = storage.Client()
     bucket = client.get_bucket(bucket_name)
     file_obj = bucket.get_blob(f"{dataset_name}/dataset_info.json")
-
-    # Read the contents of the file
     file_contents = file_obj.download_as_string()
-
-    # Convert the file contents to a JSON object
     dataset_info = json.loads(file_contents)
-    # with open("gs://{}/{}/dataset_info.json".format(bucket_name, dataset_name), "r") as f:
-    #    dataset_info = json.load(f)
+    
+    split = 'test'
+    for i in dataset_info['splits']:
+        if(i['name'] == "test"):
+            if(int(i['shardLengths'][0]) > 200):
+                percent = int(200/int(i['shardLengths'][0])*100)
+                split = f'test[:{percent}%]'
+                print(split)
+
+    builder = tfds.builder_from_directory(gcs_path)
+    test_data = builder.as_dataset(split = split, batch_size=128)
 
     test_acc = tf.metrics.SparseCategoricalAccuracy()
 
@@ -90,12 +88,14 @@ def cleverhans_fgm_func(request):
 
         progress_bar_test.add(x.shape[0])
 
-    message = "test acc on original data (%): {:.3f}".format(test_acc.result() * 100)
-
+  
+    data = {"accuracy" : round(float(test_acc.result()) * 100, 2)}
+  
     # Set CORS headers for the main request
     headers = {
-        'Access-Control-Allow-Origin': '*'
-    }
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+        }
 
-    return (message, 200, headers)
-
+    return (json.dumps(data), 200, headers)
+    
