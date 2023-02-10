@@ -1,4 +1,6 @@
+functions-framework==3.*
 tensorflow
 foolbox
-matplotlib
+tensorflow-datasets
 numpy
+google-cloud-storage

@@ -12,23 +12,25 @@ from google.cloud import storage
 import functions_framework
 
 import numpy as np
-import tensorflow as tf 
+import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow.keras import Model
 from keras.layers import Input
 
+
 def process_data(x, dataset_info):
-    if(dataset_info['schema']['feature'][1]['type'] == "INT"):
+    if (dataset_info['schema']['feature'][1]['type'] == "INT"):
         x = tf.cast(x, tf.float32)
         print(dataset_info['schema']['feature'][1]['type'])
 
     for i in dataset_info['splits'][0]['statistics']['features']:
-        if(i['name'] == "image"):
-            if(i['numStats']['max'] == 255):
+        if (i['name'] == "image"):
+            if (i['numStats']['max'] == 255):
                 x /= 127.5
                 x -= 1
                 print(dataset_info['splits'][0]['statistics']['features'][1]['numStats']['max'])
     return x
+
 
 @functions_framework.http
 def original_func(request):
@@ -46,7 +48,7 @@ def original_func(request):
         return ('', 204, headers)
 
     request_json = request.get_json(silent=True)
-    
+
     bucket_name = "dlstr-bucket"
     model_name = request_json['model_name']
     dataset_name = request_json['dataset_name']
@@ -76,7 +78,6 @@ def original_func(request):
 
     progress_bar_test = tf.keras.utils.Progbar(200)
     for sample in test_data:
-
         x = sample['image']
         y = sample['label']
 
