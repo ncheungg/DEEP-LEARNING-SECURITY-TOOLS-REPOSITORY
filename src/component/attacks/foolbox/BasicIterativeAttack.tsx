@@ -2,14 +2,18 @@ import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, Radio, Row, Tooltip } from "antd";
 import { useState } from "react";
 
-interface DeepFoolAttackProps {
+interface AttackProps {
   formEnabled: boolean;
+  sliderVal: [number, number];
+  lowerBound?: number;
+  upperBound?: number;
 }
 
-const BasicIterativeAttack = (props: DeepFoolAttackProps) => {
+const BasicIterativeAttack = (props: AttackProps) => {
   const { formEnabled } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
+  const [randomStart, setRandomStart] = useState(false);
 
   return (
     <>
@@ -52,7 +56,7 @@ const BasicIterativeAttack = (props: DeepFoolAttackProps) => {
           tooltip="Controls whether to randomly start within allowed epsilon ball."
           style={{ marginTop: "-2em" }}
         >
-          <Radio.Group value={false}>
+          <Radio.Group value={randomStart} onChange={(e) => setRandomStart(e.target.value)}>
             <Radio value={true}>Yes</Radio>
             <Radio value={false}>No</Radio>
           </Radio.Group>

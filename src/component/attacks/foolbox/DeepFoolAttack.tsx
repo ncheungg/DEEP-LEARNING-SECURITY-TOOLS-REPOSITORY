@@ -2,12 +2,15 @@ import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, Row, Tooltip } from "antd";
 import { useState } from "react";
 
-interface DeepFoolAttackProps {
+interface AttackProps {
   formEnabled: boolean;
+  sliderVal: [number, number];
+  lowerBound?: number;
+  upperBound?: number;
 }
 
-const DeepFoolAttack = (props: DeepFoolAttackProps) => {
-  const { formEnabled } = props;
+const DeepFoolAttack = (props: AttackProps) => {
+  const { formEnabled, sliderVal, lowerBound, upperBound } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
 
@@ -39,7 +42,7 @@ const DeepFoolAttack = (props: DeepFoolAttackProps) => {
         <Form.Item
           tooltip="Order of the Norm Definition: A vectors norm is another way to refer to its length. L1, L2, and Linf are 3 different ways to calculate a vectors length. L1 norm is calculated as the sum of the absolute vector values from the origin (Manhattan distance). L2 norm is calculated by determining the distance of the vector from the origin (Euclidean distance). Linf norm is calculated by returning the max value of the vector."
           label="Order of the Norm:"
-          required
+          required={subFormEnabled}
           rules={[{ required: true, message: "Please input Order of the Norm Value." }]}
         >
           <Checkbox.Group style={{ width: "100%" }}>
