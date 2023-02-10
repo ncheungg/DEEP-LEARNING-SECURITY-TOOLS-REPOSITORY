@@ -15,6 +15,7 @@ const { Dragger } = Upload;
 const props: UploadProps = {
   name: "file",
   multiple: false,
+  accept: "zip",
   action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
   onChange(info) {
     const { status } = info.file;
@@ -47,7 +48,7 @@ const UploadModel: React.FC = (props) => {
         <FileMarkdownOutlined />
       </p>
       <p className="ant-upload-text">Click or drag to upload machine learning model here</p>
-      <p className="ant-upload-hint">Single files for models supported in formats such as: ...</p>
+      <p className="ant-upload-hint">Single files for models supported in formats such as: .zip</p>
       <br />
       <br />
       <br />

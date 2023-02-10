@@ -206,7 +206,23 @@ def binary_search_contrast_reduction_attack(model, model_lower_bound, model_uppe
 
     attack = fb.attacks.BinarySearchContrastReductionAttack()
 
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=0.1)
+    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=None)
+
+    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
+    robust_accuracy *= 100
+
+    return robust_accuracy
+
+
+def linear_search_contrast_reduction_attack(model, model_lower_bound, model_upper_bound, images, labels):
+    model_bounds = (model_lower_bound, model_upper_bound)
+
+    fmodel = fb.TensorFlowModel(model, model_bounds)
+    # fmodel = fmodel.transform_bounds((0, 1))
+
+    attack = fb.attacks.LinearSearchContrastReductionAttack()
+
+    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=None)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
@@ -318,6 +334,7 @@ def l2_clipping_aware_repeated_additive_gaussian_noise_attack(model, model_lower
 
     return robust_accuracy
 
+
 if __name__ == "__main__":
     f = open(r'/mnt/d/Nathan/Downloads/cifar10/dataset_info.json')
     dataset_info = json.load(f)
@@ -336,34 +353,23 @@ if __name__ == "__main__":
 
     epsilon_max = 0.01
     epsilon_num = 21
+    target = 0.6
     
-    attack_types = ['additive', 'clipping-aware-additive', 'repeated-additive', 'clipping-aware-repeated-additive']
+    attack_types = ['linear', 'binary']
 
     response_body = {}
 
     # run the attacks
     for attack_type in attack_types:
-        if attack_type == 'additive':
-            accuracy = l2_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num)
+        if attack_type == 'binary':
+            accuracy = binary_search_contrast_reduction_attack(model, model_lower_bound, model_upper_bound,
+                                                               images, labels)
 
             response_body[attack_type] = accuracy.tolist()
 
-        elif attack_type == 'clipping-aware-additive':
-            accuracy = l2_clipping_aware_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                                                        images, labels, epsilon_max, epsilon_num)
-
-            response_body[attack_type] = accuracy.tolist()
-
-        elif attack_type == 'repeated-additive':
-            accuracy = l2_repeated_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                                                  images, labels, epsilon_max, epsilon_num)
-
-            response_body[attack_type] = accuracy.tolist()
-
-        elif attack_type == 'clipping-aware-repeated-additive':
-            accuracy = l2_clipping_aware_repeated_additive_gaussian_noise_attack(model, model_lower_bound,
-                                                                                 model_upper_bound, images, labels,
-                                                                                 epsilon_max, epsilon_num)
+        elif attack_type == 'linear':
+            accuracy = linear_search_contrast_reduction_attack(model, model_lower_bound, model_upper_bound,
+                                                               images, labels)
 
             response_body[attack_type] = accuracy.tolist()
 

@@ -9,20 +9,23 @@ interface AttackProps {
   upperBound?: number;
 }
 
-const FastGradientAttack = (props: AttackProps) => {
+const AdditiveUniformNoiseAttack = (props: AttackProps) => {
   const { formEnabled } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
-  const [randomStart, setRandomStart] = useState(false);
+  const [selectedNorms, setSelectedNorms] = useState(new Set());
 
   return (
     <>
       <Checkbox disabled={!formEnabled} onChange={(e) => setSubFormEnabled(e.target.checked)}>
-        <b>Fast Gradient Attack</b>
+        <b>Additive Uniform Noise Attack</b>
       </Checkbox>
-      <Tooltip title="Fast Gradient Method (2) and Fast Gradient Signed Method (∞).">
+      <Tooltip title="Samples uniform noise with or without repeated/clipping.">
         <InfoCircleOutlined style={{ color: "gray" }} />
       </Tooltip>
+      <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener" style={{ color: "gray", paddingLeft: "8px" }}>
+        <LinkOutlined />
+      </a>
 
       {/* attack inputs */}
       <Form
@@ -50,20 +53,22 @@ const FastGradientAttack = (props: AttackProps) => {
         </Form.Item>
 
         <Form.Item
-          label="Random Start:"
-          rules={[{ required: true, message: "Please input random start." }]}
+          label="Attack Types:"
+          rules={[{ required: true, message: "Please input desired attack types." }]}
           required
-          tooltip="Controls whether to randomly start within allowed epsilon ball."
+          tooltip="Samples Uniform noise with or without repeated/clipping."
           style={{ marginTop: "-2em" }}
         >
-          <Radio.Group value={randomStart} onChange={(e) => setRandomStart(e.target.value)}>
-            <Radio value={true}>Yes</Radio>
-            <Radio value={false}>No</Radio>
-          </Radio.Group>
+          <Checkbox.Group style={{ width: "100%" }}>
+            <Checkbox value="additive">Additive</Checkbox>
+            <Checkbox value="clipping-aware-additive">Clipping</Checkbox>
+            <Checkbox value="repeated-additive">Repeated</Checkbox>
+            <Checkbox value="clipping-aware-repeated-additive">Clipping & Repeated</Checkbox>
+          </Checkbox.Group>
         </Form.Item>
       </Form>
     </>
   );
 };
 
-export default FastGradientAttack;
+export default AdditiveUniformNoiseAttack;
