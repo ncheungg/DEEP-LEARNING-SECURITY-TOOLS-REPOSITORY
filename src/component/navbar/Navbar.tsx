@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { AppstoreOutlined, CloudSyncOutlined, HomeOutlined, InfoCircleOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  CloudSyncOutlined,
+  HomeOutlined,
+  InfoCircleOutlined,
+  MailOutlined,
+  ScanOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 import { Col, MenuProps } from "antd";
 import { Menu } from "antd";
 import Image from "next/image";
@@ -88,16 +96,16 @@ const items: MenuProps["items"] = [
   {
     label: (
       <Link href="/attack" rel="noopener noreferrer">
-        Attack
+        Scan
       </Link>
     ),
     key: "attack",
-    icon: <CloudSyncOutlined />,
+    icon: <ScanOutlined />,
   },
   {
     label: (
       <Link href="/about" rel="noopener noreferrer">
-        About
+        Documentation
       </Link>
     ),
     key: "about",

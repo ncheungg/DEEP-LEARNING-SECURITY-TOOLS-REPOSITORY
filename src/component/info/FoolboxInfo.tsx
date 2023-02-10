@@ -7,7 +7,7 @@ const onChange = (e: CheckboxChangeEvent) => {
   console.log(`checked = ${e.target.checked}`);
 };
 
-export default function FoolboxLib() {
+export default function FoolboxInfo() {
   return (
     <>
       <Tooltip title="Reduces the contrast of the input using a perturbation of the given size.">

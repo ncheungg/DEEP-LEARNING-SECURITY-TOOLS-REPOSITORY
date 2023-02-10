@@ -2,10 +2,9 @@ import React from "react";
 import { CloudSyncOutlined, CloudUploadOutlined, DatabaseOutlined, FileMarkdownOutlined, InboxOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
 import { message, Upload } from "antd";
-import path from "node:path/win32";
 
-// const { Storage } = require("@google-cloud/storage");
-// const gc = new Storage({
+//const { Storage } = require("@google-cloud/storage");
+//const gc = new Storage({
 //   keyFilename: "./credible-tesla-375823-3923de5f4106.json",
 //   projectId: "credible-tesla-375823",
 // });
@@ -35,8 +34,13 @@ const props: UploadProps = {
 
 const UploadModel: React.FC = (props) => {
   return (
-    <Dragger {...props}>
+    <Dragger {...props} style={{ width: "100%" }}>
       <p className="ant-upload-drag-icon">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         {/* <InboxOutlined /> */}
         {/* <CloudSyncOutlined /> */}
         {/* <CloudUploadOutlined /> */}
@@ -44,6 +48,12 @@ const UploadModel: React.FC = (props) => {
       </p>
       <p className="ant-upload-text">Click or drag to upload machine learning model here</p>
       <p className="ant-upload-hint">Single files for models supported in formats such as: ...</p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </Dragger>
   );
 };

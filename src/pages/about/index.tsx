@@ -3,6 +3,8 @@ import Footer from "@/component/footer/Footer";
 import { Button, Col, Layout } from "antd";
 import { Typography } from "antd";
 import { CloudSyncOutlined, DownloadOutlined } from "@ant-design/icons";
+import InfoAccordion from "@/component/info/InfoCollapse";
+import InfoCollapse from "@/component/info/InfoCollapse";
 
 const { Title } = Typography;
 
@@ -18,17 +20,18 @@ export default function Home() {
           backgroundColor: "white",
           minHeight: "calc(100vh - 4em)",
           padding: "3em",
-          maxWidth: "65em",
+          width: "65em",
         }}
       >
-        <Title>About Us</Title>
-        <Title level={2}>To Robust and Convenient Machine-Learning Model Security Testing</Title>
-
-        <Button type="primary" icon={<CloudSyncOutlined />} size="large" href="/">
-          Get Started
-        </Button>
-
+        <Title>Attacks Library Documentation</Title>
+        <Title level={2}>Browse through the available attacks below:</Title>
         <br />
+
+        {/* <Button type="primary" icon={<CloudSyncOutlined />} size="large" href="/">
+          Get Started
+        </Button> */}
+
+        {/* <br />
         <br />
         <br />
         <br />
@@ -43,7 +46,9 @@ export default function Home() {
         <br />
         <Title level={3}>
           With our website&apos;s sleek and simple design, you can quickly scan your machine learning models with ease.
-        </Title>
+        </Title> */}
+
+        <InfoCollapse />
       </Content>
 
       <Footer />

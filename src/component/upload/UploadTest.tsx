@@ -28,6 +28,11 @@ const props: UploadProps = {
 const UploadTest: React.FC = (props) => {
   return (
     <Dragger {...props}>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <p className="ant-upload-drag-icon">
         {/* <InboxOutlined /> */}
         {/* <DatabaseOutlined /> */}
@@ -35,6 +40,12 @@ const UploadTest: React.FC = (props) => {
       </p>
       <p className="ant-upload-text">Click or drag to upload test data here</p>
       <p className="ant-upload-hint">Single file uploads of up to 500MB supported</p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </Dragger>
   );
 };
