@@ -15,7 +15,7 @@ const text = `
 
 const AccordionAttack: React.FC = () => (
   <Collapse accordion>
-    <Panel header="Cleverhans Attack Library" key="1">
+    <Panel header="Cleverhans Attacck Library" key="1">
       <CleverhansLib />
     </Panel>
     <Panel header="Foolbox Attack Library" key="2">
