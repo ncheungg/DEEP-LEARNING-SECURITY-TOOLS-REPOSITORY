@@ -1,5 +1,6 @@
 import React from "react";
-import { Anchor, Row, Col, Card, Divider, Typography } from "antd";
+import { Anchor, Row, Col, Card, Divider, Typography, Tooltip } from "antd";
+import { LinkOutlined } from "@ant-design/icons";
 
 const { Title, Paragraph, Text, Link } = Typography;
 
@@ -7,62 +8,77 @@ const InfoAnchor: React.FC = () => {
   return (
     <Row>
       <Col span={16}>
-        <div id="part-1" style={{ height: "20vh", background: "rgba(255,0,0,0.02)" }}>
-          <Paragraph>
-            <pre>L2 Contrast Reduction Attack</pre>
-            <blockquote>
-              {" "}
-              <p>
-                <b>Definition:</b> Reduces the contrast of the input using a perturbation of the given size.
-              </p>
-              <p>
-                <b>Parameters:</b>{" "}
-                <ul>
-                  <li>Epsilon</li>
-                  <li>Step Size</li>
-                  <li>Order of the Norm</li>
-                </ul>
-              </p>
-            </blockquote>
-          </Paragraph>
+        <div id="part-1" style={{ height: "25vh", background: "rgba(255,0,0,0)" }}>
+          <Card
+            title="L2 Contrast Reduction Attack"
+            extra={
+              <Tooltip title="Open page" placement="bottom">
+                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                  <LinkOutlined style={{ color: "gray" }} />
+                </a>
+              </Tooltip>
+            }
+          >
+            <p>
+              <b>Definition:</b> Reduces the contrast of the input using a perturbation of the given size.
+            </p>
+            <p>
+              <b>Parameters:</b>{" "}
+              <ul>
+                <li>Epsilon</li>
+                <li>Step Size</li>
+                <li>Order of the Norm</li>
+              </ul>
+            </p>
+          </Card>
         </div>
-        <div id="part-2" style={{ height: "20vh", background: "rgba(0,255,0,0.02)" }}>
-          <Paragraph>
-            <pre>L2 Contrast Reduction Attack</pre>
-            <blockquote>
-              {" "}
-              <p>
-                <b>Definition:</b> Reduces the contrast of the input using a perturbation of the given size.
-              </p>
-              <p>
-                <b>Parameters:</b>{" "}
-                <ul>
-                  <li>Epsilon</li>
-                  <li>Step Size</li>
-                  <li>Order of the Norm</li>
-                </ul>
-              </p>
-            </blockquote>
-          </Paragraph>
+        <div id="part-2" style={{ height: "25vh", background: "rgba(255,0,0,0)" }}>
+          <Card
+            title="L2 Contrast Reduction Attack"
+            extra={
+              <Tooltip title="Open page" placement="bottom">
+                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                  <LinkOutlined style={{ color: "gray" }} />
+                </a>
+              </Tooltip>
+            }
+          >
+            <p>
+              <b>Definition:</b> Reduces the contrast of the input using a perturbation of the given size.
+            </p>
+            <p>
+              <b>Parameters:</b>{" "}
+              <ul>
+                <li>Epsilon</li>
+                <li>Step Size</li>
+                <li>Order of the Norm</li>
+              </ul>
+            </p>
+          </Card>
         </div>
-        <div id="part-3" style={{ height: "20vh", background: "rgba(0,0,255,0.02)" }}>
-          <Paragraph>
-            <pre>L2 Contrast Reduction Attack</pre>
-            <blockquote>
-              {" "}
-              <p>
-                <b>Definition:</b> Reduces the contrast of the input using a perturbation of the given size.
-              </p>
-              <p>
-                <b>Parameters:</b>{" "}
-                <ul>
-                  <li>Epsilon</li>
-                  <li>Step Size</li>
-                  <li>Order of the Norm</li>
-                </ul>
-              </p>
-            </blockquote>
-          </Paragraph>
+        <div id="part-3" style={{ height: "100vh", background: "rgba(255,0,0,0)" }}>
+          <Card
+            title="L2 Contrast Reduction Attack"
+            extra={
+              <Tooltip title="Open page" placement="bottom">
+                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                  <LinkOutlined style={{ color: "gray" }} />
+                </a>
+              </Tooltip>
+            }
+          >
+            <p>
+              <b>Definition:</b> Reduces the contrast of the input using a perturbation of the given size.
+            </p>
+            <p>
+              <b>Parameters:</b>{" "}
+              <ul>
+                <li>Epsilon</li>
+                <li>Step Size</li>
+                <li>Order of the Norm</li>
+              </ul>
+            </p>
+          </Card>
         </div>
       </Col>
       <Col span={8} style={{ paddingLeft: "2em" }}>
