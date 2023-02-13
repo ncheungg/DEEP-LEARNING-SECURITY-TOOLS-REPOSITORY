@@ -26,8 +26,8 @@
   right: 75%; /*Positions 50% from right (right edge will be at center) */
   margin-right: -500px;
   align-items: inherit;
-  height: 400px;
-  width: 400px;
+  height: 300px;
+  width: 300px;
   max-width: var(--max-width);
   /* width: 100%; */
   /* background-color: powderblue; */
@@ -41,6 +41,18 @@
   align-items: inherit;
   height: 400px;
   width: 400px;
+  max-width: var(--max-width);
+  /* width: 100%; */
+  /* background-color: powderblue; */
+}
+.Chart4 {
+  position: absolute;
+  top: 400px;
+  right: 75%; /*Positions 50% from right (right edge will be at center) */
+  margin-right: -500px;
+  align-items: inherit;
+  height: 300px;
+  width: 300px;
   max-width: var(--max-width);
   /* width: 100%; */
   /* background-color: powderblue; */
