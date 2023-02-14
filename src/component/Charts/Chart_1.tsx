@@ -136,7 +136,7 @@ const data4 = {
   labels: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
   datasets: [
     {
-      label: "Original Moedddddel Accuracy",
+      label: "Original Model Accuracy",
       data: [0, 0.23, 0.44, 0.65, 0.83, 1.0],
       borderColor: "rgba(0,0,220)",
       backgroundColor: "rgba(0,0,120,0.1)",
@@ -164,7 +164,7 @@ const options4 = {
     title: {
       display: true,
       //position: "center",
-      text: "ML Praivacy Meter Results",
+      text: "ML Privacy Meter Results",
     },
   },
   scales: {

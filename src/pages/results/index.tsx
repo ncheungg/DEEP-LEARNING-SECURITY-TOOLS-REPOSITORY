@@ -51,7 +51,7 @@ export default function Home() {
         <Title level={2}>Post-Attack Accuracy Summary Graphs:</Title>
         <Chart_1 />
 
-        <Title>Advanced Summary of Attack Results:</Title>
+        {/* <Title>Advanced Summary of Attack Results:</Title> */}
 
         <br />
         <Button type="primary" icon={<HomeOutlined />} size="large" href="/">
