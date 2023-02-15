@@ -33,6 +33,7 @@ ChartJS.register(
 );
 
 const inter = Inter({ subsets: ["latin"] });
+
 const data = {
   labels: [
     "L2ContrastReductionAttack",
@@ -44,7 +45,6 @@ const data = {
     {
       label: "Original Model Accuracy",
       fillColor: "green",
-      fill: "origin",
       data: [0.75, 0.75, 0.75, 0.75],
       borderColor: "rgb(0, 255, 0)",
       backgroundColor: "rgba(35, 158, 45, 0.8)",
@@ -52,7 +52,6 @@ const data = {
     {
       label: "Accuracy After FoolBox Attacks",
       fillColor: "red",
-      fill: true,
       data: [0.54, 0.47, 0.64, 0.34],
       borderColor: "rgb(53, 162, 235)",
       backgroundColor: "rgba(255, 0, 0, 0.8)",
@@ -64,10 +63,14 @@ const options = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: {},
+    legend: {
+      display: true,
+
+      labels: {},
+    },
     title: {
       display: true,
-      text: "Foolboxxx Attack Strength",
+      text: "Foolbox Attack Strength",
     },
   },
   scales: {
@@ -96,7 +99,7 @@ const data2 = {
       label: "Accuracy After Cleverhans Attacks",
       fillColor: "red",
       data: [0.32, 0.55, 0.7, 0.29],
-      borderColor: "rgba(53, 162, 235,0.1)",
+      borderColor: "rgb(53, 162, 235)",
       backgroundColor: "rgba(255, 0, 0, 0.8)",
     },
   ],
@@ -134,7 +137,6 @@ const data3 = {
       data: [0.75],
       borderColor: "rgb(0, 255, 0)",
       backgroundColor: "rgba(35, 158, 45, 0.8)",
-      fill: true,
     },
     {
       label: "Accuracy After Cleverhans Attacks",
@@ -142,7 +144,6 @@ const data3 = {
       data: [0, 0.55, 0.7, 0.29],
       borderColor: "rgb(53, 162, 235)",
       backgroundColor: "rgba(255, 0, 0, 0.8)",
-      fill: true,
     },
   ],
 };
@@ -166,112 +167,6 @@ const options3 = {
   },
 };
 
-const data4 = {
-  labels: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
-  datasets: [
-    {
-      label: "Original Moedddddel Accuracy",
-      data: [0, 0.23, 0.44, 0.65, 0.83, 1.0],
-      borderColor: "rgba(0,0,220)",
-      backgroundColor: "rgba(0,0,120,0.1)",
-      pointRadius: 0,
-      lineTension: 0.8,
-      fill: true,
-    },
-    {
-      label: "y=x",
-      data: [0, 0.2, 0.4, 0.6, 0.8, 1],
-      borderColor: "orange",
-      pointRadius: 0,
-      borderWidth: 2,
-      borderDash: [5, 5], // this sets the border to a dotted line
-      fill: false,
-    },
-  ],
-};
-
-const options4 = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {},
-    title: {
-      display: true,
-      //position: "center",
-      text: "ML Privacy Meter Results",
-    },
-  },
-  scales: {
-    y: {
-      scaleLabel: {
-        display: true,
-        labelString: "Your X-axis Title",
-      },
-      min: 0,
-      max: 1,
-      beginAtZero: true,
-    },
-    x: {
-      label: "He",
-      min: 0,
-      max: 1,
-    },
-  },
-  elements: {
-    line: {
-      fill: true,
-    },
-  },
-};
-
-const data5 = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "My First dataset",
-      fill: true,
-      lineTension: 0.4,
-      backgroundColor: "rgba(75,192,192,0.4)",
-      borderColor: "rgba(75,192,192,1)",
-      data: [65, 59, 80, 81, 56, 55, 40],
-    },
-  ],
-};
-
-const options5 = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {},
-    title: {
-      display: true,
-      //position: "center",
-      text: "ML Praivacy Meter Results",
-    },
-  },
-  scales: {
-    y: {
-      scaleLabel: {
-        display: true,
-        labelString: "Your X-axis Title",
-      },
-      min: 0,
-      max: 100,
-      beginAtZero: true,
-    },
-    x: {
-      label: "He",
-      min: 0,
-      max: 70,
-    },
-  },
-  elements: {
-    line: {
-      fill: true,
-    },
-  },
-};
-
 export default function Home() {
   return (
     <>
@@ -288,31 +183,24 @@ export default function Home() {
           <Bar
             data={data}
             options={options}
-            style={{
-              position: "inherit",
-              top: "0px",
-              // right: "%",
-              //margin-right: "-45px",
-              //align-items: "inherit",
-              height: "400px",
-              width: "400px",
-              // max-width: var(--max-width)
-            }}
+            // style={{
+            //   position: "inherit",
+            //   top: "0px",
+            //   // right: "%",
+            //   //margin-right: "-45px",
+            //   //align-items: "inherit",
+            //   height: "400px",
+            //   width: "400px",
+            //   // max-width: var(--max-width)
+            // }}
           />
         </div>
         <div className={styles.Chart2}>
-          <Bar data={data2} options={options2} height="300px" width="300px" />
+          <Bar data={data2} options={options2} />
         </div>
         <div className={styles.Chart3}>
-          <Bar data={data3} options={options3} height="300px" width="300px" />
+          <Bar data={data3} options={options3} />
         </div>
-        <div className={styles.Chart4}>
-          <Line data={data4} options={options4} height="300px" width="300px" />
-        </div>
-        <div className={styles.Chart5}>
-          <Line data={data5} options={options5} height="300px" width="300px" />
-        </div>
-        {/* export default LineChart; */}
         <div className={styles.grid}></div>
       </main>
       {/* </Content> */}

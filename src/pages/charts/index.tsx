@@ -39,47 +39,52 @@ const data = {
     "L2ContrastReductionAttack",
     "VirtualAdversarialAttack",
     "L2FastGradientAttack",
-    "L2BasicIterativeAttack",
+    "Original Model Accuracy",
   ],
   datasets: [
     {
-      label: "Original Model Accuracy",
-      fillColor: "green",
-      data: [0.75, 0.75, 0.75, 0.75],
-      borderColor: "rgb(0, 255, 0)",
-      backgroundColor: "rgba(35, 158, 45, 0.8)",
+      label: "Accuracy After FoolBox Attack",
+      fillColor: "black",
+      data: [0.54, 0.32, 0.29, 0.75],
+      borderColor: "rgba, 0, 0,0)",
+      backgroundColor: [
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(35, 158, 45, 0.8)",
+      ],
     },
-    {
-      label: "Accuracy After FoolBox Attacks",
-      fillColor: "red",
-      data: [0.54, 0.47, 0.64, 0.34],
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(255, 0, 0, 0.8)",
-    },
+    // {
+    //   label: "Accuracy After FoolBox Attacks",
+    //   fillColor: "red",
+    //   data: [0.54, 0.47, 0.64, 0.34],
+    //   borderColor: "rgb(53, 162, 235)",
+    //   backgroundColor: "rgba(255, 0, 0, 0.8)",
+    // },
   ],
 };
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true,
+const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: true,
 
-        labels: {},
-      },
-      title: {
-        display: true,
-        text: "Foolbox Attack Strength",
-      },
+      labels: {},
     },
-    scales: {
-      y: {
-        min: 0,
-        max: 1,
-      },
+    title: {
+      display: true,
+      text: "Foolbox Attack Strength",
     },
-  };
+  },
+  scales: {
+    y: {
+      min: 0,
+      max: 1,
+    },
+  },
+};
 
 const data2 = {
   labels: [
@@ -105,24 +110,24 @@ const data2 = {
   ],
 };
 
-  const options2 = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {},
-      title: {
-        display: true,
-        //position: "center",
-        text: "Cleverhans Attack Strength",
-      },
+const options2 = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {},
+    title: {
+      display: true,
+      //position: "center",
+      text: "Cleverhans Attack Strength",
     },
-    scales: {
-      y: {
-        min: 0,
-        max: 1,
-      },
+  },
+  scales: {
+    y: {
+      min: 0,
+      max: 1,
     },
-  };
+  },
+};
 
 const data3 = {
   labels: [
@@ -167,7 +172,65 @@ const options3 = {
   },
 };
 
-  //export default function Home() {
+const data4 = {
+  labels: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
+  datasets: [
+    {
+      label: "Original Moedddddel Accuracy",
+      data: [0, 0.23, 0.44, 0.65, 0.83, 1.0],
+      borderColor: "rgba(0,0,220)",
+      backgroundColor: "rgba(0,0,120,0.1)",
+      pointRadius: 0,
+      lineTension: 0.8,
+      fill: true,
+    },
+    {
+      label: "y=x",
+      data: [0, 0.2, 0.4, 0.6, 0.8, 1],
+      borderColor: "orange",
+      pointRadius: 0,
+      borderWidth: 2,
+      borderDash: [5, 5], // this sets the border to a dotted line
+      fill: false,
+    },
+  ],
+};
+
+const options4 = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {},
+    title: {
+      display: true,
+      //position: "center",
+      text: "ML Praivacy Meter Results",
+    },
+  },
+  scales: {
+    y: {
+      scaleLabel: {
+        display: true,
+        labelString: "Your X-axis Title",
+      },
+      min: 0,
+      max: 1,
+      beginAtZero: true,
+    },
+    x: {
+      label: "He",
+      min: 0,
+      max: 1,
+    },
+  },
+  elements: {
+    line: {
+      fill: true,
+    },
+  },
+};
+
+export default function Home() {
   return (
     <>
       {/* <Content style={{backgroundColor="white" }}>  */}
@@ -184,8 +247,9 @@ const options3 = {
             data={data}
             options={options}
             style={{
-              position: "inherit",
-              top: "0px",
+              position: "fixed",
+              right: "1050px",
+              top: "50px",
               // right: "%",
               //margin-right: "-45px",
               //align-items: "inherit",
@@ -196,10 +260,27 @@ const options3 = {
           />
         </div>
         <div className={styles.Chart2}>
-          <Bar data={data2} options={options2} height="300px" width="300px" />
+          <Bar data={data2} options={options2} />
         </div>
         <div className={styles.Chart3}>
-          <Bar data={data3} options={options3} height="300px" width="300px" />
+          <Bar data={data3} options={options3} />
+        </div>
+        <div className={styles.Chart4}>
+          <Line
+            data={data4}
+            options={options4}
+            style={{
+              position: "fixed",
+              right: "1050px",
+              top: "490px",
+              // right: "%",
+              //margin-right: "-45px",
+              //align-items: "inherit",
+              height: "300px",
+              width: "300px",
+              // max-width: var(--max-width)
+            }}
+          />
         </div>
         <div className={styles.grid}></div>
       </main>
