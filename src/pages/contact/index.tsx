@@ -28,7 +28,7 @@ export default function Contact() {
 
         <FAQAccordion />
 
-        <Title level={2} style={{ paddingBottom: "1em", paddingTop: "9em" }}>
+        <Title level={2} style={{ paddingBottom: "1em", paddingTop: "3em" }}>
           Don't see your question? Contact us Here!
         </Title>
 

@@ -1,29 +1,31 @@
 import React, { useState } from "react";
-import {
-  Button,
-  message,
-  Space,
-  Cascader,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Layout,
-  Radio,
-  Select,
-  Switch,
-  TreeSelect,
-  Typography,
-} from "antd";
-import { type } from "os";
-
-type SizeType = Parameters<typeof Form>[0]["size"];
+import { Form, Input, Button, message, SizeType } from "antd";
 
 const ContactForm: React.FC = () => {
   const [componentSize, setComponentSize] = useState<SizeType | "default">("default");
+  const [form] = Form.useForm();
 
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
     setComponentSize(size);
+  };
+
+  const handleSubmit = (values: any) => {
+    console.log("Form values: ", values);
+    success();
+    form.resetFields();
+  };
+
+  const handleError = (values: any) => {
+    const missingValues = Object.keys(values).filter((key) => !values[key]);
+    if (missingValues.length) {
+      console.error(`The following fields are required: ${missingValues.join(", ")}`);
+      message.error(`Please fill in all required fields.`);
+      return;
+    }
+
+    console.log("Form values: ", values);
+    success();
+    form.resetFields();
   };
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -33,25 +35,24 @@ const ContactForm: React.FC = () => {
       email: "Please Enter a Valid email",
     },
   };
+  // const handleError = (error: any) => {
+  //   messageApi.open({
+  //     type: "error",
+  //     content: "Please fill out all required fields",
+  //   });
+  // };
 
   const success = () => {
+    window.scrollTo(0, 0);
     messageApi.open({
       type: "success",
-      content: "This is a success message",
-    });
-
-    console.log("pressed");
-  };
-
-  const error = () => {
-    messageApi.open({
-      type: "error",
-      content: "This is an error message",
+      content: "Thank you for contacting us! We will reach out to you in 2-3 business days.",
     });
   };
 
   return (
     <Form
+      form={form}
       labelCol={{ span: 3 }}
       wrapperCol={{ span: 35 }}
       layout="horizontal"
@@ -60,6 +61,8 @@ const ContactForm: React.FC = () => {
       size={componentSize as SizeType}
       style={{ maxWidth: 600 }}
       validateMessages={validateMessages}
+      onFinish={handleSubmit}
+      //onFinish={handleError}
     >
       <Form.Item name={["Name"]} label="Name" rules={[{ required: true }]}>
         <Input placeholder="Enter a valid name" />
@@ -67,31 +70,17 @@ const ContactForm: React.FC = () => {
       <Form.Item name={["Email"]} label="Email" rules={[{ type: "email", required: true }]}>
         <Input placeholder="Enter a valid email address" />
       </Form.Item>
-      <Form.Item name={["user", "introduction"]} label="Message">
+      <Form.Item name={["A message is"]} label="Message" rules={[{ required: true }]}>
         <Input.TextArea placeholder="Your message " />
       </Form.Item>
       <Form.Item wrapperCol={{ span: 2, offset: 12 }}>
         <>
           {contextHolder}
-          {/* <Button type="primary" onClick={htmltype = "submit" ? success : () => {}}> */}
-          <Button type="primary" htmlType="submit" onClick={success}>
+          <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </>
       </Form.Item>
-      {/* <Form.Item label="Name">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Email">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Message">
-        <Input />
-      </Form.Item>
-
-      <Form.Item label="Send">
-        <Button>Submit</Button>
-      </Form.Item> */}
     </Form>
   );
 };
