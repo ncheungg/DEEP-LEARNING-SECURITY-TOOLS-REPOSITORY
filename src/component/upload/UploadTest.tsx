@@ -38,8 +38,8 @@ const UploadTest: React.FC = (props) => {
         {/* <DatabaseOutlined /> */}
         <FileZipOutlined />
       </p>
-      <p className="ant-upload-text">Click or drag to upload test data here</p>
-      <p className="ant-upload-hint">Single file uploads of up to 500MB supported</p>
+      <p className="ant-upload-text">Click or drag to upload model dataset here</p>
+      <p className="ant-upload-hint">Compressed (.zip) file containing test data in the TensorFlow-Datasets format</p>
       <br />
       <br />
       <br />

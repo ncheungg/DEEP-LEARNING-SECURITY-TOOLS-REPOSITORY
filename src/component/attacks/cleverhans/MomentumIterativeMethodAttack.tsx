@@ -1,5 +1,5 @@
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
-import { Checkbox, Col, Form, Radio, Row, Tooltip } from "antd";
+import { Checkbox, Col, Form, Input, Radio, Row, Tooltip } from "antd";
 import { useState } from "react";
 
 interface AttackProps {
@@ -7,26 +7,47 @@ interface AttackProps {
   sliderVal: [number, number];
   epsilonStep?: number;
   attackIterations?: number;
-  decayFactor?: number;
 }
 
-const BasicIterativeMethodAttack = (props: AttackProps) => {
+const MomentumIterativeMethodAttack = (props: AttackProps) => {
   const { formEnabled } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
+  const [decayFactor, setDecayFactor] = useState<number>();
 
   return (
     <>
       <Checkbox disabled={!formEnabled} onChange={(e) => setSubFormEnabled(e.target.checked)}>
-        <b>Basic Iterative Method Attack</b>
+        <b>Momentum Iterative Method Attack</b>
       </Checkbox>
       {/* <Tooltip title="Fast Gradient Method (2) and Fast Gradient Signed Method (∞).">
         <InfoCircleOutlined style={{ color: "gray" }} />
       </Tooltip> */}
 
-      <div style={{ height: "2em" }}></div>
+      {/* attack inputs */}
+      <Form
+        labelCol={{ span: 8 }}
+        // wrapperCol={{ span: 20 }}
+        layout="horizontal"
+        // onValuesChange={onFormLayoutChange}
+        disabled={!subFormEnabled || !formEnabled}
+        style={{ maxWidth: 600 }}
+        initialValues={{ remember: true }}
+        // onFinish={onFinish}
+        // onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <Form.Item
+          label="Decay Factor:"
+          required={subFormEnabled}
+          rules={[{ required: true, message: "Please enter the decay factor for momentum term." }]}
+          tooltip="The decay factor for momentum term."
+        >
+          <Input type="number" onChange={(e) => setDecayFactor(Number(e.target.value))} />
+        </Form.Item>
+      </Form>
     </>
   );
 };
 
-export default BasicIterativeMethodAttack;
+export default MomentumIterativeMethodAttack;

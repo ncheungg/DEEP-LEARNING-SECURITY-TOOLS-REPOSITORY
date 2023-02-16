@@ -4,14 +4,6 @@ import { Form, Input, Checkbox, Slider } from "antd";
 import { Tooltip } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import type { MenuProps } from "antd";
-import DeepFoolAttack from "../attacks/foolbox/DeepFoolAttack";
-import FastGradientAttack from "../attacks/foolbox/FastGradientAttack";
-import BasicIterativeAttack from "../attacks/foolbox/BasicIterativeAttack";
-import AdditiveGaussianNoiseAttack from "../attacks/foolbox/AdditiveGaussianNoiseAttack";
-import AdditiveUniformNoiseAttack from "../attacks/foolbox/AdditiveUniformNoiseAttack";
-import InversionAttack from "../attacks/foolbox/InversionAttack";
-import SaltAndPepperNoiseAttack from "../attacks/foolbox/SaltAndPepperNoiseAttack";
-import ContrastReductionAttack from "../attacks/foolbox/ContrastReductionAttack";
 import FastGradientMethodAttack from "../attacks/cleverhans/FastGradientMethodAttack";
 import ProjectedGradientDescentAttack from "../attacks/cleverhans/ProjectedGradientDescentAttack";
 import BasicIterativeMethodAttack from "../attacks/cleverhans/BasicIterativeMethodAttack";
@@ -31,7 +23,6 @@ const CleverHansLib: React.FC = () => {
   const [sliderVal, setSliderVal] = useState<[number, number]>([0.02, 0.06]);
   const [epsilonStep, setEpsilonStep] = useState<number>();
   const [attackIterations, setAttackIterations] = useState<number>();
-  const [decayFactor, setDecayFactor] = useState<number>();
 
   return (
     <>
@@ -99,22 +90,13 @@ const CleverHansLib: React.FC = () => {
           <Input type="number" onChange={(e) => setAttackIterations(Number(e.target.value))} />
         </Form.Item>
 
-        <Form.Item
-          label="Decay Factor:"
-          required={componentEnabled}
-          rules={[{ required: true, message: "Please enter the decay factor for momentum term." }]}
-          tooltip="The decay factor for momentum term."
-        >
-          <Input type="number" onChange={(e) => setDecayFactor(Number(e.target.value))} />
-        </Form.Item>
-
         <div style={{ textAlign: "left", marginTop: "5em" }}>
-          <FastGradientMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations, decayFactor }} />
-          <ProjectedGradientDescentAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations, decayFactor }} />
-          <BasicIterativeMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations, decayFactor }} />
-          <MadryEtAlMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations, decayFactor }} />
-          <MomentumIterativeMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations, decayFactor }} />
-          <SPSAAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations, decayFactor }} />
+          <FastGradientMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
+          <ProjectedGradientDescentAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
+          <BasicIterativeMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
+          <MadryEtAlMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
+          <MomentumIterativeMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
+          <SPSAAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
         </div>
       </Form>
     </>

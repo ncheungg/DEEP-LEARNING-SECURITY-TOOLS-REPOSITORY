@@ -47,8 +47,8 @@ const UploadModel: React.FC = (props) => {
         {/* <CloudUploadOutlined /> */}
         <FileMarkdownOutlined />
       </p>
-      <p className="ant-upload-text">Click or drag to upload machine learning model here</p>
-      <p className="ant-upload-hint">Single files for models supported in formats such as: .zip</p>
+      <p className="ant-upload-text">Click or drag to upload keras model here</p>
+      <p className="ant-upload-hint">Compressed (.zip) file containing a Keras model in the Tensorflow SavedModel format</p>
       <br />
       <br />
       <br />

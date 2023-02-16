@@ -7,7 +7,6 @@ interface AttackProps {
   sliderVal: [number, number];
   epsilonStep?: number;
   attackIterations?: number;
-  decayFactor?: number;
 }
 
 const MadryEtAlMethodAttack = (props: AttackProps) => {

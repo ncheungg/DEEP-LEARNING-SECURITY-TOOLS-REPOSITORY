@@ -1,7 +1,6 @@
 import React from "react";
 import { Collapse } from "antd";
-import AdvLib from "./AdvLib";
-import PrivLib from "./PrivLib";
+import PrivLib from "./PrivacyMeter";
 import FoolboxLib from "./FoolboxLib";
 import CleverHansLib from "./CleverHansLib";
 
@@ -22,7 +21,7 @@ const AccordionAttack: React.FC = () => (
       <CleverHansLib />
       {/* <AdvLib /> */}
     </Panel>
-    <Panel header="Privacy Attacks" key="2">
+    <Panel header="ML Privacy Meter" key="2">
       <PrivLib />
     </Panel>
   </Collapse>
