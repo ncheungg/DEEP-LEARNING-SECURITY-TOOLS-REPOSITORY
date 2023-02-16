@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { Form, Input, Button, message, SizeType } from "antd";
+import { Form, Input, Button, message } from "antd";
+
+type MySizeType = "small" | "medium" | "large";
+
+interface MyComponentProps {
+  size?: MySizeType;
+}
 
 const ContactForm: React.FC = () => {
-  const [componentSize, setComponentSize] = useState<SizeType | "default">("default");
+  const [componentSize, setComponentSize] = useState<MySizeType | "default">("default");
   const [form] = Form.useForm();
 
-  const onFormLayoutChange = ({ size }: { size: SizeType }) => {
+  const onFormLayoutChange = ({ size }: { size: MySizeType }) => {
     setComponentSize(size);
   };
 
@@ -58,7 +64,7 @@ const ContactForm: React.FC = () => {
       layout="horizontal"
       initialValues={{ size: componentSize }}
       onValuesChange={onFormLayoutChange}
-      size={componentSize as SizeType}
+      //size={componentSize as MySizeType}
       style={{ maxWidth: 600 }}
       validateMessages={validateMessages}
       onFinish={handleSubmit}
