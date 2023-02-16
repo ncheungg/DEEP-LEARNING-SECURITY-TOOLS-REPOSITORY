@@ -90,51 +90,50 @@ const PrivLib: React.FC = () => {
       <Checkbox checked={componentDisabled} onChange={(e) => setComponentDisabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
         <b>Enable Privacy Meter</b>
       </Checkbox>
-      <Dropdown menu={{ items }}>
-        <a style={{ color: "gray" }} onClick={(e) => e.preventDefault()}>
-          <Space>
-            {/* Cascading menu */}
-            <PlusCircleOutlined />
-          </Space>
-        </a>
-      </Dropdown>
+
       <Form
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 14 }}
         layout="horizontal"
-        onValuesChange={onFormLayoutChange}
+        // onValuesChange={onFormLayoutChange}
         disabled={!componentDisabled}
         style={{ maxWidth: 600 }}
         initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        // onFinish={onFinish}
+        // onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item label="Number of Classes:" rules={[{ required: true, message: "Please input Epsilon value." }]}>
-          <Input
-            suffix={
-              <Tooltip placement="right" title="Description: Number of classes that the input can be labelled as.">
-                <InfoCircleOutlined style={{ color: "gray" }} />
-              </Tooltip>
-            }
-          />
+        <Form.Item
+          label="Num of Classes:"
+          rules={[{ required: true, message: "Please input Epsilon value." }]}
+          tooltip="Number of possible output classes"
+          required={componentDisabled}
+        >
+          <Input type="number" placeholder="5" />
         </Form.Item>
 
-        <Form.Item label="Loss Function:" rules={[{ required: true, message: "Please input Order of the Norm value." }]}>
-          <Row>
+        <Form.Item
+          required={componentDisabled}
+          label="Loss Function:"
+          rules={[{ required: true, message: "Please input Order of the Norm value." }]}
+          tooltip="Loss function used by ML Privacy Meter to perform audit"
+        >
+          <Select
+            defaultValue="Select"
+            // style={{ width: 230 }}
+            // onChange={handleChange}
+            options={[
+              { value: "bin_cross", label: "Binary Crossentropy" },
+              { value: "cat_cross", label: "Categorical Crossentropy" },
+              { value: "mean_abs", label: "Mean Absolute Error" },
+              { value: "mean_sq", label: "Mean Squared Error" },
+            ]}
+          />
+
+          {/* <Row>
             <Col span={6} style={{ paddingRight: "2em" }}>
               <Space wrap>
-                <Select
-                  defaultValue="Select"
-                  style={{ width: 230 }}
-                  onChange={handleChange}
-                  options={[
-                    { value: "bin_cross", label: "Binary Crossentropy" },
-                    { value: "cat_cross", label: "Categorical Crossentropy" },
-                    { value: "mean_abs", label: "Mean Absolute Error" },
-                    { value: "mean_sq", label: "Mean Squared Error" },
-                  ]}
-                />
+                
               </Space>
             </Col>
             <Col span={1}>
@@ -142,7 +141,7 @@ const PrivLib: React.FC = () => {
                 <InfoCircleOutlined style={{ color: "gray", paddingLeft: "10.5em", paddingTop: "0.56em" }} />
               </Tooltip>
             </Col>
-          </Row>
+          </Row> */}
         </Form.Item>
       </Form>
     </div>
