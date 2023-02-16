@@ -3,6 +3,7 @@ import { Collapse } from "antd";
 import AdvLib from "./AdvLib";
 import PrivLib from "./PrivLib";
 import FoolboxLib from "./FoolboxLib";
+import CleverHansLib from "./CleverHansLib";
 
 const { Panel } = Collapse;
 
@@ -13,12 +14,13 @@ const text = `
 `;
 
 const AccordionAttack: React.FC = () => (
-  <Collapse accordion defaultActiveKey={["1"]}>
-    <Panel header="Foolbox Attacks" key="0">
+  <Collapse accordion defaultActiveKey="0">
+    <Panel header="Foolbox" key="0">
       <FoolboxLib />
     </Panel>
-    <Panel header="Adversarial Example Attacks" key="1">
-      <AdvLib />
+    <Panel header="CleverHans" key="1">
+      <CleverHansLib />
+      {/* <AdvLib /> */}
     </Panel>
     <Panel header="Privacy Attacks" key="2">
       <PrivLib />
