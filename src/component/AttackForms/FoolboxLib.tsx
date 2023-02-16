@@ -44,7 +44,12 @@ const FoolboxLib: React.FC = () => {
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item label="Epsilons:" required rules={[{ required: true, message: "Please input epsilon values." }]}>
+        <Form.Item
+          label="Epsilons:"
+          required={componentEnabled}
+          rules={[{ required: true, message: "Please input epsilon values." }]}
+          tooltip="Range of tested epsilon values between 0 and 0.5 inclusive (step size = 0.02)."
+        >
           <Slider
             range
             defaultValue={[0, 0.2]}
@@ -55,11 +60,21 @@ const FoolboxLib: React.FC = () => {
           />
         </Form.Item>
 
-        <Form.Item label="Model Lower Bound:" required rules={[{ required: true, message: "Please input the model's lower bound value." }]}>
+        <Form.Item
+          label="Model Lower Bound:"
+          required={componentEnabled}
+          rules={[{ required: true, message: "Please input the model's lower bound value." }]}
+          tooltip="The lower bound for the model's pixel values, usually (0, 1) or (0, 255)."
+        >
           <Input type="number" placeholder="0" onChange={(e) => setLowerBound(Number(e.target.value))} />
         </Form.Item>
 
-        <Form.Item label="Model Upper Bound:" required rules={[{ required: true, message: "Please input the model's upper bound value." }]}>
+        <Form.Item
+          label="Model Upper Bound:"
+          required={componentEnabled}
+          rules={[{ required: true, message: "Please input the model's upper bound value." }]}
+          tooltip="The upper bound for the model's pixel values, usually (0, 1) or (0, 255)."
+        >
           <Input type="number" placeholder="255" onChange={(e) => setUpperBound(Number(e.target.value))} />
         </Form.Item>
 

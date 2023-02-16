@@ -39,7 +39,7 @@ const ContrastReductionAttack = (props: AttackProps) => {
         <Form.Item
           label="Search Types:"
           rules={[{ required: true, message: "Please input desired search types." }]}
-          required
+          required={subFormEnabled}
           tooltip="Linear/Binary search to find the smallest adversarial perturbation."
           // style={{ marginTop: "-2em" }}
         >
