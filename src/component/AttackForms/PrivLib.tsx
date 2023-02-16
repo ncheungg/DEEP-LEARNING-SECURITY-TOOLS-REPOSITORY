@@ -88,7 +88,7 @@ const PrivLib: React.FC = () => {
   return (
     <div style={{ paddingBottom: "1.3em" }}>
       <Checkbox checked={componentDisabled} onChange={(e) => setComponentDisabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
-        <b>Enable Privacy Attack Library</b>
+        <b>Enable Privacy Meter</b>
       </Checkbox>
       <Dropdown menu={{ items }}>
         <a style={{ color: "gray" }} onClick={(e) => e.preventDefault()}>
