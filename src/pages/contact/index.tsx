@@ -2,6 +2,7 @@ import Navbar from "@/component/navbar/Navbar";
 import Footer from "@/component/footer/Footer";
 import { Col, Layout, Typography } from "antd";
 import ContactForm from "@/component/ContactForm/ContactForm";
+import FAQAccordion from "@/component/ContactForm/QuestionForm";
 
 const { Title } = Typography;
 
@@ -15,14 +16,20 @@ export default function Contact() {
       <Content
         style={{
           backgroundColor: "white",
+          // backgroundImage=
           minHeight: "calc(100vh - 4em)",
           padding: "3em",
           width: "65em",
         }}
       >
-        <Title>Contact Us</Title>
         <Title level={2} style={{ paddingBottom: "1em" }}>
-          We will try to get back to you within 2-3 business days
+          Frequently Asked Questions
+        </Title>
+
+        <FAQAccordion />
+
+        <Title level={2} style={{ paddingBottom: "1em", paddingTop: "3em" }}>
+          Don't see your question? Contact us Here!
         </Title>
 
         <ContactForm />

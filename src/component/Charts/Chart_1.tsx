@@ -15,23 +15,28 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineEleme
 
 const inter = Inter({ subsets: ["latin"] });
 const data = {
-  labels: ["L2ContrastReductionAttack", "VirtualAdversarialAttack", "L2FastGradientAttack", "L2BasicIterativeAttack"],
+  labels: [
+    "L2 Fast Gradient Method Attack",
+    "Inversion Attack",
+    "Linf Deep Fool Attack",
+    " Linf Contrast Reduction Attack",
+    "L2 Additive Gaussian Noise Attack",
+    "Original Model Accuracy",
+  ],
   datasets: [
     {
-      label: "Original Model Accuracy",
-      fillColor: "green",
-      fill: "origin",
-      data: [0.75, 0.75, 0.75, 0.75],
-      borderColor: "rgb(0, 255, 0)",
-      backgroundColor: "rgba(35, 158, 45, 0.8)",
-    },
-    {
-      label: "Accuracy After FoolBox Attacks",
-      fillColor: "red",
-      fill: true,
-      data: [0.54, 0.47, 0.64, 0.34],
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(255, 0, 0, 0.8)",
+      label: "Accuracy After FoolBox Attack",
+      fillColor: "black",
+      data: [0.39, 0.32, 0.09, 0.27, 0.29, 0.75],
+      borderColor: "rgb(0, 0, 0)",
+      backgroundColor: [
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(35, 158, 45, 0.8)",
+      ],
     },
   ],
 };
@@ -40,7 +45,11 @@ const options = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: {},
+    legend: {
+      display: true,
+
+      labels: {},
+    },
     title: {
       display: true,
       text: "Foolbox Attack Strength",
@@ -55,24 +64,35 @@ const options = {
 };
 
 const data2 = {
-  labels: ["Fast Gradient Method", "Basic Iterative Method", "Madry et al", "Momentum Iterative Method"],
+  labels: [
+    "Linf Fast Gradient Method Attack",
+    "Linf Madry et al Attack",
+    "Madry et al",
+    "Linf Momentum Iterative Attack",
+    "Original Model Accuracy",
+  ],
   datasets: [
     {
-      label: "Original Model Accuracy",
-      data: [0.75, 0.75, 0.75, 0.75],
-      borderColor: "rgb(0, 255, 0)",
-      backgroundColor: "rgba(35, 158, 45, 0.8)",
+      label: "Accuracy After Clenerhans Attack",
+      data: [0.19, 0.26, 0.11, 0.32, 0.75],
+      borderColor: "rgb(0, 0, 0)",
+      backgroundColor: [
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(255, 0, 0, 0.8)",
+        "rgba(35, 158, 45, 0.8)",
+      ],
     },
-    {
-      label: "Accuracy After Cleverhans Attacks",
-      fillColor: "red",
-      data: [0.32, 0.55, 0.7, 0.29],
-      borderColor: "rgba(53, 162, 235,0.1)",
-      backgroundColor: "rgba(255, 0, 0, 0.8)",
-    },
+    // {
+    //   label: "Accuracy After Cleverhans Attacks",
+    //   fillColor: "red",
+    //   data: [0.32, 0.55, 0.7, 0.29],
+    //   borderColor: "rgba(53, 162, 235,0.1)",
+    //   backgroundColor: "rgba(255, 0, 0, 0.8)",
+    // },
   ],
 };
-
 const options2 = {
   responsive: true,
   maintainAspectRatio: false,
@@ -136,7 +156,7 @@ const data4 = {
   labels: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
   datasets: [
     {
-      label: "Original Moedddddel Accuracy",
+      label: "Original Model Accuracy",
       data: [0, 0.23, 0.44, 0.65, 0.83, 1.0],
       borderColor: "rgba(0,0,220)",
       backgroundColor: "rgba(0,0,120,0.1)",
@@ -164,7 +184,7 @@ const options4 = {
     title: {
       display: true,
       //position: "center",
-      text: "ML Praivacy Meter Results",
+      text: "ML Privacy Meter Results",
     },
   },
   scales: {
@@ -241,9 +261,9 @@ export default function Chart_1() {
         <div className={styles.Chart2} style={{ paddingTop: "2em", paddingBottom: "2em" }}>
           <Bar data={data2} options={options2} height="300px" width="300px" />
         </div>
-        <div className={styles.Chart3} style={{ paddingTop: "2em", paddingBottom: "2em" }}>
+        {/* <div className={styles.Chart3} style={{ paddingTop: "2em", paddingBottom: "2em" }}>
           <Bar data={data3} options={options3} height="300px" width="300px" />
-        </div>
+        </div> */}
         <div className={styles.Chart4} style={{ paddingTop: "2em", paddingBottom: "2em" }}>
           <Line data={data4} options={options4} height="300px" width="300px" />
         </div>
