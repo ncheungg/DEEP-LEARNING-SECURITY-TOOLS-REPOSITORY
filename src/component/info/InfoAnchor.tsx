@@ -9,11 +9,11 @@ const InfoAnchor: React.FC = () => {
     <Row>
       <Col span={16}>
         <div id="part-1" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
-          <Title level={2}>Cleverhans Attacks Library:</Title>
+          <Title level={2}>Foolbox Attacks Library:</Title>
         </div>
         <div id="part-1-1" style={{ height: "22em", background: "rgba(255,0,0,0)" }}>
           <Card
-            title="L2 Contrast Reduction Attack"
+            title="Deep Fool Attack"
             extra={
               <Tooltip title="Open page" placement="bottom">
                 <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
@@ -28,7 +28,7 @@ const InfoAnchor: React.FC = () => {
             <p>
               <b>Parameters:</b>{" "}
               <ul>
-                <li>Epsilon</li>
+                <li>Range of Epsilon</li>
                 <li>Step Size</li>
                 <li>Order of the Norm</li>
               </ul>
@@ -37,7 +37,7 @@ const InfoAnchor: React.FC = () => {
         </div>
         <div id="part-1-2" style={{ height: "26.75em", background: "rgba(255,0,0,0)" }}>
           <Card
-            title="Virtual Adversarial Attack"
+            title="Fast Gradient Attack"
             extra={
               <Tooltip title="Open page" placement="bottom">
                 <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
@@ -63,7 +63,7 @@ const InfoAnchor: React.FC = () => {
         </div>
         <div id="part-1-3" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
           <Card
-            title="Decoupled Direction and Norm L2 Adversarial Attack"
+            title="Basic Iterative Attack"
             extra={
               <Tooltip title="Open page" placement="bottom">
                 <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener">
@@ -86,7 +86,7 @@ const InfoAnchor: React.FC = () => {
         </div>
         <div id="part-1-4" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
           <Card
-            title="L2 Projected Gradient Descent Attack"
+            title="Additive Gaussian Noise Attack"
             extra={
               <Tooltip title="Open page" placement="bottom">
                 <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
@@ -109,7 +109,55 @@ const InfoAnchor: React.FC = () => {
         </div>
         <div id="part-1-5" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
           <Card
-            title="L2 Clipping Aware Additive Gaussian Noise Attack"
+            title="Inversion Attack"
+            extra={
+              <Tooltip title="Open page">
+                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                  <LinkOutlined style={{ color: "gray" }} />
+                </a>
+              </Tooltip>
+            }
+          >
+            <p>
+              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+            </p>
+            <p>
+              <b>Parameters:</b>{" "}
+              <ul>
+                <li>Epsilon</li>
+                <li>Step Size</li>
+                <li>Order of the Norm</li>
+              </ul>
+            </p>
+          </Card>
+        </div>
+        <div id="part-1-6" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
+          <Card
+            title="Salt & Pepper Noise Attack"
+            extra={
+              <Tooltip title="Open page">
+                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                  <LinkOutlined style={{ color: "gray" }} />
+                </a>
+              </Tooltip>
+            }
+          >
+            <p>
+              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+            </p>
+            <p>
+              <b>Parameters:</b>{" "}
+              <ul>
+                <li>Epsilon</li>
+                <li>Step Size</li>
+                <li>Order of the Norm</li>
+              </ul>
+            </p>
+          </Card>
+        </div>
+        <div id="part-1-7" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
+          <Card
+            title="Contrast Reduction Attack"
             extra={
               <Tooltip title="Open page">
                 <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
@@ -132,35 +180,11 @@ const InfoAnchor: React.FC = () => {
           </Card>
         </div>
         <div id="part-2" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
-          <Title level={2}>Foolbox Attacks Library:</Title>
+          <Title level={2}>CleverHans Attacks Library:</Title>
         </div>
-        <div id="part-2-1" style={{ height: "22em", background: "rgba(255,0,0,0)" }}>
+        <div id="part-2-1" style={{ height: "26.75em", background: "rgba(255,0,0,0)" }}>
           <Card
-            title="L2 Contrast Reduction Attack"
-            extra={
-              <Tooltip title="Open page" placement="bottom">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
-                  <LinkOutlined style={{ color: "gray" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> Reduces the contrast of the input using a perturbation of the given size.
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="part-2-2" style={{ height: "26.75em", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Virtual Adversarial Attack"
+            title="Fast Gradient Method Attack"
             extra={
               <Tooltip title="Open page" placement="bottom">
                 <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
@@ -184,9 +208,10 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-2-3" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
+        <div id="part-2-2" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
           <Card
-            title="Decoupled Direction and Norm L2 Adversarial Attack"
+            title="
+            Basic Iterative Method Attack"
             extra={
               <Tooltip title="Open page" placement="bottom">
                 <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener">
@@ -207,9 +232,9 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-2-4" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
+        <div id="part-2-3" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
           <Card
-            title="L2 Projected Gradient Descent Attack"
+            title="Momentum Iterative Method Attack"
             extra={
               <Tooltip title="Open page" placement="bottom">
                 <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
@@ -230,9 +255,9 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-2-5" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
+        <div id="part-2-4" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
           <Card
-            title="L2 Clipping Aware Additive Gaussian Noise Attack"
+            title="Madry Et Al Method Attack"
             extra={
               <Tooltip title="Open page">
                 <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
@@ -254,8 +279,56 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-3" style={{ height: "100vhem", background: "rgba(255,0,0,0)" }}>
-          <Title level={2}>Other Libraries:</Title>
+        <div id="part-2-5" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
+          <Card
+            title="SPSA Attack"
+            extra={
+              <Tooltip title="Open page">
+                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                  <LinkOutlined style={{ color: "gray" }} />
+                </a>
+              </Tooltip>
+            }
+          >
+            <p>
+              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+            </p>
+            <p>
+              <b>Parameters:</b>{" "}
+              <ul>
+                <li>Epsilon</li>
+                <li>Step Size</li>
+                <li>Order of the Norm</li>
+              </ul>
+            </p>
+          </Card>
+        </div>
+        <div id="part-3" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
+          <Title level={2}>ML Privacy Meter Attacks Library:</Title>
+        </div>
+        <div id="part-3-1" style={{ height: "100vh", background: "rgba(255,0,0,0)" }}>
+          <Card
+            title="SPSA Attack"
+            extra={
+              <Tooltip title="Open page">
+                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                  <LinkOutlined style={{ color: "gray" }} />
+                </a>
+              </Tooltip>
+            }
+          >
+            <p>
+              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+            </p>
+            <p>
+              <b>Parameters:</b>{" "}
+              <ul>
+                <li>Epsilon</li>
+                <li>Step Size</li>
+                <li>Order of the Norm</li>
+              </ul>
+            </p>
+          </Card>
         </div>
       </Col>
       <Col span={8} style={{ paddingLeft: "2em" }}>
@@ -264,71 +337,88 @@ const InfoAnchor: React.FC = () => {
             {
               key: "part-1",
               href: "#part-1",
-              title: "CleverHans Attacks",
+              title: "Foolbox Attacks Library",
               children: [
                 {
                   key: "part-1-1",
                   href: "#part-1-1",
-                  title: "L2 Contrast Reduction Attack",
+                  title: "Deep Fool Attack",
                 },
                 {
                   key: "part-1-2",
                   href: "#part-1-2",
-                  title: "Virtual Adversarial Attack",
+                  title: "Fast Gradient Attack",
                 },
                 {
                   key: "part-1-3",
                   href: "#part-1-3",
-                  title: "Decoupled Direction and Norm L2 Adversarial Attack",
+                  title: "Basic Iterative Attack",
                 },
                 {
                   key: "part-1-4",
                   href: "#part-1-4",
-                  title: "L2 Projected Gradient Descent Attack",
+                  title: "Additive Gaussian Noise Attack",
                 },
                 {
                   key: "part-1-5",
                   href: "#part-1-5",
-                  title: "L2 Clipping Aware Additive Gaussian Noise Attack",
+                  title: "Inversion Attack",
+                },
+                {
+                  key: "part-1-6",
+                  href: "#part-1-6",
+                  title: "Salt & Pepper Noise Attack",
+                },
+                {
+                  key: "part-1-7",
+                  href: "#part-1-7",
+                  title: "Contrast Reduction Attack",
                 },
               ],
             },
             {
               key: "part-2",
               href: "#part-2",
-              title: "Foolbox Attacks",
+              title: "CleverHans Attacks Library",
               children: [
                 {
                   key: "part-2-1",
                   href: "#part-2-1",
-                  title: "L2 Contrast Reduction Attack",
+                  title: "Fast Gradient Method Attack",
                 },
                 {
                   key: "part-2-2",
                   href: "#part-2-2",
-                  title: "Virtual Adversarial Attack",
+                  title: "Basic Iterative Method Attack",
                 },
                 {
                   key: "part-2-3",
                   href: "#part-2-3",
-                  title: "Decoupled Direction and Norm L2 Adversarial Attack",
+                  title: "Momentum Iterative Method Attack",
                 },
                 {
                   key: "part-2-4",
                   href: "#part-2-4",
-                  title: "L2 Projected Gradient Descent Attack",
+                  title: "Madry Et Al Method Attack",
                 },
                 {
                   key: "part-2-5",
                   href: "#part-2-5",
-                  title: "L2 Clipping Aware Additive Gaussian Noise Attack",
+                  title: "SPSA Attack",
                 },
               ],
             },
             {
               key: "part-3",
               href: "#part-3",
-              title: "Other Attacks",
+              title: "ML Privacy Meter Attacks Library",
+              children: [
+                {
+                  key: "part-3-1",
+                  href: "#part-3-1",
+                  title: "Population Attack",
+                },
+              ],
             },
           ]}
         />
