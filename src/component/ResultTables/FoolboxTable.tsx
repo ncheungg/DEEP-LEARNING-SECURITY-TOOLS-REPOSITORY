@@ -138,7 +138,7 @@ const FoolboxTable: React.FC = () => {
       ...getColumnSearchProps("name"),
     },
     {
-      title: "Post-Attack Accuracy",
+      title: "Post-Attack Accuracy (%)",
       dataIndex: "accuracy",
       key: "accuracy",
       width: "20%",

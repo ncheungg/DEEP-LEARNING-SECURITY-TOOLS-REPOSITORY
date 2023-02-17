@@ -32,7 +32,7 @@ const data: DataType[] = [
   },
   {
     key: "2",
-    fpr: 0.1048,
+    fpr: 0.25,
     accuracy: 0.517,
     roc: 0.5892376,
     tn: 4555,
@@ -42,7 +42,7 @@ const data: DataType[] = [
   },
   {
     key: "3",
-    fpr: 0.0918,
+    fpr: 0.5,
     accuracy: 0.525,
     roc: 0.5879765,
     tn: 4321,
@@ -52,7 +52,7 @@ const data: DataType[] = [
   },
   {
     key: "4",
-    fpr: 0.1567,
+    fpr: 0.75,
     accuracy: 0.548,
     roc: 0.5987689,
     tn: 2678,
@@ -62,7 +62,7 @@ const data: DataType[] = [
   },
   {
     key: "5",
-    fpr: 0.9817,
+    fpr: 1.0,
     accuracy: 0.588,
     roc: 0.5298901,
     tn: 1675,

@@ -37,8 +37,8 @@ export default function Home() {
         <FoolboxTable />
         <Title level={3}>ML Privacy Meter (Population Attack Audit Results):</Title>
         <MLPrivacyMeterTable />
-        <Title level={3}>Dioptra:</Title>
-        <DioptraTable />
+        {/* <Title level={3}>Dioptra:</Title>
+        <DioptraTable /> */}
 
         <Button type="primary" icon={<DownloadOutlined />} size="large" /*href=""*/>
           Download PDF
