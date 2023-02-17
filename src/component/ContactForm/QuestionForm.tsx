@@ -17,7 +17,7 @@ const FAQAccordion: React.FC = () => {
     <Collapse
       defaultActiveKey={[]}
       onChange={onChange}
-      // accordion={true}
+      accordion={true}
       bordered={false}
       expandIcon={({ isActive }) => (isActive ? <MinusOutlined /> : <PlusOutlined />)}
     >
@@ -48,10 +48,31 @@ const FAQAccordion: React.FC = () => {
           expandIcon={({ isActive }) => (isActive ? <MinusCircleTwoTone /> : <PlusCircleTwoTone />)}
         >
           <Panel header="What files I need to get started?" key="1">
-            <p>{text}</p>
+            <p>
+              {`To get started with KOMN, all you need is a pre-trained Keras model that has been saved using the 
+                TensorFlow `}{" "}
+              <a href="https://www.tensorflow.org/api_docs/python/tf/keras/models/save_model" rel="noopener noreferrer" target="_blank">
+                save_model function
+              </a>
+              , with the save_format option set to &apos;tf&apos;. Additionally, you will need a data set in the format provided by the
+              TensorFlow-Datasets (TFDS) library. This can be achieved by using the TFDS{" "}
+              <a href="https://www.tensorflow.org/datasets/api_docs/python/tfds/load" rel="noopener noreferrer" target="_blank">
+                {" "}
+                load function.{" "}
+              </a>
+              You will also require that the folders containing the Keras model and the TFDS data set must be compressed before being
+              uploaded to KOMN. Visit the <a href="https://rsa02.netlify.app/attack"> scan </a>
+              page to get started.
+            </p>
           </Panel>
           <Panel header="How do I use the aggregator? " key="2">
-            <p>{text}</p>
+            <p>{`Once your have uploaded your model and dataset, you will be presented a screen to select which type of libraries
+                 and attacks you would like to run your model against. 
+                 You will be able to select various forms of attacks from 
+                 reuputable Machine Learning libraries such as Cleverhans, Foolbox, and the ML Privacy Meter. You will also
+                 be able to specify the parameters of each attack. Once you are satisfied with your selections, simply click
+                 on the scan button located at the bottom of the page. Scanning the model may take several minutes, depending on the
+                 size of your model and dataset.`}</p>
           </Panel>
         </Collapse>
       </Panel>
