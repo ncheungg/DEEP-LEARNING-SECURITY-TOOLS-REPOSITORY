@@ -89,7 +89,7 @@ const FAQAccordion: React.FC = () => {
       <Panel header="Is KOMN still in development?" key="5">
         <p>{`Currently, KOMN is still under development. The team is expected to have a complete 
         beta working in early Spring 2023. After gathering feedback from the community,
-        the full version will be released in the fall of 2023 Inshallah.`}</p>
+        the full version will be released in the fall of 2023.`}</p>
       </Panel>
     </Collapse>
   );
