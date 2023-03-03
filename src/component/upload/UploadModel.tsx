@@ -10,13 +10,14 @@ import { message, Upload } from "antd";
 // });
 // gc.getBuckets().then((x: any) => console.log(x));
 
+
+
 const { Dragger } = Upload;
 
 const props: UploadProps = {
   name: "file",
   multiple: false,
   accept: "zip",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
   onChange(info) {
     const { status } = info.file;
     if (status !== "uploading") {
@@ -29,11 +30,32 @@ const props: UploadProps = {
     }
   },
   onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
+    const file = e.dataTransfer.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    console.log("uploading file");
+    console.log(formData);
+    fetch('https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file', {
+      method: 'POST',
+      body: formData,
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Network response was not ok.');
+    })
+    .then((data) => {
+      console.log('Upload successful');
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error('Error uploading file:', error);
+    });
   },
 };
 
-const UploadModel: React.FC = (props) => {
+const UploadModel: React.FC = () => {
   return (
     <Dragger {...props} style={{ width: "100%" }}>
       <p className="ant-upload-drag-icon">
