@@ -8,24 +8,61 @@ const { Dragger } = Upload;
 const props: UploadProps = {
   name: "file",
   multiple: false,
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  accept: "zip",
   onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
+    //on change occurs anytime the status of the upload changes (file added/removed, upload finished)
+    
+    const {file} = info;
+    const status = file.status;
+
+    if(status === "removed"){
+      console.log("file remove");
+      return;
     }
+    //uploading means from users computer to client side
+    if(status == "uploading"){
+      return;
+    }
+    if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+      return;
+    }
+
+    //once its uploaded to client side, then we can upload through api call
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
     }
+    
+    const formData = new FormData();
+    if(file.originFileObj){
+      formData.append('file', file.originFileObj);
+    }
+
+    console.log("uploading file");
+    console.log(formData);
+    fetch('https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file', {
+      method: 'POST',
+      body: formData,
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Network response was not ok.');
+    })
+    .then((data) => {
+      console.log('Upload successful');
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error('Error uploading file:', error);
+    });
+
   },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
+
 };
 
-const UploadTest: React.FC = (props) => {
+const UploadTest: React.FC = () => {
   return (
     <Dragger {...props}>
       <br />
