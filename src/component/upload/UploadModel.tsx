@@ -2,6 +2,8 @@ import React from "react";
 import { CloudSyncOutlined, CloudUploadOutlined, DatabaseOutlined, FileMarkdownOutlined, InboxOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
 import { message, Upload } from "antd";
+import { UploadChangeParam, UploadFile } from 'antd/es/upload/interface';
+
 
 //const { Storage } = require("@google-cloud/storage");
 //const gc = new Storage({
@@ -19,20 +21,34 @@ const props: UploadProps = {
   multiple: false,
   accept: "zip",
   onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
+    //on change occurs anytime the status of the upload changes (file added/removed, upload finished)
+    
+    const {file} = info;
+    const status = file.status;
+
+    if(status === "removed"){
+      console.log("file remove");
+      return;
     }
+    //uploading means from users computer to client side
+    if(status == "uploading"){
+      return;
+    }
+    if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+      return;
+    }
+
+    //once its uploaded to client side, then we can upload through api call
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
     }
-  },
-  onDrop(e) {
-    const file = e.dataTransfer.files[0];
+    
     const formData = new FormData();
-    formData.append('file', file);
+    if(file.originFileObj){
+      formData.append('file', file.originFileObj);
+    }
+
     console.log("uploading file");
     console.log(formData);
     fetch('https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file', {
@@ -52,7 +68,9 @@ const props: UploadProps = {
     .catch((error) => {
       console.error('Error uploading file:', error);
     });
+
   },
+
 };
 
 const UploadModel: React.FC = () => {
