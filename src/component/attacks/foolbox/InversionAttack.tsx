@@ -19,8 +19,10 @@ const InversionAttack = (props: AttackProps) => {
       <Checkbox disabled={!formEnabled} onChange={(e) => setSubFormEnabled(e.target.checked)}>
         <b>Inversion Attack</b>
       </Checkbox>
-      <Tooltip title='Creates "negative images" by inverting the pixel values.'>
-        <InfoCircleOutlined style={{ color: "gray" }} />
+      <Tooltip title='Creates "negative images" by inverting the pixel values. (Click for Inversion Attack Attack Documentation)'>
+        <a href="/about#foolbox-inversion-attack" target="_blank" rel="noreferrer noopener">
+          <InfoCircleOutlined style={{ color: "gray" }} />
+        </a>
       </Tooltip>
 
       <div style={{ height: "2em" }}></div>

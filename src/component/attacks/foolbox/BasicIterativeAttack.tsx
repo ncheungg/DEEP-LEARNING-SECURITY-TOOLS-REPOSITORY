@@ -20,8 +20,10 @@ const BasicIterativeAttack = (props: AttackProps) => {
       <Checkbox disabled={!formEnabled} onChange={(e) => setSubFormEnabled(e.target.checked)}>
         <b>Basic Iterative Attack</b>
       </Checkbox>
-      <Tooltip title="Basic Iterative Method.">
-        <InfoCircleOutlined style={{ color: "gray" }} />
+      <Tooltip title="Basic Iterative Method. (Click for Basic Iterative Method Attack Documentation)">
+        <a href="/about#foolbox-basic-iterative-attack" target="_blank" rel="noreferrer noopener">
+          <InfoCircleOutlined style={{ color: "gray" }} />
+        </a>
       </Tooltip>
 
       {/* attack inputs */}

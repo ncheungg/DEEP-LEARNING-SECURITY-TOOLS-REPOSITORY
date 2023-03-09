@@ -1,4 +1,4 @@
-import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
+import { FileSearchOutlined, InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, Row, Tooltip } from "antd";
 import { useState } from "react";
 
@@ -19,12 +19,11 @@ const DeepFoolAttack = (props: AttackProps) => {
       <Checkbox disabled={!formEnabled} onChange={(e) => setSubFormEnabled(e.target.checked)}>
         <b>Deep Fool Attack</b>
       </Checkbox>
-      <Tooltip title="A simple and fast gradient-based adversarial attack. Implements the DeepFool attack.">
-        <InfoCircleOutlined style={{ color: "gray" }} />
+      <Tooltip title="A simple and fast gradient-based adversarial attack. Implements the DeepFool attack. (Click for Deep Fool Attack Documentation)">
+        <a href="/about#foolbox-deep-fool-attack" target="_blank" rel="noreferrer noopener">
+          <InfoCircleOutlined style={{ color: "gray" }} />
+        </a>
       </Tooltip>
-      <a href="https://arxiv.org/abs/1511.04599" target="_blank" rel="noreferrer noopener" style={{ color: "gray", paddingLeft: "8px" }}>
-        <LinkOutlined />
-      </a>
 
       {/* attack inputs */}
       <Form

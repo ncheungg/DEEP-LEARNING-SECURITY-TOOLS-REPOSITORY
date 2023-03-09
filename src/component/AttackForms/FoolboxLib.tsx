@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { FileSearchOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { Form, Input, Checkbox, Slider } from "antd";
 import { Tooltip } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
@@ -31,6 +31,9 @@ const FoolboxLib: React.FC = () => {
       <Checkbox checked={componentEnabled} onChange={(e) => setComponentEnabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
         <b>Enable Foolbox</b>
       </Checkbox>
+      <a href="/about#ml-privacy-meter" target="_blank" rel="noreferrer noopener">
+        <FileSearchOutlined style={{ color: "gray" }} />
+      </a>
 
       <Form
         labelCol={{ span: 6 }}

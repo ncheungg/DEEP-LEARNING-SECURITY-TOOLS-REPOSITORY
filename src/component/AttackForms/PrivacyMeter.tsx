@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DownOutlined, InfoCircleOutlined, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { DownOutlined, FileSearchOutlined, InfoCircleOutlined, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import {
   Form,
   Input,
@@ -88,8 +88,11 @@ const PrivLib: React.FC = () => {
   return (
     <div style={{ paddingBottom: "1.3em" }}>
       <Checkbox checked={componentDisabled} onChange={(e) => setComponentDisabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
-        <b>Enable Privacy Meter</b>
+        <b>Enable ML Privacy Meter</b>
       </Checkbox>
+      <a href="/about#ml-privacy-meter" target="_blank" rel="noreferrer noopener">
+        <FileSearchOutlined style={{ color: "gray" }} />
+      </a>
 
       <Form
         labelCol={{ span: 6 }}

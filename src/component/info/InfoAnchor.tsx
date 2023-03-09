@@ -1,6 +1,6 @@
 import React from "react";
 import { Anchor, Row, Col, Card, Divider, Typography, Tooltip } from "antd";
-import { LinkOutlined } from "@ant-design/icons";
+import { GithubOutlined, LinkOutlined } from "@ant-design/icons";
 
 const { Title, Paragraph, Text, Link } = Typography;
 
@@ -8,16 +8,23 @@ const InfoAnchor: React.FC = () => {
   return (
     <Row>
       <Col span={16}>
-        <div id="part-1" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
+        <div id="foolbox" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
           <Title level={2}>Foolbox Attacks Library:</Title>
         </div>
-        <div id="part-1-1" style={{ height: "22em", background: "rgba(255,0,0,0)" }}>
+        <div id="foolbox-deep-fool-attack" style={{ height: "flex", background: "rgba(255,0,0,0)" }}>
           <Card
             title="Deep Fool Attack"
             extra={
-              <Tooltip title="Open page" placement="bottom">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */ placement="bottom">
+                <a href="https://arxiv.org/abs/1511.04599" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a>
+                <a
+                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/deepfool.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -35,13 +42,20 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-1-2" style={{ height: "26.75em", background: "rgba(255,0,0,0)" }}>
+        <div id="foolbox-fast-gradient-attack" style={{ height: "26.75em", background: "rgba(255,0,0,0)" }}>
           <Card
             title="Fast Gradient Attack"
             extra={
-              <Tooltip title="Open page" placement="bottom">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */ placement="bottom">
+                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/fast_gradient_method.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -61,13 +75,20 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-1-3" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
+        <div id="foolbox-basic-iterative-attack" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
           <Card
             title="Basic Iterative Attack"
             extra={
-              <Tooltip title="Open page" placement="bottom">
-                <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */ placement="bottom">
+                {/* <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/basic_iterative_method.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -84,13 +105,20 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-1-4" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
+        <div id="foolbox-additive-gaussian-noise-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
           <Card
             title="Additive Gaussian Noise Attack"
             extra={
-              <Tooltip title="Open page" placement="bottom">
+              <Tooltip /* title="Open Page" */ placement="bottom">
                 <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a>
+                <a
+                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/additive_noise.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -107,13 +135,50 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-1-5" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
+        <div id="foolbox-additive-uniform-noise-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
+          <Card
+            title="Additive Uniform Noise Attack"
+            extra={
+              <Tooltip /* title="Open Page" */ placement="bottom">
+                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                  <LinkOutlined style={{ color: "gray" }} />
+                </a>
+                <a
+                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/additive_noise.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+                </a>
+              </Tooltip>
+            }
+          >
+            <p>
+              <b>Definition:</b> ...
+            </p>
+            <p>
+              <b>Parameters:</b>{" "}
+              <ul>
+                <li>Step Size</li>
+                <li>Order of the Norm</li>
+              </ul>
+            </p>
+          </Card>
+        </div>
+        <div id="foolbox-inversion-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
           <Card
             title="Inversion Attack"
             extra={
-              <Tooltip title="Open page">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */>
+                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/inversion.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -131,13 +196,20 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-1-6" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
+        <div id="foolbox-salt-and-pepper-noise-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
           <Card
             title="Salt & Pepper Noise Attack"
             extra={
-              <Tooltip title="Open page">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */>
+                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/saltandpepper.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -155,13 +227,20 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-1-7" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
+        <div id="foolbox-contrast-reduction-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
           <Card
             title="Contrast Reduction Attack"
             extra={
-              <Tooltip title="Open page">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */>
+                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/contrast.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -179,16 +258,23 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-2" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
+        <div id="cleverhans" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
           <Title level={2}>CleverHans Attacks Library:</Title>
         </div>
-        <div id="part-2-1" style={{ height: "26.75em", background: "rgba(255,0,0,0)" }}>
+        <div id="cleverhans-fast-gradient-method-attack" style={{ height: "26.75em", background: "rgba(255,0,0,0)" }}>
           <Card
             title="Fast Gradient Method Attack"
             extra={
-              <Tooltip title="Open page" placement="bottom">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */ placement="bottom">
+                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/fast_gradient_method.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -208,14 +294,52 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-2-2" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
+        <div id="cleverhans-projected-gradient-descent-attack" style={{ height: "20.75em", background: "rgba(255,0,0,0)" }}>
+          <Card
+            title="Projected Gradient Descent Attack"
+            extra={
+              <Tooltip /* title="Open Page" */ placement="bottom">
+                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                  <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/fast_gradient_method.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+                </a>
+              </Tooltip>
+            }
+          >
+            <p>
+              <b>Definition:</b> ...
+            </p>
+            <p>
+              <b>Parameters:</b>{" "}
+              <ul>
+                <li>Epsilon</li>
+                <li>Step Size</li>
+                <li>Order of the Norm</li>
+              </ul>
+            </p>
+          </Card>
+        </div>
+        <div id="cleverhans-basic-iterative-method-attack" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
           <Card
             title="
             Basic Iterative Method Attack"
             extra={
-              <Tooltip title="Open page" placement="bottom">
-                <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */ placement="bottom">
+                {/* <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/basic_iterative_method.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -232,13 +356,20 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-2-3" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
+        <div id="cleverhans-momentum-iterative-method-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
           <Card
             title="Momentum Iterative Method Attack"
             extra={
-              <Tooltip title="Open page" placement="bottom">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */ placement="bottom">
+                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/momentum_iterative_method.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -255,13 +386,20 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-2-4" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
+        <div id="cleverhans-madry-et-al-method-attack" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
           <Card
             title="Madry Et Al Method Attack"
             extra={
-              <Tooltip title="Open page">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */>
+                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/madry_et_al.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -279,13 +417,20 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-2-5" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
+        <div id="cleverhans-spsa-attack" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
           <Card
             title="SPSA Attack"
             extra={
-              <Tooltip title="Open page">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */>
+                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/contrast.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -303,16 +448,23 @@ const InfoAnchor: React.FC = () => {
             </p>
           </Card>
         </div>
-        <div id="part-3" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
+        <div id="ml-privacy-meter" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
           <Title level={2}>ML Privacy Meter Attacks Library:</Title>
         </div>
-        <div id="part-3-1" style={{ height: "100vh", background: "rgba(255,0,0,0)" }}>
+        <div id="ml-privacy-meter-population-attack" style={{ height: "100vh", background: "rgba(255,0,0,0)" }}>
           <Card
             title="SPSA Attack"
             extra={
-              <Tooltip title="Open page">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <Tooltip /* title="Open Page" */>
+                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+                <a
+                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/contrast.py"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
                 </a>
               </Tooltip>
             }
@@ -335,87 +487,97 @@ const InfoAnchor: React.FC = () => {
         <Anchor
           items={[
             {
-              key: "part-1",
-              href: "#part-1",
+              key: "foolbox",
+              href: "#foolbox",
               title: "Foolbox Attacks Library",
               children: [
                 {
-                  key: "part-1-1",
-                  href: "#part-1-1",
+                  key: "foolbox-deep-fool-attack",
+                  href: "#foolbox-deep-fool-attack",
                   title: "Deep Fool Attack",
                 },
                 {
-                  key: "part-1-2",
-                  href: "#part-1-2",
+                  key: "foolbox-fast-gradient-attack",
+                  href: "#foolbox-fast-gradient-attack",
                   title: "Fast Gradient Attack",
                 },
                 {
-                  key: "part-1-3",
-                  href: "#part-1-3",
+                  key: "foolbox-basic-iterative-attack",
+                  href: "#foolbox-basic-iterative-attack",
                   title: "Basic Iterative Attack",
                 },
                 {
-                  key: "part-1-4",
-                  href: "#part-1-4",
+                  key: "foolbox-additive-gaussian-noise-attack",
+                  href: "#foolbox-additive-gaussian-noise-attack",
                   title: "Additive Gaussian Noise Attack",
                 },
                 {
-                  key: "part-1-5",
-                  href: "#part-1-5",
+                  key: "foolbox-additive-uniform-noise-attack",
+                  href: "#foolbox-additive-uniform-noise-attack",
+                  title: "Additive Uniform Noise Attack",
+                },
+                {
+                  key: "foolbox-inversion-attack",
+                  href: "#foolbox-inversion-attack",
                   title: "Inversion Attack",
                 },
                 {
-                  key: "part-1-6",
-                  href: "#part-1-6",
+                  key: "foolbox-salt-and-pepper-noise-attack",
+                  href: "#foolbox-salt-and-pepper-noise-attack",
                   title: "Salt & Pepper Noise Attack",
                 },
                 {
-                  key: "part-1-7",
-                  href: "#part-1-7",
+                  key: "foolbox-contrast-reduction-attack",
+                  href: "#foolbox-contrast-reduction-attack",
                   title: "Contrast Reduction Attack",
                 },
               ],
             },
             {
-              key: "part-2",
-              href: "#part-2",
+              key: "cleverhans",
+              href: "#cleverhans",
               title: "CleverHans Attacks Library",
               children: [
                 {
-                  key: "part-2-1",
-                  href: "#part-2-1",
+                  key: "cleverhans-fast-gradient-method-attack",
+                  href: "#cleverhans-fast-gradient-method-attack",
                   title: "Fast Gradient Method Attack",
                 },
                 {
-                  key: "part-2-2",
-                  href: "#part-2-2",
+                  key: "cleverhans-projected-gradient-descent-attack",
+                  href: "#cleverhans-projected-gradient-descent-attack",
+                  title: "Projected Gradient Descent Attack",
+                },
+                {
+                  key: "cleverhans-basic-iterative-method-attack",
+                  href: "#cleverhans-basic-iterative-method-attack",
                   title: "Basic Iterative Method Attack",
                 },
                 {
-                  key: "part-2-3",
-                  href: "#part-2-3",
+                  key: "cleverhans-momentum-iterative-method-attack",
+                  href: "#cleverhans-momentum-iterative-method-attack",
                   title: "Momentum Iterative Method Attack",
                 },
                 {
-                  key: "part-2-4",
-                  href: "#part-2-4",
+                  key: "cleverhans-madry-et-al-method-attack",
+                  href: "#cleverhans-madry-et-al-method-attack",
                   title: "Madry Et Al Method Attack",
                 },
                 {
-                  key: "part-2-5",
-                  href: "#part-2-5",
+                  key: "cleverhans-spsa-attack",
+                  href: "#cleverhans-spsa-attack",
                   title: "SPSA Attack",
                 },
               ],
             },
             {
-              key: "part-3",
-              href: "#part-3",
+              key: "ml-privacy-meter",
+              href: "#ml-privacy-meter",
               title: "ML Privacy Meter Attacks Library",
               children: [
                 {
-                  key: "part-3-1",
-                  href: "#part-3-1",
+                  key: "ml-privacy-meter-population-attack",
+                  href: "#ml-privacy-meter-population-attack",
                   title: "Population Attack",
                 },
               ],

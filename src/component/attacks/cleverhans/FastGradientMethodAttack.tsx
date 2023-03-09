@@ -19,9 +19,11 @@ const FastGradientMethodAttack = (props: AttackProps) => {
       <Checkbox disabled={!formEnabled} onChange={(e) => setSubFormEnabled(e.target.checked)}>
         <b>Fast Gradient Method Attack</b>
       </Checkbox>
-      {/* <Tooltip title="Fast Gradient Method (2) and Fast Gradient Signed Method (∞).">
-        <InfoCircleOutlined style={{ color: "gray" }} />
-      </Tooltip> */}
+      <Tooltip title="Click for Fast Gradient Method Attack Documentation">
+        <a href="/about#cleverhans-fast-gradient-method-attack" target="_blank" rel="noreferrer noopener">
+          <InfoCircleOutlined style={{ color: "gray" }} />
+        </a>
+      </Tooltip>
 
       <div style={{ height: "2em" }}></div>
     </>

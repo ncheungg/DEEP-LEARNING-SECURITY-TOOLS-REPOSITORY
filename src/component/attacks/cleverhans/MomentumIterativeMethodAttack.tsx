@@ -20,9 +20,11 @@ const MomentumIterativeMethodAttack = (props: AttackProps) => {
       <Checkbox disabled={!formEnabled} onChange={(e) => setSubFormEnabled(e.target.checked)}>
         <b>Momentum Iterative Method Attack</b>
       </Checkbox>
-      {/* <Tooltip title="Fast Gradient Method (2) and Fast Gradient Signed Method (∞).">
-        <InfoCircleOutlined style={{ color: "gray" }} />
-      </Tooltip> */}
+      <Tooltip title="Click for Momentum Iterative Method Attack Documentation">
+        <a href="/about#cleverhans-momentum-iterative-method-attack" target="_blank" rel="noreferrer noopener">
+          <InfoCircleOutlined style={{ color: "gray" }} />
+        </a>
+      </Tooltip>
 
       {/* attack inputs */}
       <Form
