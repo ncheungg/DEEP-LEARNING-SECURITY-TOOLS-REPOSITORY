@@ -8,480 +8,484 @@ const InfoAnchor: React.FC = () => {
   return (
     <Row>
       <Col span={16}>
-        <div id="foolbox" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
-          <Title level={2}>Foolbox Attacks Library:</Title>
-        </div>
-        <div id="foolbox-deep-fool-attack" style={{ height: "flex", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Deep Fool Attack"
-            extra={
-              <Tooltip /* title="Open Page" */ placement="bottom">
-                <a href="https://arxiv.org/abs/1511.04599" target="_blank" rel="noreferrer noopener">
-                  <LinkOutlined style={{ color: "gray" }} />
-                </a>
-                <a
-                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/deepfool.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> Reduces the contrast of the input using a perturbation of the given size.
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Range of Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="foolbox-fast-gradient-attack" style={{ height: "26.75em", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Fast Gradient Attack"
-            extra={
-              <Tooltip /* title="Open Page" */ placement="bottom">
-                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
-                  <LinkOutlined style={{ color: "gray" }} />
-                </a> */}
-                <a
-                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/fast_gradient_method.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> Second-order gradient-based attack on the logits. 1 The attack calculates an untargeted adversarial
-              perturbation by performing a approximated second order optimization step on the KL divergence between the unperturbed
-              predictions and the predictions for the adversarial perturbation.
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="foolbox-basic-iterative-attack" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Basic Iterative Attack"
-            extra={
-              <Tooltip /* title="Open Page" */ placement="bottom">
-                {/* <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener">
+        <Title id="foolbox" level={2}>
+          Foolbox Attacks Library
+        </Title>
+        <Card
+          id="foolbox-deep-fool-attack"
+          title="Deep Fool Attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */ placement="bottom">
+              <a href="https://arxiv.org/abs/1511.04599" target="_blank" rel="noreferrer noopener">
+                <LinkOutlined style={{ color: "gray" }} />
+              </a>
+              <a
+                href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/deepfool.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> Reduces the contrast of the input using a perturbation of the given size.
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Range of Epsilon</li>
+              <li>Step Size</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="Fast Gradient Attack"
+          id="foolbox-fast-gradient-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */ placement="bottom">
+              {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/basic_iterative_method.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> ...
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="foolbox-additive-gaussian-noise-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Additive Gaussian Noise Attack"
-            extra={
-              <Tooltip /* title="Open Page" */ placement="bottom">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
-                  <LinkOutlined style={{ color: "gray" }} />
-                </a>
-                <a
-                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/additive_noise.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> ...
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="foolbox-additive-uniform-noise-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Additive Uniform Noise Attack"
-            extra={
-              <Tooltip /* title="Open Page" */ placement="bottom">
-                <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
-                  <LinkOutlined style={{ color: "gray" }} />
-                </a>
-                <a
-                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/additive_noise.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> ...
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="foolbox-inversion-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Inversion Attack"
-            extra={
-              <Tooltip /* title="Open Page" */>
-                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <a
+                href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/fast_gradient_method.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> Second-order gradient-based attack on the logits. 1 The attack calculates an untargeted adversarial
+            perturbation by performing a approximated second order optimization step on the KL divergence between the unperturbed
+            predictions and the predictions for the adversarial perturbation.
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Step Size</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="Basic Iterative Attack"
+          id="foolbox-basic-iterative-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */ placement="bottom">
+              {/* <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/inversion.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="foolbox-salt-and-pepper-noise-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Salt & Pepper Noise Attack"
-            extra={
-              <Tooltip /* title="Open Page" */>
-                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <a
+                href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/basic_iterative_method.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> ?
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="Additive Gaussian Noise Attack"
+          id="foolbox-additive-gaussian-noise-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */ placement="bottom">
+              <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                <LinkOutlined style={{ color: "gray" }} />
+              </a>
+              <a
+                href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/additive_noise.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> ?
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Step Size</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="Additive Uniform Noise Attack"
+          id="foolbox-additive-uniform-noise-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */ placement="bottom">
+              <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                <LinkOutlined style={{ color: "gray" }} />
+              </a>
+              <a
+                href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/additive_noise.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> ?
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Step Size</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="Inversion Attack"
+          id="foolbox-inversion-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */>
+              {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/saltandpepper.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="foolbox-contrast-reduction-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Contrast Reduction Attack"
-            extra={
-              <Tooltip /* title="Open Page" */>
-                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <a
+                href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/inversion.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Step Size</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="Salt & Pepper Noise Attack"
+          id="foolbox-salt-and-pepper-noise-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */>
+              {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/contrast.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="cleverhans" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
-          <Title level={2}>CleverHans Attacks Library:</Title>
-        </div>
-        <div id="cleverhans-fast-gradient-method-attack" style={{ height: "26.75em", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Fast Gradient Method Attack"
-            extra={
-              <Tooltip /* title="Open Page" */ placement="bottom">
-                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <a
+                href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/saltandpepper.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Step Size</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="Contrast Reduction Attack"
+          id="foolbox-contrast-reduction-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */>
+              {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/fast_gradient_method.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> Second-order gradient-based attack on the logits. 1 The attack calculates an untargeted adversarial
-              perturbation by performing a approximated second order optimization step on the KL divergence between the unperturbed
-              predictions and the predictions for the adversarial perturbation.
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="cleverhans-projected-gradient-descent-attack" style={{ height: "20.75em", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Projected Gradient Descent Attack"
-            extra={
-              <Tooltip /* title="Open Page" */ placement="bottom">
-                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <a
+                href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/contrast.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Step Size</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Title id="cleverhans" level={2}>
+          CleverHans Attacks Library:
+        </Title>
+        <Card
+          title="Fast Gradient Method Attack"
+          id="cleverhans-fast-gradient-method-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */ placement="bottom">
+              {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/fast_gradient_method.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> ...
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="cleverhans-basic-iterative-method-attack" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="
+              <a
+                href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/fast_gradient_method.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> Second-order gradient-based attack on the logits. 1 The attack calculates an untargeted adversarial
+            perturbation by performing a approximated second order optimization step on the KL divergence between the unperturbed
+            predictions and the predictions for the adversarial perturbation.
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="Projected Gradient Descent Attack"
+          id="cleverhans-projected-gradient-descent-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */ placement="bottom">
+              {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+                  <LinkOutlined style={{ color: "gray" }} />
+                </a> */}
+              <a
+                href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/fast_gradient_method.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> ?
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>?</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="
             Basic Iterative Method Attack"
-            extra={
-              <Tooltip /* title="Open Page" */ placement="bottom">
-                {/* <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener">
+          id="cleverhans-basic-iterative-method-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */ placement="bottom">
+              {/* <a href="https://arxiv.org/abs/1811.09600" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/basic_iterative_method.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> ...
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="cleverhans-momentum-iterative-method-attack" style={{ height: "20em", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Momentum Iterative Method Attack"
-            extra={
-              <Tooltip /* title="Open Page" */ placement="bottom">
-                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <a
+                href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/basic_iterative_method.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> ?
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Epsilon Step Size</li>
+              <li>Attack Iterations</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="Momentum Iterative Method Attack"
+          id="cleverhans-momentum-iterative-method-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */ placement="bottom">
+              {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/momentum_iterative_method.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> ...
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="cleverhans-madry-et-al-method-attack" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="Madry Et Al Method Attack"
-            extra={
-              <Tooltip /* title="Open Page" */>
-                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <a
+                href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/momentum_iterative_method.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> ?
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Epsilon Step Size</li>
+              <li>Attack Iterations</li>
+              <li>Order of the Norm</li>
+              <li>Decay Factor</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="Madry Et Al Method Attack"
+          id="cleverhans-madry-et-al-method-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */>
+              {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/madry_et_al.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="cleverhans-spsa-attack" style={{ height: "20vh", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="SPSA Attack"
-            extra={
-              <Tooltip /* title="Open Page" */>
-                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <a
+                href="https://github.com/cleverhans-lab/cleverhans/blob/master/cleverhans/tf2/attacks/madry_et_al.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Epsilon Step Size</li>
+              <li>Attack Iterations</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Card
+          title="SPSA Attack"
+          id="cleverhans-spsa-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */>
+              {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/contrast.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
-        <div id="ml-privacy-meter" style={{ height: "4.5em", background: "rgba(255,0,0,0)" }}>
-          <Title level={2}>ML Privacy Meter Attacks Library:</Title>
-        </div>
-        <div id="ml-privacy-meter-population-attack" style={{ height: "100vh", background: "rgba(255,0,0,0)" }}>
-          <Card
-            title="SPSA Attack"
-            extra={
-              <Tooltip /* title="Open Page" */>
-                {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
+              <a
+                href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/contrast.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Step Size</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        <Title id="ml-privacy-meter" level={2}>
+          ML Privacy Meter Attacks Library:
+        </Title>
+        <Card
+          title="SPSA Attack"
+          id="ml-privacy-meter-population-attack"
+          style={{ marginBottom: "15px" }}
+          extra={
+            <Tooltip /* title="Open Page" */>
+              {/* <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener">
                   <LinkOutlined style={{ color: "gray" }} />
                 </a> */}
-                <a
-                  href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/contrast.py"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
-                </a>
-              </Tooltip>
-            }
-          >
-            <p>
-              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
-            </p>
-            <p>
-              <b>Parameters:</b>{" "}
-              <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
-              </ul>
-            </p>
-          </Card>
-        </div>
+              <a
+                href="https://github.com/bethgelab/foolbox/blob/master/foolbox/attacks/contrast.py"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <GithubOutlined style={{ color: "gray", paddingLeft: "8px" }} />
+              </a>
+            </Tooltip>
+          }
+        >
+          <p>
+            <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+          </p>
+          <p>
+            <b>Parameters:</b>{" "}
+            <ul>
+              <li>Epsilon</li>
+              <li>Step Size</li>
+              <li>Order of the Norm</li>
+            </ul>
+          </p>
+        </Card>
+        {/* <p style={{ height: "100vh" }}></p> */}
       </Col>
       <Col span={8} style={{ paddingLeft: "2em" }}>
         <Anchor
