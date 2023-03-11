@@ -19,8 +19,10 @@ const ContrastReductionAttack = (props: AttackProps) => {
       <Checkbox disabled={!formEnabled} onChange={(e) => setSubFormEnabled(e.target.checked)}>
         <b>Contrast Reduction Attack</b>
       </Checkbox>
-      <Tooltip title="Reduces the contrast of the input using a the specified search type to find the smallest adversarial perturbation.">
-        <InfoCircleOutlined style={{ color: "gray" }} />
+      <Tooltip title="Reduces the contrast of the input using a the specified search type to find the smallest adversarial perturbation. (Click for Contrast Reduction Attack Documentation)">
+        <a href="/about#foolbox-contrast-reduction-attack" target="_blank" rel="noreferrer noopener">
+          <InfoCircleOutlined style={{ color: "gray" }} />
+        </a>
       </Tooltip>
 
       {/* attack inputs */}

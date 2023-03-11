@@ -19,12 +19,11 @@ const AdditiveGaussianNoiseAttack = (props: AttackProps) => {
       <Checkbox disabled={!formEnabled} onChange={(e) => setSubFormEnabled(e.target.checked)}>
         <b>Additive Gaussian Noise Attack</b>
       </Checkbox>
-      <Tooltip title="Samples Gaussian noise with or without repeated/clipping.">
-        <InfoCircleOutlined style={{ color: "gray" }} />
+      <Tooltip title="Samples Gaussian noise with or without repeated/clipping. (Click for Additive Gaussian Noise Attack Documentation)">
+        <a href="/about#foolbox-additive-gaussian-noise-attack" target="_blank" rel="noreferrer noopener">
+          <InfoCircleOutlined style={{ color: "gray" }} />
+        </a>
       </Tooltip>
-      <a href="https://arxiv.org/abs/2007.07677" target="_blank" rel="noreferrer noopener" style={{ color: "gray", paddingLeft: "8px" }}>
-        <LinkOutlined />
-      </a>
 
       {/* attack inputs */}
       <Form

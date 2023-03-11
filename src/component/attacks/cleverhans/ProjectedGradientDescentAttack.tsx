@@ -19,9 +19,11 @@ const ProjectedGradientDescentAttack = (props: AttackProps) => {
       <Checkbox disabled={!formEnabled} onChange={(e) => setSubFormEnabled(e.target.checked)}>
         <b>Projected Gradient Descent Attack</b>
       </Checkbox>
-      {/* <Tooltip title="Fast Gradient Method (2) and Fast Gradient Signed Method (∞).">
-        <InfoCircleOutlined style={{ color: "gray" }} />
-      </Tooltip> */}
+      <Tooltip title="Click for Projected Gradient Descent Attack Documentation">
+        <a href="/about#cleverhans-projected-gradient-descent-attack" target="_blank" rel="noreferrer noopener">
+          <InfoCircleOutlined style={{ color: "gray" }} />
+        </a>
+      </Tooltip>
 
       <div style={{ height: "2em" }}></div>
     </>
