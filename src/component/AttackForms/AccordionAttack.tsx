@@ -13,7 +13,7 @@ const text = `
 `;
 
 const AccordionAttack: React.FC = () => (
-  <Collapse accordion defaultActiveKey="0">
+  <Collapse accordion >
     <Panel header="Foolbox" key="0">
       <FoolboxLib />
     </Panel>
