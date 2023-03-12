@@ -20,7 +20,7 @@ const MadryEtAlMethodAttack = (props: AttackProps) => {
         <b>Madry et al. Method Attack</b>
       </Checkbox>
       <Tooltip title="Click for Madry et al. Method Attack Documentation">
-        <a href="/about#cleverhans-madry-et-al-method-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#cleverhans-madry-et-al-method-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>

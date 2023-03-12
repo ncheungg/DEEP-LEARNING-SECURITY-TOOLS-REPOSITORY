@@ -21,7 +21,7 @@ const MomentumIterativeMethodAttack = (props: AttackProps) => {
         <b>Momentum Iterative Method Attack</b>
       </Checkbox>
       <Tooltip title="Click for Momentum Iterative Method Attack Documentation">
-        <a href="/about#cleverhans-momentum-iterative-method-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#cleverhans-momentum-iterative-method-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>

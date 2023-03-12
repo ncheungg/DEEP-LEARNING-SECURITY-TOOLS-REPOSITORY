@@ -20,7 +20,7 @@ const InversionAttack = (props: AttackProps) => {
         <b>Inversion Attack</b>
       </Checkbox>
       <Tooltip title='Creates "negative images" by inverting the pixel values. (Click for Inversion Attack Attack Documentation)'>
-        <a href="/about#foolbox-inversion-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#foolbox-inversion-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>
