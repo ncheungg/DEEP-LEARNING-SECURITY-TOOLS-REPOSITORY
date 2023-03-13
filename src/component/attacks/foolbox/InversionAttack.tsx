@@ -4,13 +4,14 @@ import { useState } from "react";
 
 interface AttackProps {
   formEnabled: boolean;
+  formRef: React.MutableRefObject<null>;
   sliderVal: [number, number];
   lowerBound?: number;
   upperBound?: number;
 }
 
 const InversionAttack = (props: AttackProps) => {
-  const { formEnabled } = props;
+  const { formEnabled, formRef } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
 

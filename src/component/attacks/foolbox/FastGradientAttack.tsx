@@ -4,13 +4,14 @@ import { useState } from "react";
 
 interface AttackProps {
   formEnabled: boolean;
+  formRef: React.MutableRefObject<null>;
   sliderVal: [number, number];
   lowerBound?: number;
   upperBound?: number;
 }
 
 const FastGradientAttack = (props: AttackProps) => {
-  const { formEnabled } = props;
+  const { formEnabled, formRef } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
   const [randomStart, setRandomStart] = useState(false);
@@ -38,6 +39,7 @@ const FastGradientAttack = (props: AttackProps) => {
         // onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item
           label="Order of the Norm:"

@@ -4,15 +4,22 @@ import { useState } from "react";
 
 interface AttackProps {
   formEnabled: boolean;
+  formRef: React.MutableRefObject<null>;
   sliderVal: [number, number];
   lowerBound?: number;
   upperBound?: number;
 }
 
 const AdditiveGaussianNoiseAttack = (props: AttackProps) => {
-  const { formEnabled } = props;
+  const { formEnabled, formRef } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
+  const [attackTypes, setAttackTypes] = useState<string[]>();
+
+  const onFinish = () => {
+    console.log("submitted");
+    console.log({ formEnabled, subFormEnabled, attackTypes });
+  };
 
   return (
     <>
@@ -34,9 +41,10 @@ const AdditiveGaussianNoiseAttack = (props: AttackProps) => {
         disabled={!subFormEnabled || !formEnabled}
         style={{ maxWidth: 600 }}
         initialValues={{ remember: true }}
-        // onFinish={onFinish}
+        onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item
           label="Order of the Norm:"
@@ -56,7 +64,7 @@ const AdditiveGaussianNoiseAttack = (props: AttackProps) => {
           tooltip="Samples Gaussian noise with or without repeated/clipping."
           style={{ marginTop: "-2em" }}
         >
-          <Checkbox.Group style={{ width: "100%" }}>
+          <Checkbox.Group style={{ width: "100%" }} onChange={(vals) => setAttackTypes(vals as string[])}>
             <Checkbox value="additive">Additive</Checkbox>
             <Checkbox value="clipping-aware-additive">Clipping</Checkbox>
             <Checkbox value="repeated-additive">Repeated</Checkbox>

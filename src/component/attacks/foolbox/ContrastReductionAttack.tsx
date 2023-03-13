@@ -4,13 +4,14 @@ import { useState } from "react";
 
 interface AttackProps {
   formEnabled: boolean;
+  formRef: React.MutableRefObject<null>;
   sliderVal: [number, number];
   lowerBound?: number;
   upperBound?: number;
 }
 
 const ContrastReductionAttack = (props: AttackProps) => {
-  const { formEnabled } = props;
+  const { formEnabled, formRef } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
 
@@ -37,6 +38,7 @@ const ContrastReductionAttack = (props: AttackProps) => {
         // onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item
           label="Search Types:"

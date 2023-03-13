@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FileSearchOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { Form, Input, Checkbox, Slider } from "antd";
 import { Tooltip } from "antd";
@@ -15,7 +15,22 @@ import ContrastReductionAttack from "../attacks/foolbox/ContrastReductionAttack"
 
 const SLIDER_STEP = 0.02;
 
-const FoolboxLib: React.FC = () => {
+interface FoolboxLibProps {
+  formRef: React.MutableRefObject<null>;
+}
+
+const FoolboxLib = (props: FoolboxLibProps) => {
+  const { formRef } = props;
+
+  const deepFoolRef = useRef(null);
+  const fastGradientRef = useRef(null);
+  const basicIterativeRef = useRef(null);
+  const additiveUniformRef = useRef(null);
+  const additiveGaussianRef = useRef(null);
+  const inversionRef = useRef(null);
+  const saltAndPepperRef = useRef(null);
+  const contrastReductionRef = useRef(null);
+
   // enable/disable form checkbox
   const [componentEnabled, setComponentEnabled] = useState<boolean>(false);
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
@@ -25,6 +40,8 @@ const FoolboxLib: React.FC = () => {
   const [sliderVal, setSliderVal] = useState<[number, number]>([0, 0.5]);
   const [lowerBound, setLowerBound] = useState<number>();
   const [upperBound, setUpperBound] = useState<number>();
+
+  const onFinish = () => {};
 
   return (
     <>
@@ -43,9 +60,10 @@ const FoolboxLib: React.FC = () => {
         disabled={!componentEnabled}
         // style={{ maxWidth: 600 }}
         initialValues={{ remember: true }}
-        // onFinish={onFinish}
+        onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item
           label="Epsilons:"
@@ -82,14 +100,26 @@ const FoolboxLib: React.FC = () => {
         </Form.Item>
 
         <div style={{ textAlign: "left", marginTop: "5em" }}>
-          <DeepFoolAttack formEnabled={componentEnabled} {...{ sliderVal, lowerBound, upperBound }} />
-          <FastGradientAttack formEnabled={componentEnabled} {...{ sliderVal, lowerBound, upperBound }} />
-          <BasicIterativeAttack formEnabled={componentEnabled} {...{ sliderVal, lowerBound, upperBound }} />
-          <AdditiveGaussianNoiseAttack formEnabled={componentEnabled} {...{ sliderVal, lowerBound, upperBound }} />
-          <AdditiveUniformNoiseAttack formEnabled={componentEnabled} {...{ sliderVal, lowerBound, upperBound }} />
-          <InversionAttack formEnabled={componentEnabled} {...{ sliderVal, lowerBound, upperBound }} />
-          <SaltAndPepperNoiseAttack formEnabled={componentEnabled} {...{ sliderVal, lowerBound, upperBound }} />
-          <ContrastReductionAttack formEnabled={componentEnabled} {...{ sliderVal, lowerBound, upperBound }} />
+          <DeepFoolAttack formEnabled={componentEnabled} formRef={deepFoolRef} {...{ sliderVal, lowerBound, upperBound }} />
+          <FastGradientAttack formEnabled={componentEnabled} formRef={fastGradientRef} {...{ sliderVal, lowerBound, upperBound }} />
+          <BasicIterativeAttack formEnabled={componentEnabled} formRef={basicIterativeRef} {...{ sliderVal, lowerBound, upperBound }} />
+          <AdditiveGaussianNoiseAttack
+            formEnabled={componentEnabled}
+            formRef={additiveGaussianRef}
+            {...{ sliderVal, lowerBound, upperBound }}
+          />
+          <AdditiveUniformNoiseAttack
+            formEnabled={componentEnabled}
+            formRef={additiveUniformRef}
+            {...{ sliderVal, lowerBound, upperBound }}
+          />
+          <InversionAttack formEnabled={componentEnabled} formRef={inversionRef} {...{ sliderVal, lowerBound, upperBound }} />
+          <SaltAndPepperNoiseAttack formEnabled={componentEnabled} formRef={saltAndPepperRef} {...{ sliderVal, lowerBound, upperBound }} />
+          <ContrastReductionAttack
+            formEnabled={componentEnabled}
+            formRef={contrastReductionRef}
+            {...{ sliderVal, lowerBound, upperBound }}
+          />
         </div>
       </Form>
     </>
