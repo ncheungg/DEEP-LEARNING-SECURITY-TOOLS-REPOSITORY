@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FileSearchOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import { Form, Input, Checkbox, Slider } from "antd";
+import { Form, Input, Checkbox, Slider, FormInstance } from "antd";
 import { Tooltip } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import type { MenuProps } from "antd";
@@ -14,7 +14,7 @@ import SPSAAttack from "../attacks/cleverhans/SPSAAttack";
 const SLIDER_STEP = 0.01;
 
 interface CleverHansLibProps {
-  formRef: React.MutableRefObject<null>;
+  formRef?: React.MutableRefObject<FormInstance<any> | undefined>;
 }
 
 const CleverHansLib = (props: CleverHansLibProps) => {

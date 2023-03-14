@@ -1,9 +1,6 @@
 import React, { useState, useRef } from "react";
 import { FileSearchOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import { Form, Input, Checkbox, Slider } from "antd";
-import { Tooltip } from "antd";
-import { CheckboxValueType } from "antd/es/checkbox/Group";
-import type { MenuProps } from "antd";
+import { Form, Input, Checkbox, Slider, FormInstance } from "antd";
 import DeepFoolAttack from "../attacks/foolbox/DeepFoolAttack";
 import FastGradientAttack from "../attacks/foolbox/FastGradientAttack";
 import BasicIterativeAttack from "../attacks/foolbox/BasicIterativeAttack";
@@ -16,20 +13,20 @@ import ContrastReductionAttack from "../attacks/foolbox/ContrastReductionAttack"
 const SLIDER_STEP = 0.02;
 
 interface FoolboxLibProps {
-  formRef: React.MutableRefObject<null>;
+  formRef?: React.MutableRefObject<FormInstance<any> | undefined>;
 }
 
 const FoolboxLib = (props: FoolboxLibProps) => {
   const { formRef } = props;
 
-  const deepFoolRef = useRef(null);
-  const fastGradientRef = useRef(null);
-  const basicIterativeRef = useRef(null);
-  const additiveUniformRef = useRef(null);
-  const additiveGaussianRef = useRef(null);
-  const inversionRef = useRef(null);
-  const saltAndPepperRef = useRef(null);
-  const contrastReductionRef = useRef(null);
+  const deepFoolRef = useRef<FormInstance<any>>();
+  const fastGradientRef = useRef<FormInstance<any>>();
+  const basicIterativeRef = useRef<FormInstance<any>>();
+  const additiveUniformRef = useRef<FormInstance<any>>();
+  const additiveGaussianRef = useRef<FormInstance<any>>();
+  const inversionRef = useRef<FormInstance<any>>();
+  const saltAndPepperRef = useRef<FormInstance<any>>();
+  const contrastReductionRef = useRef<FormInstance<any>>();
 
   // enable/disable form checkbox
   const [componentEnabled, setComponentEnabled] = useState<boolean>(false);

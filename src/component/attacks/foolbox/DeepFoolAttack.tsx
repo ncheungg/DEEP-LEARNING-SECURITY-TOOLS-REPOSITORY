@@ -1,10 +1,10 @@
 import { FileSearchOutlined, InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
-import { Checkbox, Col, Form, Row, Tooltip } from "antd";
-import { useState } from "react";
+import { Checkbox, Col, Form, FormInstance, Row, Tooltip } from "antd";
+import { Ref, useState } from "react";
 
 interface AttackProps {
   formEnabled: boolean;
-  formRef: React.MutableRefObject<null>;
+  formRef?: React.MutableRefObject<FormInstance<any> | undefined>;
   sliderVal: [number, number];
   lowerBound?: number;
   upperBound?: number;

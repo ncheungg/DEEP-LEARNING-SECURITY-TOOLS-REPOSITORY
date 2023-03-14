@@ -10,9 +10,9 @@ const AttackSteps: React.FC = () => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
 
-  const foolboxRef = useRef(null);
-  const cleverhansRef = useRef(null);
-  const privRef = useRef(null);
+  const foolboxRef = useRef<FormInstance<any>>();
+  const cleverhansRef = useRef<FormInstance<any>>();
+  const privRef = useRef<FormInstance<any>>();
 
   const steps = [
     {
@@ -68,6 +68,10 @@ const AttackSteps: React.FC = () => {
     }, 6000);
   };
 
+  const submitForms = () => {
+    foolboxRef?.current?.submit();
+  };
+
   return (
     <>
       <Steps current={current} items={items} />
@@ -85,9 +89,11 @@ const AttackSteps: React.FC = () => {
             onClick={() => {
               message.success("Processing complete!");
               enterLoading(1);
+
+              submitForms();
             }}
             loading={loadings[1]}
-            href="/results"
+            // href="/results"
             icon={<PlayCircleFilled />}
           >
             Scan Model

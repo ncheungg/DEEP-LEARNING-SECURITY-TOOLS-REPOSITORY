@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import { Card, FormInstance } from "antd";
 import React from "react";
 import { Collapse } from "antd";
 import FoolboxLib from "@/component/AttackForms/FoolboxLib";
@@ -8,9 +8,9 @@ import PrivLib from "@/component/AttackForms/PrivacyMeter";
 const { Panel } = Collapse;
 
 interface AttacksLibCardProps {
-  foolboxRef: React.MutableRefObject<null>;
-  cleverhansRef: React.MutableRefObject<null>;
-  privRef: React.MutableRefObject<null>;
+  foolboxRef: React.MutableRefObject<FormInstance<any>>;
+  cleverhansRef: React.MutableRefObject<FormInstance<any>>;
+  privRef: React.MutableRefObject<FormInstance<any>>;
 }
 
 const AttacksLibCard = (props: AttacksLibCardProps) => {
