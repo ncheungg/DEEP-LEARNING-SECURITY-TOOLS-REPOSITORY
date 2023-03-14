@@ -54,9 +54,10 @@ export const runFoolboxDeepFoolAttack = async (params: FoolboxDeepFoolAttackPara
     model_upper_bound: upperBound,
     norms,
   };
+  const requestHeaders = { "Content-Type": "application/json" };
   const url = "https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/foolbox/deep-fool";
 
-  const res = await fetch(url, { method: "POST", body: JSON.stringify(requestBody) });
+  const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
   return data;
@@ -75,9 +76,10 @@ export const runAdditiveGaussianAttack = async (params: AdditiveGaussianAttackPa
     model_upper_bound: upperBound,
     attack_types: attackTypes,
   };
+  const requestHeaders = { "Content-Type": "application/json" };
   const url = "https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/foolbox/additive-gaussian-noise";
 
-  const res = await fetch(url, { method: "POST", body: JSON.stringify(requestBody) });
+  const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
   return data;
@@ -97,9 +99,10 @@ export const runAdditiveUniformAttack = async (params: AdditiveUniformAttackPara
     attack_types: attackTypes,
     norms,
   };
+  const requestHeaders = { "Content-Type": "application/json" };
   const url = "https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/foolbox/additive-uniform-noise";
 
-  const res = await fetch(url, { method: "POST", body: JSON.stringify(requestBody) });
+  const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
   return data;
@@ -119,9 +122,10 @@ export const runFastGradientAttack = async (params: FastGradientAttackParams) =>
     random_start: randomStart,
     norms,
   };
+  const requestHeaders = { "Content-Type": "application/json" };
   const url = "https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/foolbox/fast-gradient";
 
-  const res = await fetch(url, { method: "POST", body: JSON.stringify(requestBody) });
+  const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
   return data;
@@ -141,9 +145,10 @@ export const runBasicIterativeAttack = async (params: BasicIterativeAttackParams
     random_start: randomStart,
     norms,
   };
+  const requestHeaders = { "Content-Type": "application/json" };
   const url = "https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/foolbox/basic-iterative";
 
-  const res = await fetch(url, { method: "POST", body: JSON.stringify(requestBody) });
+  const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
   return data;
@@ -161,9 +166,10 @@ export const runInversionAttack = async (params: InversionAttackParams) => {
     model_lower_bound: lowerBound,
     model_upper_bound: upperBound,
   };
+  const requestHeaders = { "Content-Type": "application/json" };
   const url = "https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/foolbox/inversion";
 
-  const res = await fetch(url, { method: "POST", body: JSON.stringify(requestBody) });
+  const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
   return data;
@@ -181,9 +187,10 @@ export const runSaltAndPepperAttack = async (params: SaltAndPepperNoiseAttackPar
     model_lower_bound: lowerBound,
     model_upper_bound: upperBound,
   };
+  const requestHeaders = { "Content-Type": "application/json" };
   const url = "https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/foolbox/salt-and-pepper-noise";
 
-  const res = await fetch(url, { method: "POST", body: JSON.stringify(requestBody) });
+  const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
   return data;
@@ -200,11 +207,12 @@ export const runContrastReductionAttack = async (params: ContrastReductionAttack
     epsilon_step: epsilonStep,
     model_lower_bound: lowerBound,
     model_upper_bound: upperBound,
-    attackTypes,
+    attack_types: attackTypes,
   };
+  const requestHeaders = { "Content-Type": "application/json" };
   const url = "https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/foolbox/contrast-reduction";
 
-  const res = await fetch(url, { method: "POST", body: JSON.stringify(requestBody) });
+  const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
   return data;

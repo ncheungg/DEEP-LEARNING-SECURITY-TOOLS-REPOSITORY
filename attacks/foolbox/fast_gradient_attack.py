@@ -44,9 +44,9 @@ def l2_fast_gradient_attack(model, model_lower_bound, model_upper_bound, images,
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
 
-    attack = fb.attacks.L2FastGradientAttack()
+    attack = fb.attacks.L2FastGradientAttack(random_start=random_start)
 
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons, random_start=random_start)
+    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
@@ -60,9 +60,9 @@ def linf_fast_gradient_attack(model, model_lower_bound, model_upper_bound, image
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
 
-    attack = fb.attacks.LinfFastGradientAttack()
+    attack = fb.attacks.LinfFastGradientAttack(random_start=random_start)
 
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons, random_start=random_start)
+    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100

@@ -107,97 +107,6 @@ def attack_endpoint(request):
     return response_body, 200, headers
 
 
-def linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.LinfDeepFoolAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    return epsilons, robust_accuracy
-
-
-def gaussian_blur_attack(model, model_lower_bound, model_upper_bound, images, labels):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.GaussianBlurAttack()
-    # epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=0.1)
-
-    print(is_adv)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    return robust_accuracy
-
-
-def salt_and_pepper_noise_attack(model, model_lower_bound, model_upper_bound, images, labels):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.SaltAndPepperNoiseAttack()
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=0.1)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    return robust_accuracy
-
-
-def linf_deep_fool_attack_show_graph(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.LinfDeepFoolAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    plt.plot(epsilons, robust_accuracy.numpy())
-    plt.ylim(0, 100)
-
-    plt.title("DeepFool L-Infinity Attack")
-    plt.xlabel("Epsilons (ε)")
-    plt.ylabel("Accuracy (%)")
-
-    plt.show()
-
-def inversion_attack(model, model_lower_bound, model_upper_bound, images, labels):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.InversionAttack()
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=0.1)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    return robust_accuracy
-
-
 def binary_search_contrast_reduction_attack(model, model_lower_bound, model_upper_bound, images, labels):
     model_bounds = (model_lower_bound, model_upper_bound)
 
@@ -230,111 +139,6 @@ def linear_search_contrast_reduction_attack(model, model_lower_bound, model_uppe
     return robust_accuracy
 
 
-def l2_basic_iterative_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.L2BasicIterativeAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    return epsilons, robust_accuracy
-
-
-def linf_basic_iterative_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.LinfBasicIterativeAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    return epsilons, robust_accuracy
-
-def l2_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                      images, labels, epsilon_max, epsilon_num):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.L2AdditiveGaussianNoiseAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    return robust_accuracy
-
-
-def l2_clipping_aware_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                                     images, labels, epsilon_max, epsilon_num):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.L2ClippingAwareAdditiveGaussianNoiseAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    return robust_accuracy
-
-
-def l2_repeated_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                               images, labels, epsilon_max, epsilon_num):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.L2RepeatedAdditiveGaussianNoiseAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    return robust_accuracy
-
-
-def l2_clipping_aware_repeated_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                                              images, labels, epsilon_max, epsilon_num):
-    model_bounds = (model_lower_bound, model_upper_bound)
-
-    fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
-
-    attack = fb.attacks.L2ClippingAwareRepeatedAdditiveGaussianNoiseAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
-
-    raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
-
-    robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
-    robust_accuracy *= 100
-
-    return robust_accuracy
-
-
 if __name__ == "__main__":
     f = open(r'/mnt/d/Nathan/Downloads/cifar10/dataset_info.json')
     dataset_info = json.load(f)
@@ -351,26 +155,23 @@ if __name__ == "__main__":
 
     images, labels = preprocess_dataset(dataset, dataset_info)
 
-    epsilon_max = 0.01
-    epsilon_num = 21
+    epsilons = np.arange(0, 0.22, 0.02)
+
     target = 0.6
     
-    attack_types = ['linear', 'binary']
+    norms = ['2', 'linf']
+
+    random_start = True
 
     response_body = {}
 
     # run the attacks
-    for attack_type in attack_types:
-        if attack_type == 'binary':
-            accuracy = binary_search_contrast_reduction_attack(model, model_lower_bound, model_upper_bound,
-                                                               images, labels)
+    for norm in norms:
+        if norm == '2':
+            linear_search_contrast_reduction_attack(model, model_lower_bound, model_upper_bound, images, labels)
+        elif norm == 'linf':
+            binary_search_contrast_reduction_attack(model, model_lower_bound, model_upper_bound, images, labels)
 
-            response_body[attack_type] = accuracy.tolist()
+            # response_body[attack_type] = accuracy.tolist()
 
-        elif attack_type == 'linear':
-            accuracy = linear_search_contrast_reduction_attack(model, model_lower_bound, model_upper_bound,
-                                                               images, labels)
-
-            response_body[attack_type] = accuracy.tolist()
-
-    print(response_body)
+    # print(response_body)
