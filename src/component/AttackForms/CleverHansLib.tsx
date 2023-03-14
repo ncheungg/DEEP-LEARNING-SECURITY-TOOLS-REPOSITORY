@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FileSearchOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import { Form, Input, Checkbox, Slider } from "antd";
+import { Form, Input, Checkbox, Slider, FormInstance } from "antd";
 import { Tooltip } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import type { MenuProps } from "antd";
@@ -13,7 +13,13 @@ import SPSAAttack from "../attacks/cleverhans/SPSAAttack";
 
 const SLIDER_STEP = 0.01;
 
-const CleverHansLib: React.FC = () => {
+interface CleverHansLibProps {
+  formRef?: React.MutableRefObject<FormInstance<any> | undefined>;
+}
+
+const CleverHansLib = (props: CleverHansLibProps) => {
+  const { formRef } = props;
+
   // enable/disable form checkbox
   const [componentEnabled, setComponentEnabled] = useState<boolean>(false);
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
@@ -44,6 +50,7 @@ const CleverHansLib: React.FC = () => {
         // onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item
           label="Epsilon Starts:"

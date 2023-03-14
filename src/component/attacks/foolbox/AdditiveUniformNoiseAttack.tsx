@@ -1,16 +1,17 @@
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
-import { Checkbox, Col, Form, Radio, Row, Tooltip } from "antd";
-import { useState } from "react";
+import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
+import { Ref, useState } from "react";
 
 interface AttackProps {
   formEnabled: boolean;
+  formRef?: React.MutableRefObject<FormInstance<any> | undefined>;
   sliderVal: [number, number];
   lowerBound?: number;
   upperBound?: number;
 }
 
 const AdditiveUniformNoiseAttack = (props: AttackProps) => {
-  const { formEnabled } = props;
+  const { formEnabled, formRef } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
   const [selectedNorms, setSelectedNorms] = useState(new Set());
@@ -38,6 +39,7 @@ const AdditiveUniformNoiseAttack = (props: AttackProps) => {
         // onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item
           label="Order of the Norm:"

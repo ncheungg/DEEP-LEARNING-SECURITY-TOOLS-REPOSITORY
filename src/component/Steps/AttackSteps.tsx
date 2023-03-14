@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button, message, Steps, theme } from "antd";
 
 import UploadModelCard from "./AttackCards/UploadModelCard";
@@ -6,28 +6,28 @@ import UploadTestCard from "./AttackCards/UploadTestCard";
 import AttacksLibCard from "./AttackCards/AttacksLibCard";
 import { PlayCircleFilled } from "@ant-design/icons";
 
-const steps = [
-  {
-    title: "Step 1",
-    content: <UploadModelCard />,
-  },
-  {
-    title: "Step 2",
-    content: <UploadTestCard />,
-  },
-  {
-    title: "Step 3",
-    content: <AttacksLibCard />,
-  },
-  //   {
-  //     title: "Step 4",
-  //     content: <FormSubmitBtn />,
-  //   },
-];
-
 const AttackSteps: React.FC = () => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
+
+  const foolboxRef = useRef<FormInstance<any>>();
+  const cleverhansRef = useRef<FormInstance<any>>();
+  const privRef = useRef<FormInstance<any>>();
+
+  const steps = [
+    {
+      title: "Step 1",
+      content: <UploadModelCard />,
+    },
+    {
+      title: "Step 2",
+      content: <UploadTestCard />,
+    },
+    {
+      title: "Step 3",
+      content: <AttacksLibCard {...{ foolboxRef, cleverhansRef, privRef }} />,
+    },
+  ];
 
   const next = () => {
     setCurrent(current + 1);
@@ -68,6 +68,10 @@ const AttackSteps: React.FC = () => {
     }, 6000);
   };
 
+  const submitForms = () => {
+    foolboxRef?.current?.submit();
+  };
+
   return (
     <>
       <Steps current={current} items={items} />
@@ -85,9 +89,11 @@ const AttackSteps: React.FC = () => {
             onClick={() => {
               message.success("Processing complete!");
               enterLoading(1);
+
+              submitForms();
             }}
             loading={loadings[1]}
-            href="/results"
+            // href="/results"
             icon={<PlayCircleFilled />}
           >
             Scan Model

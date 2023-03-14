@@ -1,16 +1,17 @@
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
-import { Checkbox, Col, Form, Radio, Row, Tooltip } from "antd";
+import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
 import { useState } from "react";
 
 interface AttackProps {
   formEnabled: boolean;
+  formRef?: React.MutableRefObject<FormInstance<any> | undefined>;
   sliderVal: [number, number];
   lowerBound?: number;
   upperBound?: number;
 }
 
 const SaltAndPepperNoiseAttack = (props: AttackProps) => {
-  const { formEnabled } = props;
+  const { formEnabled, formRef } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
 
