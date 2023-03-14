@@ -8,9 +8,9 @@ import PrivLib from "@/component/AttackForms/PrivacyMeter";
 const { Panel } = Collapse;
 
 interface AttacksLibCardProps {
-  foolboxRef: React.MutableRefObject<FormInstance<any>>;
-  cleverhansRef: React.MutableRefObject<FormInstance<any>>;
-  privRef: React.MutableRefObject<FormInstance<any>>;
+  foolboxRef: React.MutableRefObject<any>;
+  cleverhansRef: React.MutableRefObject<any>;
+  privRef: React.MutableRefObject<any>;
 }
 
 const AttacksLibCard = (props: AttacksLibCardProps) => {

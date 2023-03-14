@@ -13,7 +13,7 @@ import ContrastReductionAttack from "../attacks/foolbox/ContrastReductionAttack"
 const SLIDER_STEP = 0.02;
 
 interface FoolboxLibProps {
-  formRef?: React.MutableRefObject<FormInstance<any> | undefined>;
+  formRef: React.MutableRefObject<FormInstance<any>>;
 }
 
 const FoolboxLib = (props: FoolboxLibProps) => {
@@ -34,11 +34,23 @@ const FoolboxLib = (props: FoolboxLibProps) => {
     setComponentEnabled(disabled);
   };
 
-  const [sliderVal, setSliderVal] = useState<[number, number]>([0, 0.5]);
+  const [epsilonRange, setepsilonRange] = useState<[number, number]>([0, 0.5]);
   const [lowerBound, setLowerBound] = useState<number>();
   const [upperBound, setUpperBound] = useState<number>();
 
-  const onFinish = () => {};
+  const onFinish = () => {
+    console.log("finished submitting parent component");
+
+    // submit all subforms
+    deepFoolRef?.current?.submit();
+    fastGradientRef?.current?.submit();
+    basicIterativeRef?.current?.submit();
+    additiveUniformRef?.current?.submit();
+    additiveGaussianRef?.current?.submit();
+    inversionRef?.current?.submit();
+    saltAndPepperRef?.current?.submit();
+    contrastReductionRef?.current?.submit();
+  };
 
   return (
     <>
@@ -72,7 +84,7 @@ const FoolboxLib = (props: FoolboxLibProps) => {
             range
             defaultValue={[0, 0.2]}
             disabled={!componentEnabled}
-            onChange={(val) => setSliderVal(val)}
+            onChange={(val) => setepsilonRange(val)}
             step={SLIDER_STEP}
             max={0.5}
           />
@@ -97,25 +109,53 @@ const FoolboxLib = (props: FoolboxLibProps) => {
         </Form.Item>
 
         <div style={{ textAlign: "left", marginTop: "5em" }}>
-          <DeepFoolAttack formEnabled={componentEnabled} formRef={deepFoolRef} {...{ sliderVal, lowerBound, upperBound }} />
-          <FastGradientAttack formEnabled={componentEnabled} formRef={fastGradientRef} {...{ sliderVal, lowerBound, upperBound }} />
-          <BasicIterativeAttack formEnabled={componentEnabled} formRef={basicIterativeRef} {...{ sliderVal, lowerBound, upperBound }} />
+          <DeepFoolAttack
+            formEnabled={componentEnabled}
+            formRef={deepFoolRef}
+            epsilonStep={SLIDER_STEP}
+            {...{ epsilonRange, lowerBound, upperBound }}
+          />
+          <FastGradientAttack
+            formEnabled={componentEnabled}
+            formRef={fastGradientRef}
+            epsilonStep={SLIDER_STEP}
+            {...{ epsilonRange, lowerBound, upperBound }}
+          />
+          <BasicIterativeAttack
+            formEnabled={componentEnabled}
+            formRef={basicIterativeRef}
+            epsilonStep={SLIDER_STEP}
+            {...{ epsilonRange, lowerBound, upperBound }}
+          />
           <AdditiveGaussianNoiseAttack
             formEnabled={componentEnabled}
             formRef={additiveGaussianRef}
-            {...{ sliderVal, lowerBound, upperBound }}
+            epsilonStep={SLIDER_STEP}
+            {...{ epsilonRange, lowerBound, upperBound }}
           />
           <AdditiveUniformNoiseAttack
             formEnabled={componentEnabled}
             formRef={additiveUniformRef}
-            {...{ sliderVal, lowerBound, upperBound }}
+            epsilonStep={SLIDER_STEP}
+            {...{ epsilonRange, lowerBound, upperBound }}
           />
-          <InversionAttack formEnabled={componentEnabled} formRef={inversionRef} {...{ sliderVal, lowerBound, upperBound }} />
-          <SaltAndPepperNoiseAttack formEnabled={componentEnabled} formRef={saltAndPepperRef} {...{ sliderVal, lowerBound, upperBound }} />
+          <InversionAttack
+            formEnabled={componentEnabled}
+            formRef={inversionRef}
+            epsilonStep={SLIDER_STEP}
+            {...{ epsilonRange, lowerBound, upperBound }}
+          />
+          <SaltAndPepperNoiseAttack
+            formEnabled={componentEnabled}
+            formRef={saltAndPepperRef}
+            epsilonStep={SLIDER_STEP}
+            {...{ epsilonRange, lowerBound, upperBound }}
+          />
           <ContrastReductionAttack
             formEnabled={componentEnabled}
             formRef={contrastReductionRef}
-            {...{ sliderVal, lowerBound, upperBound }}
+            epsilonStep={SLIDER_STEP}
+            {...{ epsilonRange, lowerBound, upperBound }}
           />
         </div>
       </Form>

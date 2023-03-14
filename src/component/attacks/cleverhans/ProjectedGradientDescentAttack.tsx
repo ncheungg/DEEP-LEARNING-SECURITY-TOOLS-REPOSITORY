@@ -4,13 +4,14 @@ import { useState } from "react";
 
 interface AttackProps {
   formEnabled: boolean;
-  sliderVal: [number, number];
+  formRef: React.MutableRefObject<any>;
+  epsilonRange: [number, number];
   epsilonStep?: number;
   attackIterations?: number;
 }
 
 const ProjectedGradientDescentAttack = (props: AttackProps) => {
-  const { formEnabled } = props;
+  const { formEnabled, formRef } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
 

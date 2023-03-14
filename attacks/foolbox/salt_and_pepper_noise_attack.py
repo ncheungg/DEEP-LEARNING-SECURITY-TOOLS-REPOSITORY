@@ -42,7 +42,6 @@ def salt_and_pepper_noise_attack(model, model_lower_bound, model_upper_bound, im
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
 
     attack = fb.attacks.SaltAndPepperNoiseAttack()
 

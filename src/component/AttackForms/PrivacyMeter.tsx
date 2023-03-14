@@ -1,6 +1,20 @@
 import React, { useState } from "react";
 import { DownOutlined, FileSearchOutlined, InfoCircleOutlined, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { Form, Input, Button, Radio, Select, Cascader, DatePicker, InputNumber, TreeSelect, Switch, Checkbox, MenuProps } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Radio,
+  Select,
+  Cascader,
+  DatePicker,
+  InputNumber,
+  TreeSelect,
+  Switch,
+  Checkbox,
+  MenuProps,
+  FormInstance,
+} from "antd";
 import { Tooltip } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
@@ -46,7 +60,7 @@ const onFinishFailed = (errorInfo: any) => {
 };
 
 interface PrivLibProps {
-  formRef?: Ref<FormInstance<any>>;
+  formRef: React.MutableRefObject<FormInstance<any>>;
 }
 
 const PrivLib = (props: PrivLibProps) => {
@@ -107,19 +121,6 @@ const PrivLib = (props: PrivLibProps) => {
               { value: "mean_sq", label: "Mean Squared Error" },
             ]}
           />
-
-          {/* <Row>
-            <Col span={6} style={{ paddingRight: "2em" }}>
-              <Space wrap>
-                
-              </Space>
-            </Col>
-            <Col span={1}>
-              <Tooltip placement="right" title="Description: Loss function used by ML Privacy Meter to perform audit.">
-                <InfoCircleOutlined style={{ color: "gray", paddingLeft: "10.5em", paddingTop: "0.56em" }} />
-              </Tooltip>
-            </Col>
-          </Row> */}
         </Form.Item>
       </Form>
     </div>

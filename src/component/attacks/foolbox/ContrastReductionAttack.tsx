@@ -1,19 +1,33 @@
+import { runContrastReductionAttack } from "@/api/foolbox";
+import { datasetNameState, modelNameState } from "@/recoil/Atom";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
 import { Ref, useState } from "react";
+import { useRecoilValue } from "recoil";
 
 interface AttackProps {
   formEnabled: boolean;
-  formRef: React.MutableRefObject<FormInstance<any> | undefined>;
-  sliderVal: [number, number];
+  formRef: React.MutableRefObject<any>;
+  epsilonRange: [number, number];
+  epsilonStep: number;
   lowerBound?: number;
   upperBound?: number;
 }
 
 const ContrastReductionAttack = (props: AttackProps) => {
-  const { formEnabled, formRef } = props;
+  const { formEnabled, formRef, epsilonRange, lowerBound, upperBound, epsilonStep } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
+  const [attackTypes, setAttackTypes] = useState<string[]>([]);
+
+  const modelName = useRecoilValue(modelNameState);
+  const datasetName = useRecoilValue(datasetNameState);
+
+  const onFinish = () => {
+    if (formEnabled && subFormEnabled) {
+      runContrastReductionAttack({ upperBound, lowerBound, epsilonRange, epsilonStep, modelName, datasetName, attackTypes });
+    }
+  };
 
   return (
     <>
@@ -35,7 +49,7 @@ const ContrastReductionAttack = (props: AttackProps) => {
         disabled={!subFormEnabled || !formEnabled}
         style={{ maxWidth: 600 }}
         initialValues={{ remember: true }}
-        // onFinish={onFinish}
+        onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
         ref={formRef}
@@ -47,7 +61,7 @@ const ContrastReductionAttack = (props: AttackProps) => {
           tooltip="Linear/Binary search to find the smallest adversarial perturbation."
           // style={{ marginTop: "-2em" }}
         >
-          <Checkbox.Group style={{ width: "100%" }}>
+          <Checkbox.Group style={{ width: "100%" }} onChange={(vals) => setAttackTypes(vals as string[])}>
             <Checkbox value="binary">Binary</Checkbox>
             <Checkbox value="linear">Linear</Checkbox>
           </Checkbox.Group>

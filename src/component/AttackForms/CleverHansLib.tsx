@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FileSearchOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { Form, Input, Checkbox, Slider, FormInstance } from "antd";
 import { Tooltip } from "antd";
@@ -14,11 +14,18 @@ import SPSAAttack from "../attacks/cleverhans/SPSAAttack";
 const SLIDER_STEP = 0.01;
 
 interface CleverHansLibProps {
-  formRef?: React.MutableRefObject<FormInstance<any> | undefined>;
+  formRef: React.MutableRefObject<FormInstance<any>>;
 }
 
 const CleverHansLib = (props: CleverHansLibProps) => {
   const { formRef } = props;
+
+  const basicIterativeRef = useRef();
+  const fastGradientRef = useRef();
+  const madryEtAlRef = useRef();
+  const momentumIterativeRef = useRef();
+  const projectedGradientDescentRef = useRef();
+  const spsaRef = useRef();
 
   // enable/disable form checkbox
   const [componentEnabled, setComponentEnabled] = useState<boolean>(false);
@@ -101,12 +108,28 @@ const CleverHansLib = (props: CleverHansLibProps) => {
         </Form.Item>
 
         <div style={{ textAlign: "left", marginTop: "5em" }}>
-          <FastGradientMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
-          <ProjectedGradientDescentAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
-          <BasicIterativeMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
-          <MadryEtAlMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
-          <MomentumIterativeMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
-          <SPSAAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
+          <FastGradientMethodAttack
+            formEnabled={componentEnabled}
+            formRef={fastGradientRef}
+            {...{ sliderVal, epsilonStep, attackIterations }}
+          />
+          <ProjectedGradientDescentAttack
+            formEnabled={componentEnabled}
+            formRef={projectedGradientDescentRef}
+            {...{ sliderVal, epsilonStep, attackIterations }}
+          />
+          <BasicIterativeMethodAttack
+            formEnabled={componentEnabled}
+            formRef={basicIterativeRef}
+            {...{ sliderVal, epsilonStep, attackIterations }}
+          />
+          <MadryEtAlMethodAttack formEnabled={componentEnabled} formRef={madryEtAlRef} {...{ sliderVal, epsilonStep, attackIterations }} />
+          <MomentumIterativeMethodAttack
+            formEnabled={componentEnabled}
+            formRef={momentumIterativeRef}
+            {...{ sliderVal, epsilonStep, attackIterations }}
+          />
+          <SPSAAttack formEnabled={componentEnabled} formRef={spsaRef} {...{ sliderVal, epsilonStep, attackIterations }} />
         </div>
       </Form>
     </>

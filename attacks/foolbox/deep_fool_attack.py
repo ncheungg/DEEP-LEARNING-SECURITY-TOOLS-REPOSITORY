@@ -38,38 +38,34 @@ def preprocess_dataset(dataset, dataset_info):
     return images, labels
 
 
-def l2_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
+def l2_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilons):
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
 
     attack = fb.attacks.LinfDeepFoolAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
 
     raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
 
-    return epsilons, robust_accuracy
+    return robust_accuracy
 
 
-def linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilon_max, epsilon_num):
+def linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilons):
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
 
     attack = fb.attacks.LinfDeepFoolAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
 
     raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
 
-    return epsilons, robust_accuracy
+    return robust_accuracy
 
 
 @functions_framework.http
@@ -98,8 +94,9 @@ def attack_endpoint(request):
     # attack input parameters
     model_lower_bound = request_json['model_lower_bound']
     model_upper_bound = request_json['model_upper_bound']
+    epsilon_min = request_json['epsilon_min']
     epsilon_max = request_json['epsilon_max']
-    epsilon_num = request_json['epsilon_num']
+    epsilon_step = request_json['epsilon_step']
     norms = request_json['norms']
 
     # get dataset metadata from bucket
@@ -125,22 +122,21 @@ def attack_endpoint(request):
 
     # extract images and labels
     images, labels = preprocess_dataset(dataset, dataset_info)
+    epsilons = np.arange(epsilon_min, epsilon_max + epsilon_step, epsilon_step)
 
     response_body = {}
 
     # run the attacks
     for norm in norms:
         if norm == '2':
-            epsilons, accuracy = l2_deep_fool_attack(model, model_lower_bound, model_upper_bound,
-                                                     images, labels, epsilon_max, epsilon_num)
+            accuracy = l2_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilons)
             response_body[norm] = {
                 'epsilons': epsilons.tolist(),
                 'accuracy': accuracy.tolist()
             }
 
         elif norm == 'inf':
-            epsilons, accuracy = linf_deep_fool_attack(model, model_lower_bound, model_upper_bound,
-                                                       images, labels, epsilon_max, epsilon_num)
+            accuracy = linf_deep_fool_attack(model, model_lower_bound, model_upper_bound, images, labels, epsilons)
             response_body[norm] = {
                 'epsilons': epsilons.tolist(),
                 'accuracy': accuracy.tolist()

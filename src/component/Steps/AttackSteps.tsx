@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Button, message, Steps, theme } from "antd";
+import { Button, FormInstance, message, Steps, theme } from "antd";
 
 import UploadModelCard from "./AttackCards/UploadModelCard";
 import UploadTestCard from "./AttackCards/UploadTestCard";
@@ -86,7 +86,11 @@ const AttackSteps: React.FC = () => {
         {current === steps.length - 1 && (
           <Button
             type="primary"
-            onClick={() => {
+            onClick={(e) => {
+              // e.preventDefault();
+
+              // console.log("reached here?");
+
               message.success("Processing complete!");
               enterLoading(1);
 

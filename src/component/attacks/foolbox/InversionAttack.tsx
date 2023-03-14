@@ -1,19 +1,31 @@
+import { datasetNameState, modelNameState } from "@/recoil/Atom";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
 
 interface AttackProps {
   formEnabled: boolean;
-  formRef?: React.MutableRefObject<FormInstance<any> | undefined>;
-  sliderVal: [number, number];
+  formRef: React.MutableRefObject<any>;
+  epsilonRange: [number, number];
+  epsilonStep: number;
   lowerBound?: number;
   upperBound?: number;
 }
 
 const InversionAttack = (props: AttackProps) => {
-  const { formEnabled, formRef } = props;
+  const { formEnabled, formRef, epsilonRange, lowerBound, upperBound, epsilonStep } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
+
+  const modelName = useRecoilValue(modelNameState);
+  const datasetName = useRecoilValue(datasetNameState);
+
+  // const onFinish = () => {
+  //   if (formEnabled && subFormEnabled) {
+  //     runAdditiveGaussianAttack({ upperBound, lowerBound, epsilonRange, epsilonStep, modelName, datasetName, attackTypes });
+  //   }
+  // };
 
   return (
     <>

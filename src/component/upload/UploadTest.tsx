@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 import { DatabaseOutlined, FileZipOutlined, InboxOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
-import { message, Upload } from "antd";
-import {Space, Spin } from 'antd';
-
-
+import { message, Upload, Space, Spin } from "antd";
 
 const { Dragger } = Upload;
 
-
-
 const UploadTest: React.FC = () => {
-  
   const [loading, setLoading] = useState(false);
-
 
   const props: UploadProps = {
     name: "file",
@@ -23,16 +16,16 @@ const UploadTest: React.FC = () => {
     //progress: { strokeWidth: 4, showInfo: true },
     onChange(info) {
       //on change occurs anytime the status of the upload changes (file added/removed, upload finished)
-      
-      const {file} = info;
+
+      const { file } = info;
       const status = file.status;
 
-      if(status === "removed"){
+      if (status === "removed") {
         console.log("file remove");
         return;
       }
       //uploading means from users computer to client side
-      if(status == "uploading"){
+      if (status == "uploading") {
         setLoading(true);
         return;
       }
@@ -45,38 +38,35 @@ const UploadTest: React.FC = () => {
       // if (status === "done") {
       //   message.success(`${info.file.name} file uploaded successfully.`);
       // }
-      
+
       const formData = new FormData();
-      if(file.originFileObj){
-        formData.append('file', file.originFileObj);
+      if (file.originFileObj) {
+        formData.append("file", file.originFileObj);
       }
 
       console.log("uploading file");
       console.log(formData);
-      fetch('https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file', {
-        method: 'POST',
+      fetch("https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file", {
+        method: "POST",
         body: formData,
       })
-      .then((response) => {
-        if (response.ok) {
-          setLoading(false);
-          message.success(`${info.file.name} file uploaded successfully.`);
-          return response.json();
-        }
-        throw new Error('Network response was not ok.');
-      })
-      .then((data) => {
-        console.log('Upload successful');
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error('Error uploading file:', error);
-      });
-
+        .then((response) => {
+          if (response.ok) {
+            setLoading(false);
+            message.success(`${info.file.name} file uploaded successfully.`);
+            return response.json();
+          }
+          throw new Error("Network response was not ok.");
+        })
+        .then((data) => {
+          console.log("Upload successful");
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error uploading file:", error);
+        });
     },
-
   };
-
 
   return (
     <Dragger {...props}>
@@ -95,25 +85,18 @@ const UploadTest: React.FC = () => {
       <br />
       <br />
       <br />
-      
-      <Space direction="vertical" style={{ width: '100%', height: 40 }}>
-        
+
+      <Space direction="vertical" style={{ width: "100%", height: 40 }}>
         {loading && (
           <Spin tip="Uploading File...">
             <div style={{ height: 40 }}></div>
           </Spin>
         )}
-        
       </Space>
-      
+
       <br />
       <br />
-      
-      
-      
-      
     </Dragger>
-    
   );
 };
 

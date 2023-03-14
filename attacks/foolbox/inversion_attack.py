@@ -3,7 +3,8 @@ import foolbox as fb
 import numpy as np
 import tensorflow_datasets as tfds
 from tensorflow.python.ops.numpy_ops import np_config
-
+from google.cloud import storage
+import json
 import functions_framework
 
 # constants
@@ -79,7 +80,6 @@ def attack_endpoint(request):
     # attack input parameters
     model_lower_bound = request_json['model_lower_bound']
     model_upper_bound = request_json['model_upper_bound']
-    attack_types = request_json['attack_types']
 
     # get dataset metadata from bucket
     client = storage.Client()
