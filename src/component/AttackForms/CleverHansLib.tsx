@@ -33,7 +33,7 @@ const CleverHansLib = (props: CleverHansLibProps) => {
     setComponentEnabled(disabled);
   };
 
-  const [sliderVal, setSliderVal] = useState<[number, number]>([0.02, 0.06]);
+  const [epsilonRange, setepsilonRange] = useState<[number, number]>([0.02, 0.06]);
   const [epsilonStep, setEpsilonStep] = useState<number>();
   const [attackIterations, setAttackIterations] = useState<number>();
 
@@ -69,7 +69,7 @@ const CleverHansLib = (props: CleverHansLibProps) => {
             range
             defaultValue={[0.02, 0.06]}
             disabled={!componentEnabled}
-            onChange={(val) => setSliderVal(val)}
+            onChange={(val) => setepsilonRange(val)}
             step={SLIDER_STEP}
             max={0.25}
           />
@@ -111,25 +111,29 @@ const CleverHansLib = (props: CleverHansLibProps) => {
           <FastGradientMethodAttack
             formEnabled={componentEnabled}
             formRef={fastGradientRef}
-            {...{ sliderVal, epsilonStep, attackIterations }}
+            {...{ epsilonRange, epsilonStep, attackIterations }}
           />
           <ProjectedGradientDescentAttack
             formEnabled={componentEnabled}
             formRef={projectedGradientDescentRef}
-            {...{ sliderVal, epsilonStep, attackIterations }}
+            {...{ epsilonRange, epsilonStep, attackIterations }}
           />
           <BasicIterativeMethodAttack
             formEnabled={componentEnabled}
             formRef={basicIterativeRef}
-            {...{ sliderVal, epsilonStep, attackIterations }}
+            {...{ epsilonRange, epsilonStep, attackIterations }}
           />
-          <MadryEtAlMethodAttack formEnabled={componentEnabled} formRef={madryEtAlRef} {...{ sliderVal, epsilonStep, attackIterations }} />
+          <MadryEtAlMethodAttack
+            formEnabled={componentEnabled}
+            formRef={madryEtAlRef}
+            {...{ epsilonRange, epsilonStep, attackIterations }}
+          />
           <MomentumIterativeMethodAttack
             formEnabled={componentEnabled}
             formRef={momentumIterativeRef}
-            {...{ sliderVal, epsilonStep, attackIterations }}
+            {...{ epsilonRange, epsilonStep, attackIterations }}
           />
-          <SPSAAttack formEnabled={componentEnabled} formRef={spsaRef} {...{ sliderVal, epsilonStep, attackIterations }} />
+          <SPSAAttack formEnabled={componentEnabled} formRef={spsaRef} {...{ epsilonRange, epsilonStep, attackIterations }} />
         </div>
       </Form>
     </>
