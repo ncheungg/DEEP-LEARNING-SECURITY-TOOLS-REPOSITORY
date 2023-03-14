@@ -5,10 +5,7 @@ import { message, Upload } from "antd";
 import {Space, Spin } from 'antd';
 
 
-
 const { Dragger } = Upload;
-
-
 
 const UploadTest: React.FC = () => {
   
@@ -40,11 +37,6 @@ const UploadTest: React.FC = () => {
         message.error(`${info.file.name} file upload failed.`);
         return;
       }
-
-      //once its uploaded to client side, then we can upload through api call
-      // if (status === "done") {
-      //   message.success(`${info.file.name} file uploaded successfully.`);
-      // }
       
       const formData = new FormData();
       if(file.originFileObj){

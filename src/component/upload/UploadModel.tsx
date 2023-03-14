@@ -5,15 +5,6 @@ import { message, Upload } from "antd";
 
 import {Space, Spin } from 'antd';
 
-//const { Storage } = require("@google-cloud/storage");
-//const gc = new Storage({
-//   keyFilename: "./credible-tesla-375823-3923de5f4106.json",
-//   projectId: "credible-tesla-375823",
-// });
-// gc.getBuckets().then((x: any) => console.log(x));
-
-
-
 const { Dragger } = Upload;
 
 
