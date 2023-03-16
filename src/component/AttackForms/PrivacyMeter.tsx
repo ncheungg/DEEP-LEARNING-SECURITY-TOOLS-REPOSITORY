@@ -90,7 +90,7 @@ const PrivLib: React.FC = () => {
       <Checkbox checked={componentDisabled} onChange={(e) => setComponentDisabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
         <b>Enable ML Privacy Meter</b>
       </Checkbox>
-      <a href="/about#ml-privacy-meter" target="_blank" rel="noreferrer noopener">
+      <a href="/documentation#ml-privacy-meter" target="_blank" rel="noreferrer noopener">
         <FileSearchOutlined style={{ color: "gray" }} />
       </a>
 

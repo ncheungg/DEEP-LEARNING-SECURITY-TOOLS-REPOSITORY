@@ -20,7 +20,7 @@ const ProjectedGradientDescentAttack = (props: AttackProps) => {
         <b>Projected Gradient Descent Attack</b>
       </Checkbox>
       <Tooltip title="Click for Projected Gradient Descent Attack Documentation">
-        <a href="/about#cleverhans-projected-gradient-descent-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#cleverhans-projected-gradient-descent-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>

@@ -6,9 +6,15 @@ const { Title, Paragraph, Text, Link } = Typography;
 
 const InfoAnchor: React.FC = () => {
   return (
+    <div>
+
+    <Title id="docs-title" style={{marginTop: "0px"}} level={1}>
+          Aggregated Attack Library Documentation
+    </Title>
     <Row>
+     
       <Col span={16}>
-        <Title id="foolbox" level={2}>
+        <Title id="foolbox" style={{marginTop: "35px"}} level={2}>
           Foolbox Attacks Library
         </Title>
         <Card
@@ -487,10 +493,15 @@ const InfoAnchor: React.FC = () => {
         </Card>
         {/* <p style={{ height: "100vh" }}></p> */}
       </Col>
-      <Col span={8} style={{ paddingLeft: "2em" }}>
+      <Col span={8} style={{ paddingLeft: "2em", marginTop: "35px"}}>
         <Anchor
           items={[
+            // {
+            //   key: "docs-title",
+            //   href: "#docs-title"
+            // }
             {
+              
               key: "foolbox",
               href: "#foolbox",
               title: "Foolbox Attacks Library",
@@ -590,6 +601,7 @@ const InfoAnchor: React.FC = () => {
         />
       </Col>
     </Row>
+    </div>
   );
 };
 

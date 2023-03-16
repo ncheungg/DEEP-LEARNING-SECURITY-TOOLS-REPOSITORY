@@ -21,7 +21,7 @@ const BasicIterativeAttack = (props: AttackProps) => {
         <b>Basic Iterative Attack</b>
       </Checkbox>
       <Tooltip title="Basic Iterative Method. (Click for Basic Iterative Method Attack Documentation)">
-        <a href="/about#foolbox-basic-iterative-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#foolbox-basic-iterative-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>

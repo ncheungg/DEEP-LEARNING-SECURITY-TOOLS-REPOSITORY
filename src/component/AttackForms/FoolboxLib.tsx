@@ -31,7 +31,7 @@ const FoolboxLib: React.FC = () => {
       <Checkbox checked={componentEnabled} onChange={(e) => setComponentEnabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
         <b>Enable Foolbox</b>
       </Checkbox>
-      <a href="/about#ml-privacy-meter" target="_blank" rel="noreferrer noopener">
+      <a href="/documentation#foolbox" target="_blank" rel="noreferrer noopener">
         <FileSearchOutlined style={{ color: "gray" }} />
       </a>
 

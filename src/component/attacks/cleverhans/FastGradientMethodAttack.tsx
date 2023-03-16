@@ -20,7 +20,7 @@ const FastGradientMethodAttack = (props: AttackProps) => {
         <b>Fast Gradient Method Attack</b>
       </Checkbox>
       <Tooltip title="Click for Fast Gradient Method Attack Documentation">
-        <a href="/about#cleverhans-fast-gradient-method-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#cleverhans-fast-gradient-method-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>
