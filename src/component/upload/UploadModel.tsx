@@ -16,6 +16,7 @@ const UploadModel: React.FC = () => {
     multiple: false,
     accept: "zip",
     maxCount: 1,
+    action: '/api/noop',
     onChange(info) {
       //on change occurs anytime the status of the upload changes (file added/removed, upload finished)
       
@@ -64,7 +65,6 @@ const UploadModel: React.FC = () => {
       });
 
     },
-
   };
 
 
