@@ -16,7 +16,8 @@ const UploadModel: React.FC = () => {
     multiple: false,
     accept: "zip",
     maxCount: 1,
-    action: '/api/noop',
+    action: 'https://run.mocky.io/v3/a453d4c2-1ce9-4e0a-9660-74268a865461',
+
     onChange(info) {
       //on change occurs anytime the status of the upload changes (file added/removed, upload finished)
       
@@ -44,6 +45,7 @@ const UploadModel: React.FC = () => {
 
       console.log("uploading file");
       console.log(formData);
+
       fetch('https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file', {
         method: 'POST',
         body: formData,

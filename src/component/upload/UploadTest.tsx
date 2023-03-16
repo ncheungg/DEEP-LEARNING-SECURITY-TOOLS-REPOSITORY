@@ -17,7 +17,7 @@ const UploadTest: React.FC = () => {
     multiple: false,
     accept: "zip",
     maxCount: 1,
-    action: '/api/noop',
+    action: 'https://run.mocky.io/v3/a453d4c2-1ce9-4e0a-9660-74268a865461',
     //progress: { strokeWidth: 4, showInfo: true },
     onChange(info) {
       //on change occurs anytime the status of the upload changes (file added/removed, upload finished)
