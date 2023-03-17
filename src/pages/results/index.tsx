@@ -8,9 +8,9 @@ import CleverhansTable from "@/component/ResultTables/CleverhansTable";
 import FoolboxTable from "@/component/ResultTables/FoolboxTable";
 import MLPrivacyMeterTable from "@/component/ResultTables/MLPrivacyMeterTable";
 import DioptraTable from "@/component/ResultTables/DioptraTable";
-import { useRecoilValue } from "recoil";
-import { attackPromiseState } from "@/recoil/Atom";
+
 import useStickyState from "utils/useStickyState";
+import ResultsAnchor from "@/component/Charts/ResultsAnchor";
 
 const { Title } = Typography;
 
@@ -56,11 +56,13 @@ export default function Home() {
         <br />
 
         <Title level={2}>Post-Attack Accuracy Summary Graphs:</Title>
-        <Chart_1 />
+        {/* <Chart_1 /> */}
 
         {/* <Title>Advanced Summary of Attack Results:</Title> */}
 
         <br />
+
+        <ResultsAnchor />
         <Button type="primary" icon={<HomeOutlined />} size="large" href="/">
           Return Home
         </Button>

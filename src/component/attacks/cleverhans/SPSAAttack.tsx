@@ -23,7 +23,7 @@ const SPSAAttack = (props: AttackProps) => {
         <b>SPSA Attack</b>
       </Checkbox>
       <Tooltip title="Click for SPSA Attack Documentation">
-        <a href="/about#cleverhans-spsa-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#cleverhans-spsa-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>

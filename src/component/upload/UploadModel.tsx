@@ -5,15 +5,6 @@ import { message, Upload } from "antd";
 
 import {Space, Spin } from 'antd';
 
-//const { Storage } = require("@google-cloud/storage");
-//const gc = new Storage({
-//   keyFilename: "./credible-tesla-375823-3923de5f4106.json",
-//   projectId: "credible-tesla-375823",
-// });
-// gc.getBuckets().then((x: any) => console.log(x));
-
-
-
 const { Dragger } = Upload;
 
 
@@ -25,6 +16,8 @@ const UploadModel: React.FC = () => {
     multiple: false,
     accept: "zip",
     maxCount: 1,
+    action: 'https://upload-file-zvax3lpy2q-ue.a.run.app',
+
     onChange(info) {
       //on change occurs anytime the status of the upload changes (file added/removed, upload finished)
       
@@ -52,28 +45,28 @@ const UploadModel: React.FC = () => {
 
       console.log("uploading file");
       console.log(formData);
-      fetch('https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file', {
-        method: 'POST',
-        body: formData,
-      })
-      .then((response) => {
-        if (response.ok) {
-          setLoading(false);
-          message.success(`${info.file.name} file uploaded successfully.`);
-          return response.json();
-        }
-        throw new Error('Network response was not ok.');
-      })
-      .then((data) => {
-        console.log('Upload successful');
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error('Error uploading file:', error);
-      });
+
+      // fetch('https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file', {
+      //   method: 'POST',
+      //   body: formData,
+      // })
+      // .then((response) => {
+      //   if (response.ok) {
+      //     setLoading(false);
+      //     message.success(`${info.file.name} file uploaded successfully.`);
+      //     return response.json();
+      //   }
+      //   throw new Error('Network response was not ok.');
+      // })
+      // .then((data) => {
+      //   console.log('Upload successful');
+      //   console.log(data);
+      // })
+      // .catch((error) => {
+      //   console.error('Error uploading file:', error);
+      // });
 
     },
-
   };
 
 
@@ -96,7 +89,7 @@ const UploadModel: React.FC = () => {
       <br />
       <br />
       
-      <Space direction="vertical" style={{ width: '100%', height: 40 }}>
+      {/* <Space direction="vertical" style={{ width: '100%', height: 40 }}>
         
         {loading && (
           <Spin tip="Uploading File...">
@@ -104,7 +97,7 @@ const UploadModel: React.FC = () => {
           </Spin>
         )}
         
-      </Space>
+      </Space> */}
       
       <br />
       <br />

@@ -48,7 +48,7 @@ const AdditiveUniformNoiseAttack = (props: AttackProps) => {
         <b>Additive Uniform Noise Attack</b>
       </Checkbox>
       <Tooltip title="Click for Additive Uniform Noise Attack Documentation">
-        <a href="/about#foolbox-additive-uniform-noise-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#foolbox-additive-uniform-noise-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>

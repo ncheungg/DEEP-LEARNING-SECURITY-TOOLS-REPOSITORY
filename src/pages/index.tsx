@@ -23,7 +23,7 @@ export default function Home() {
           //width: "80%"
         }}
       >
-        <Title /*style={{ color: "blue" }}*/>Welcome</Title>
+        <Title /*style={{ color: "blue" }}*/>Welcome to DLSTR!</Title>
         <Title
           level={2}
           style={
@@ -32,25 +32,35 @@ export default function Home() {
             }
           }
         >
-          To robust and convenient machine learning model security testing
+          Robust and convenient machine learning model security and privacy testing
         </Title>
 
         <a style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-          <img style={{ width: 400, height: 400 }} src="https://www.dropbox.com/s/98kvl2h5ggzxi7y/Untitled_Artwork.png?raw=1" alt="Logo" />
+          <img style={{ width: 300, height: 300 }} src="https://www.dropbox.com/s/98kvl2h5ggzxi7y/Untitled_Artwork.png?raw=1" alt="Logo" />
         </a>
 
         <Button type="primary" icon={<CloudSyncOutlined />} size="large" href="/attack">
-          Get Started
+          Start Testing
         </Button>
 
         <Title level={3} style={{ paddingTop: "2rem" }} /*style={{ color: "blue" }}*/>
-          About Us
+          Tutorial
         </Title>
         <Title level={4} style={{ paddingBottom: "1rem" }}>
-          Find out more about our robust and convenient machine learning model security privacy testing
+          An end to end tutorial on how to test your Tensorflow models 
         </Title>
-        <Button type="primary" icon={<InfoCircleOutlined />} size="large" href="/about">
+        <Button type="primary" icon={<InfoCircleOutlined />} size="large" href="/tutorial">
           Learn More
+        </Button>
+
+        <Title level={3} style={{ paddingTop: "2rem" }} /*style={{ color: "blue" }}*/>
+          Documentation
+        </Title>
+        <Title level={4} style={{ paddingBottom: "1rem" }}>
+          Learn more about the security and privacy attacks we use 
+        </Title>
+        <Button type="primary" icon={<InfoCircleOutlined />} size="large" href="/documentation">
+          Read The Docs
         </Button>
 
         <Title level={3} style={{ paddingTop: "2rem" }} /*style={{ color: "blue" }}*/>

@@ -104,7 +104,7 @@ const items: MenuProps["items"] = [
   },
   {
     label: (
-      <Link href="/about" rel="noopener noreferrer">
+      <Link href="/documentation" rel="noopener noreferrer">
         Documentation
       </Link>
     ),

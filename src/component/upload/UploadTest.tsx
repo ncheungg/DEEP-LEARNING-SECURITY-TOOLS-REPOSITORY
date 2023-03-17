@@ -13,6 +13,7 @@ const UploadTest: React.FC = () => {
     multiple: false,
     accept: "zip",
     maxCount: 1,
+    action: "https://upload-file-zvax3lpy2q-ue.a.run.app",
     //progress: { strokeWidth: 4, showInfo: true },
     onChange(info) {
       //on change occurs anytime the status of the upload changes (file added/removed, upload finished)
@@ -34,11 +35,6 @@ const UploadTest: React.FC = () => {
         return;
       }
 
-      //once its uploaded to client side, then we can upload through api call
-      // if (status === "done") {
-      //   message.success(`${info.file.name} file uploaded successfully.`);
-      // }
-
       const formData = new FormData();
       if (file.originFileObj) {
         formData.append("file", file.originFileObj);
@@ -46,25 +42,25 @@ const UploadTest: React.FC = () => {
 
       console.log("uploading file");
       console.log(formData);
-      fetch("https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => {
-          if (response.ok) {
-            setLoading(false);
-            message.success(`${info.file.name} file uploaded successfully.`);
-            return response.json();
-          }
-          throw new Error("Network response was not ok.");
-        })
-        .then((data) => {
-          console.log("Upload successful");
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error("Error uploading file:", error);
-        });
+      // fetch('https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file', {
+      //   method: 'POST',
+      //   body: formData,
+      // })
+      // .then((response) => {
+      //   if (response.ok) {
+      //     setLoading(false);
+      //     message.success(`${info.file.name} file uploaded successfully.`);
+      //     return response.json();
+      //   }
+      //   throw new Error('Network response was not ok.');
+      // })
+      // .then((data) => {
+      //   console.log('Upload successful');
+      //   console.log(data);
+      // })
+      // .catch((error) => {
+      //   console.error('Error uploading file:', error);
+      // });
     },
   };
 
@@ -86,13 +82,15 @@ const UploadTest: React.FC = () => {
       <br />
       <br />
 
-      <Space direction="vertical" style={{ width: "100%", height: 40 }}>
+      {/* <Space direction="vertical" style={{ width: '100%', height: 40 }}>
+        
         {loading && (
           <Spin tip="Uploading File...">
             <div style={{ height: 40 }}></div>
           </Spin>
         )}
-      </Space>
+        
+      </Space> */}
 
       <br />
       <br />

@@ -46,7 +46,7 @@ const DeepFoolAttack = (props: AttackProps) => {
         <b>Deep Fool Attack</b>
       </Checkbox>
       <Tooltip title="A simple and fast gradient-based adversarial attack. Implements the DeepFool attack. (Click for Deep Fool Attack Documentation)">
-        <a href="/about#foolbox-deep-fool-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#foolbox-deep-fool-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>

@@ -33,7 +33,7 @@ const SaltAndPepperNoiseAttack = (props: AttackProps) => {
         <b>Salt & Pepper Noise Attack</b>
       </Checkbox>
       <Tooltip title="Increases the amount of salt and pepper noise until the input is misclassified. (Click for Salt & Pepper Noise Attack Documentation)">
-        <a href="/about#foolbox-salt-and-pepper-noise-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#foolbox-salt-and-pepper-noise-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>

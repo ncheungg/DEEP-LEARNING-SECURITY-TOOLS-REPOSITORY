@@ -48,7 +48,7 @@ const FastGradientAttack = (props: AttackProps) => {
         <b>Fast Gradient Attack</b>
       </Checkbox>
       <Tooltip title="Fast Gradient Method (2) and Fast Gradient Signed Method (∞). (Click for Fast Gradient Attack Documentation)">
-        <a href="/about#foolbox-fast-gradient-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#foolbox-fast-gradient-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>

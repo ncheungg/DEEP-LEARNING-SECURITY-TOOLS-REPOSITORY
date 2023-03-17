@@ -38,7 +38,7 @@ const AdditiveGaussianNoiseAttack = (props: AttackProps) => {
         <b>Additive Gaussian Noise Attack</b>
       </Checkbox>
       <Tooltip title="Samples Gaussian noise with or without repeated/clipping. (Click for Additive Gaussian Noise Attack Documentation)">
-        <a href="/about#foolbox-additive-gaussian-noise-attack" target="_blank" rel="noreferrer noopener">
+        <a href="/documentation#foolbox-additive-gaussian-noise-attack" target="_blank" rel="noreferrer noopener">
           <InfoCircleOutlined style={{ color: "gray" }} />
         </a>
       </Tooltip>
