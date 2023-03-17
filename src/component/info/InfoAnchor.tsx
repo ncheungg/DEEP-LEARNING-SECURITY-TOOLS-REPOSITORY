@@ -306,9 +306,9 @@ const InfoAnchor: React.FC = () => {
               predictions and the predictions for the adversarial perturbation.
             </p>
             <p>
-              <b>Parameters:</b>
+              <b>Parameters:</b>{" "}
               <ul>
-                <li>Epsilon</li>
+                <li>Epsilons</li>
                 <li>Order of the Norm</li>
               </ul>
             </p>
@@ -333,12 +333,16 @@ const InfoAnchor: React.FC = () => {
             }
           >
             <p>
-              <b>Definition:</b> ?
+              <b>Definition:</b> A technique for generating adversarial examples by iteratively perturbing input data along the gradient
+              direction until reaching a point within a specified distance from the original data that maximizes the loss of a target model.
             </p>
             <p>
-              <b>Parameters:</b>
+              <b>Parameters:</b>{" "}
               <ul>
-                <li>?</li>
+                <li>Epsilons</li>
+                <li>Epsilon Step Size</li>
+                <li>Order of the Norm (L2, LInf)</li>
+                <li>Attack Iterations</li>
               </ul>
             </p>
           </Card>
@@ -363,10 +367,12 @@ const InfoAnchor: React.FC = () => {
             }
           >
             <p>
-              <b>Definition:</b> ?
+              <b>Definition:</b> A technique for generating adversarial examples by iteratively applying small perturbations to input data
+              in the direction of the gradient of the loss with respect to the input until reaching a point that maximizes the loss of a
+              target model.
             </p>
             <p>
-              <b>Parameters:</b>
+              <b>Parameters:</b>{" "}
               <ul>
                 <li>Epsilon</li>
                 <li>Epsilon Step Size</li>
@@ -395,10 +401,11 @@ const InfoAnchor: React.FC = () => {
             }
           >
             <p>
-              <b>Definition:</b> ?
+              <b>Definition:</b> Momentum iterative method adversarial attack is a variant of the basic iterative method that uses a
+              momentum term to smooth the update direction and accelerate convergence towards the optimal adversarial example.
             </p>
             <p>
-              <b>Parameters:</b>
+              <b>Parameters:</b>{" "}
               <ul>
                 <li>Epsilon</li>
                 <li>Epsilon Step Size</li>
@@ -428,10 +435,12 @@ const InfoAnchor: React.FC = () => {
             }
           >
             <p>
-              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+              <b>Definition:</b> Madry et al adversarial attack is a powerful variant of the projected gradient descent method that uses a
+              stronger constraint on the size of the perturbation and trains the model using adversarial examples generated with this
+              technique to improve its robustness against future attacks.
             </p>
             <p>
-              <b>Parameters:</b>
+              <b>Parameters:</b>{" "}
               <ul>
                 <li>Epsilon</li>
                 <li>Epsilon Step Size</li>
@@ -460,13 +469,16 @@ const InfoAnchor: React.FC = () => {
             }
           >
             <p>
-              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+              <b>Definition:</b> Simultaneous Perturbation Stochastic Approximation (SPSA) adversarial attack is a black-box attack
+              technique that estimates the gradient of the loss function using noisy samples and updates the input data with a step size
+              that is adaptively adjusted to maximize the loss of the target model.
             </p>
             <p>
-              <b>Parameters:</b>
+              <b>Parameters:</b>{" "}
               <ul>
                 <li>Epsilon</li>
-                <li>Step Size</li>
+                <li>Model Lower Bound</li>
+                <li>Model Upper Bound</li>
                 <li>Order of the Norm</li>
               </ul>
             </p>
@@ -475,7 +487,7 @@ const InfoAnchor: React.FC = () => {
             ML Privacy Meter Attacks Library:
           </Title>
           <Card
-            title="SPSA Attack"
+            title="Population Attack"
             id="ml-privacy-meter-population-attack"
             style={{ marginBottom: "15px" }}
             extra={
@@ -494,14 +506,14 @@ const InfoAnchor: React.FC = () => {
             }
           >
             <p>
-              <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
+              <b>Definition:</b> Attack that determines the ability of attackers to determine if a member is part of a machine learning
+              model training dataset.
             </p>
             <p>
-              <b>Parameters:</b>
+              <b>Parameters:</b>{" "}
               <ul>
-                <li>Epsilon</li>
-                <li>Step Size</li>
-                <li>Order of the Norm</li>
+                <li>Loss Function</li>
+                <li>Number of classes</li>
               </ul>
             </p>
           </Card>
