@@ -8,6 +8,8 @@ import CleverhansTable from "@/component/ResultTables/CleverhansTable";
 import FoolboxTable from "@/component/ResultTables/FoolboxTable";
 import MLPrivacyMeterTable from "@/component/ResultTables/MLPrivacyMeterTable";
 import DioptraTable from "@/component/ResultTables/DioptraTable";
+
+import useStickyState from "utils/useStickyState";
 import ResultsAnchor from "@/component/Charts/ResultsAnchor";
 
 const { Title } = Typography;
@@ -15,6 +17,10 @@ const { Title } = Typography;
 const { Content } = Layout;
 
 export default function Home() {
+  const [attackResults, setAttackResults] = useStickyState(null, "attack-results");
+
+  console.log({ attackResults });
+
   return (
     <Layout style={{ alignItems: "center" }}>
       <Navbar />

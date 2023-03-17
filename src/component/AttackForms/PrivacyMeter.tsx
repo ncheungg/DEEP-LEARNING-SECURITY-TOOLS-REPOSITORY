@@ -12,11 +12,8 @@ import {
   TreeSelect,
   Switch,
   Checkbox,
-  Upload,
-  Divider,
-  Row,
-  Col,
   MenuProps,
+  FormInstance,
 } from "antd";
 import { Tooltip } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
@@ -39,21 +36,6 @@ const items: MenuProps["items"] = [
       // },
     ],
   },
-  // {
-  //   key: "3",
-  //   label: "disabled sub menu",
-  //   disabled: true,
-  //   children: [
-  //     {
-  //       key: "3-1",
-  //       label: "5d menu item",
-  //     },
-  //     {
-  //       key: "3-2",
-  //       label: "6th menu item",
-  //     },
-  //   ],
-  // },
 ];
 
 const handleChange = (value: string) => {
@@ -77,13 +59,19 @@ const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
 };
 
-const PrivLib: React.FC = () => {
+interface PrivLibProps {
+  formRef: React.MutableRefObject<FormInstance<any>>;
+}
+
+const PrivLib = (props: PrivLibProps) => {
+  const { formRef } = props;
+
   const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
     setComponentDisabled(disabled);
   };
 
-  PrivLib.displayName = "FastGradientForm";
+  // PrivLib.displayName = "FastGradientForm";
 
   return (
     <div style={{ paddingBottom: "1.3em" }}>
@@ -105,6 +93,7 @@ const PrivLib: React.FC = () => {
         // onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item
           label="Num of Classes:"
@@ -132,19 +121,6 @@ const PrivLib: React.FC = () => {
               { value: "mean_sq", label: "Mean Squared Error" },
             ]}
           />
-
-          {/* <Row>
-            <Col span={6} style={{ paddingRight: "2em" }}>
-              <Space wrap>
-                
-              </Space>
-            </Col>
-            <Col span={1}>
-              <Tooltip placement="right" title="Description: Loss function used by ML Privacy Meter to perform audit.">
-                <InfoCircleOutlined style={{ color: "gray", paddingLeft: "10.5em", paddingTop: "0.56em" }} />
-              </Tooltip>
-            </Col>
-          </Row> */}
         </Form.Item>
       </Form>
     </div>

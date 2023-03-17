@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FileSearchOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import { Form, Input, Checkbox, Slider } from "antd";
+import { Form, Input, Checkbox, Slider, FormInstance } from "antd";
 import { Tooltip } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import type { MenuProps } from "antd";
@@ -13,14 +13,27 @@ import SPSAAttack from "../attacks/cleverhans/SPSAAttack";
 
 const SLIDER_STEP = 0.01;
 
-const CleverHansLib: React.FC = () => {
+interface CleverHansLibProps {
+  formRef: React.MutableRefObject<FormInstance<any>>;
+}
+
+const CleverHansLib = (props: CleverHansLibProps) => {
+  const { formRef } = props;
+
+  const basicIterativeRef = useRef();
+  const fastGradientRef = useRef();
+  const madryEtAlRef = useRef();
+  const momentumIterativeRef = useRef();
+  const projectedGradientDescentRef = useRef();
+  const spsaRef = useRef();
+
   // enable/disable form checkbox
   const [componentEnabled, setComponentEnabled] = useState<boolean>(false);
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
     setComponentEnabled(disabled);
   };
 
-  const [sliderVal, setSliderVal] = useState<[number, number]>([0.02, 0.06]);
+  const [epsilonRange, setepsilonRange] = useState<[number, number]>([0.02, 0.06]);
   const [epsilonStep, setEpsilonStep] = useState<number>();
   const [attackIterations, setAttackIterations] = useState<number>();
 
@@ -44,6 +57,7 @@ const CleverHansLib: React.FC = () => {
         // onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item
           label="Epsilon Starts:"
@@ -55,7 +69,7 @@ const CleverHansLib: React.FC = () => {
             range
             defaultValue={[0.02, 0.06]}
             disabled={!componentEnabled}
-            onChange={(val) => setSliderVal(val)}
+            onChange={(val) => setepsilonRange(val)}
             step={SLIDER_STEP}
             max={0.25}
           />
@@ -94,12 +108,32 @@ const CleverHansLib: React.FC = () => {
         </Form.Item>
 
         <div style={{ textAlign: "left", marginTop: "5em" }}>
-          <FastGradientMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
-          <ProjectedGradientDescentAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
-          <BasicIterativeMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
-          <MadryEtAlMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
-          <MomentumIterativeMethodAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
-          <SPSAAttack formEnabled={componentEnabled} {...{ sliderVal, epsilonStep, attackIterations }} />
+          <FastGradientMethodAttack
+            formEnabled={componentEnabled}
+            formRef={fastGradientRef}
+            {...{ epsilonRange, epsilonStep, attackIterations }}
+          />
+          <ProjectedGradientDescentAttack
+            formEnabled={componentEnabled}
+            formRef={projectedGradientDescentRef}
+            {...{ epsilonRange, epsilonStep, attackIterations }}
+          />
+          <BasicIterativeMethodAttack
+            formEnabled={componentEnabled}
+            formRef={basicIterativeRef}
+            {...{ epsilonRange, epsilonStep, attackIterations }}
+          />
+          <MadryEtAlMethodAttack
+            formEnabled={componentEnabled}
+            formRef={madryEtAlRef}
+            {...{ epsilonRange, epsilonStep, attackIterations }}
+          />
+          <MomentumIterativeMethodAttack
+            formEnabled={componentEnabled}
+            formRef={momentumIterativeRef}
+            {...{ epsilonRange, epsilonStep, attackIterations }}
+          />
+          <SPSAAttack formEnabled={componentEnabled} formRef={spsaRef} {...{ epsilonRange, epsilonStep, attackIterations }} />
         </div>
       </Form>
     </>

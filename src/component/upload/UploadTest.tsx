@@ -1,36 +1,32 @@
 import React, { useState } from "react";
 import { DatabaseOutlined, FileZipOutlined, InboxOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
-import { message, Upload } from "antd";
-import {Space, Spin } from 'antd';
-
+import { message, Upload, Space, Spin } from "antd";
 
 const { Dragger } = Upload;
 
 const UploadTest: React.FC = () => {
-  
   const [loading, setLoading] = useState(false);
-
 
   const props: UploadProps = {
     name: "file",
     multiple: false,
     accept: "zip",
     maxCount: 1,
-    action: 'https://upload-file-zvax3lpy2q-ue.a.run.app',
+    action: "https://upload-file-zvax3lpy2q-ue.a.run.app",
     //progress: { strokeWidth: 4, showInfo: true },
     onChange(info) {
       //on change occurs anytime the status of the upload changes (file added/removed, upload finished)
-      
-      const {file} = info;
+
+      const { file } = info;
       const status = file.status;
 
-      if(status === "removed"){
+      if (status === "removed") {
         console.log("file remove");
         return;
       }
       //uploading means from users computer to client side
-      if(status == "uploading"){
+      if (status == "uploading") {
         setLoading(true);
         return;
       }
@@ -38,10 +34,10 @@ const UploadTest: React.FC = () => {
         message.error(`${info.file.name} file upload failed.`);
         return;
       }
-      
+
       const formData = new FormData();
-      if(file.originFileObj){
-        formData.append('file', file.originFileObj);
+      if (file.originFileObj) {
+        formData.append("file", file.originFileObj);
       }
 
       console.log("uploading file");
@@ -65,11 +61,8 @@ const UploadTest: React.FC = () => {
       // .catch((error) => {
       //   console.error('Error uploading file:', error);
       // });
-
     },
-
   };
-
 
   return (
     <Dragger {...props}>
@@ -88,7 +81,7 @@ const UploadTest: React.FC = () => {
       <br />
       <br />
       <br />
-      
+
       {/* <Space direction="vertical" style={{ width: '100%', height: 40 }}>
         
         {loading && (
@@ -98,15 +91,10 @@ const UploadTest: React.FC = () => {
         )}
         
       </Space> */}
-      
+
       <br />
       <br />
-      
-      
-      
-      
     </Dragger>
-    
   );
 };
 

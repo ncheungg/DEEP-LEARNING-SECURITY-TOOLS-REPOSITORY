@@ -39,75 +39,67 @@ def preprocess_dataset(dataset, dataset_info):
 
 
 def l2_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                      images, labels, epsilon_max, epsilon_num):
+                                      images, labels, epsilons):
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
 
     attack = fb.attacks.L2AdditiveGaussianNoiseAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
 
     raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
 
-    return epsilons, robust_accuracy
+    return robust_accuracy
 
 
 def l2_clipping_aware_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                                     images, labels, epsilon_max, epsilon_num):
+                                                     images, labels, epsilons):
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
 
     attack = fb.attacks.L2ClippingAwareAdditiveGaussianNoiseAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
 
     raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
 
-    return epsilons, robust_accuracy
+    return robust_accuracy
 
 
 def l2_repeated_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                               images, labels, epsilon_max, epsilon_num):
+                                               images, labels, epsilons):
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
 
     attack = fb.attacks.L2RepeatedAdditiveGaussianNoiseAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
 
     raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
 
-    return epsilons, robust_accuracy
+    return robust_accuracy
 
 
 def l2_clipping_aware_repeated_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                                              images, labels, epsilon_max, epsilon_num):
+                                                              images, labels, epsilons):
     model_bounds = (model_lower_bound, model_upper_bound)
 
     fmodel = fb.TensorFlowModel(model, model_bounds)
-    # fmodel = fmodel.transform_bounds((0, 1))
 
     attack = fb.attacks.L2ClippingAwareRepeatedAdditiveGaussianNoiseAttack()
-    epsilons = np.linspace(0.0, epsilon_max, num=epsilon_num)
 
     raw, clipped, is_adv = attack(fmodel, images, labels, epsilons=epsilons)
 
     robust_accuracy = 1 - tf.math.reduce_mean(tf.cast(is_adv, tf.float32), axis=-1)
     robust_accuracy *= 100
 
-    return epsilons, robust_accuracy
+    return robust_accuracy
 
 
 @functions_framework.http
@@ -136,8 +128,9 @@ def attack_endpoint(request):
     # attack input parameters
     model_lower_bound = request_json['model_lower_bound']
     model_upper_bound = request_json['model_upper_bound']
+    epsilon_min = request_json['epsilon_min']
     epsilon_max = request_json['epsilon_max']
-    epsilon_num = request_json['epsilon_num']
+    epsilon_step = request_json['epsilon_step']
     attack_types = request_json['attack_types']
 
     # get dataset metadata from bucket
@@ -163,14 +156,15 @@ def attack_endpoint(request):
 
     # extract images and labels
     images, labels = preprocess_dataset(dataset, dataset_info)
+    epsilons = np.arange(epsilon_min, epsilon_max + epsilon_step, epsilon_step)
 
     response_body = {}
 
     # run the attacks
     for attack_type in attack_types:
         if attack_type == 'additive':
-            epsilons, accuracy = l2_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                                                   images, labels, epsilon_max, epsilon_num)
+            accuracy = l2_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound, 
+                                                         images, labels, epsilons)
 
             response_body[attack_type] = {
                 'epsilons': epsilons.tolist(),
@@ -178,9 +172,8 @@ def attack_endpoint(request):
             }
 
         elif attack_type == 'clipping-aware-additive':
-            epsilons, accuracy = l2_clipping_aware_additive_gaussian_noise_attack(model, model_lower_bound,
-                                                                                  model_upper_bound, images, labels,
-                                                                                  epsilon_max, epsilon_num)
+            accuracy = l2_clipping_aware_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
+                                                                        images, labels, epsilons)
 
             response_body[attack_type] = {
                 'epsilons': epsilons.tolist(),
@@ -188,8 +181,8 @@ def attack_endpoint(request):
             }
 
         elif attack_type == 'repeated-additive':
-            epsilons, accuracy = l2_repeated_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound,
-                                                                            images, labels, epsilon_max, epsilon_num)
+            accuracy = l2_repeated_additive_gaussian_noise_attack(model, model_lower_bound, model_upper_bound, 
+                                                                  images, labels, epsilons)
 
             response_body[attack_type] = {
                 'epsilons': epsilons.tolist(),
@@ -197,10 +190,9 @@ def attack_endpoint(request):
             }
 
         elif attack_type == 'clipping-aware-repeated-additive':
-            epsilons, accuracy = l2_clipping_aware_repeated_additive_gaussian_noise_attack(model, model_lower_bound,
-                                                                                           model_upper_bound, images,
-                                                                                           labels, epsilon_max,
-                                                                                           epsilon_num)
+            accuracy = l2_clipping_aware_repeated_additive_gaussian_noise_attack(model, model_lower_bound, 
+                                                                                 model_upper_bound, images, 
+                                                                                 labels, epsilons)
 
             response_body[attack_type] = {
                 'epsilons': epsilons.tolist(),

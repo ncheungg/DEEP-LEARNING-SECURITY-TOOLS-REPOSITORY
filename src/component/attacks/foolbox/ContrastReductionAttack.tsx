@@ -1,18 +1,44 @@
+import { runContrastReductionAttack } from "@/api/foolbox";
+import { attackPromiseState, datasetNameState, modelNameState } from "@/recoil/Atom";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
-import { Checkbox, Col, Form, Radio, Row, Tooltip } from "antd";
-import { useState } from "react";
+import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
+import { Ref, useState } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 interface AttackProps {
   formEnabled: boolean;
-  sliderVal: [number, number];
+  formRef: React.MutableRefObject<any>;
+  epsilonRange: [number, number];
+  epsilonStep: number;
   lowerBound?: number;
   upperBound?: number;
 }
 
 const ContrastReductionAttack = (props: AttackProps) => {
-  const { formEnabled } = props;
+  const { formEnabled, formRef, epsilonRange, lowerBound, upperBound, epsilonStep } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
+  const [attackTypes, setAttackTypes] = useState<string[]>([]);
+
+  const modelName = useRecoilValue(modelNameState);
+  const datasetName = useRecoilValue(datasetNameState);
+
+  const setAttackPromises = useSetRecoilState(attackPromiseState);
+
+  const onFinish = () => {
+    if (formEnabled && subFormEnabled) {
+      const promise = runContrastReductionAttack({
+        upperBound,
+        lowerBound,
+        epsilonRange,
+        epsilonStep,
+        modelName,
+        datasetName,
+        attackTypes,
+      });
+      setAttackPromises((currentState) => [...currentState, promise]);
+    }
+  };
 
   return (
     <>
@@ -34,9 +60,10 @@ const ContrastReductionAttack = (props: AttackProps) => {
         disabled={!subFormEnabled || !formEnabled}
         style={{ maxWidth: 600 }}
         initialValues={{ remember: true }}
-        // onFinish={onFinish}
+        onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item
           label="Search Types:"
@@ -45,7 +72,7 @@ const ContrastReductionAttack = (props: AttackProps) => {
           tooltip="Linear/Binary search to find the smallest adversarial perturbation."
           // style={{ marginTop: "-2em" }}
         >
-          <Checkbox.Group style={{ width: "100%" }}>
+          <Checkbox.Group style={{ width: "100%" }} onChange={(vals) => setAttackTypes(vals as string[])}>
             <Checkbox value="binary">Binary</Checkbox>
             <Checkbox value="linear">Linear</Checkbox>
           </Checkbox.Group>
