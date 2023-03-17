@@ -8,12 +8,19 @@ import CleverhansTable from "@/component/ResultTables/CleverhansTable";
 import FoolboxTable from "@/component/ResultTables/FoolboxTable";
 import MLPrivacyMeterTable from "@/component/ResultTables/MLPrivacyMeterTable";
 import DioptraTable from "@/component/ResultTables/DioptraTable";
+import { useRecoilValue } from "recoil";
+import { attackPromiseState } from "@/recoil/Atom";
+import useStickyState from "utils/useStickyState";
 
 const { Title } = Typography;
 
 const { Content } = Layout;
 
 export default function Home() {
+  const [attackResults, setAttackResults] = useStickyState(null, "attack-results");
+
+  console.log({ attackResults });
+
   return (
     <Layout style={{ alignItems: "center" }}>
       <Navbar />

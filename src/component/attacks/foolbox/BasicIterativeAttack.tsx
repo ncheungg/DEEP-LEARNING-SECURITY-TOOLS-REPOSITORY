@@ -1,9 +1,9 @@
 import { runBasicIterativeAttack } from "@/api/foolbox";
-import { datasetNameState, modelNameState } from "@/recoil/Atom";
+import { attackPromiseState, datasetNameState, modelNameState } from "@/recoil/Atom";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
 import { Ref, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 interface AttackProps {
   formEnabled: boolean;
@@ -24,9 +24,11 @@ const BasicIterativeAttack = (props: AttackProps) => {
   const modelName = useRecoilValue(modelNameState);
   const datasetName = useRecoilValue(datasetNameState);
 
+  const setAttackPromises = useSetRecoilState(attackPromiseState);
+
   const onFinish = () => {
     if (formEnabled && subFormEnabled) {
-      runBasicIterativeAttack({
+      const promise = runBasicIterativeAttack({
         upperBound,
         lowerBound,
         epsilonRange,
@@ -36,6 +38,9 @@ const BasicIterativeAttack = (props: AttackProps) => {
         randomStart,
         norms: selectedNorms,
       });
+      setAttackPromises((currentState) => [...currentState, promise]);
+
+      console.log({ promise });
     }
   };
 

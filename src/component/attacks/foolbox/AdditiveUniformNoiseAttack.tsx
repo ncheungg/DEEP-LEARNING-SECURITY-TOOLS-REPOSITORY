@@ -1,9 +1,9 @@
 import { runAdditiveUniformAttack } from "@/api/foolbox";
-import { datasetNameState, modelNameState } from "@/recoil/Atom";
+import { attackPromiseState, datasetNameState, modelNameState } from "@/recoil/Atom";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
 import { Ref, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 interface AttackProps {
   formEnabled: boolean;
@@ -24,9 +24,11 @@ const AdditiveUniformNoiseAttack = (props: AttackProps) => {
   const modelName = useRecoilValue(modelNameState);
   const datasetName = useRecoilValue(datasetNameState);
 
+  const setAttackPromises = useSetRecoilState(attackPromiseState);
+
   const onFinish = () => {
     if (formEnabled && subFormEnabled) {
-      runAdditiveUniformAttack({
+      const promise = runAdditiveUniformAttack({
         upperBound,
         lowerBound,
         epsilonRange,
@@ -36,6 +38,7 @@ const AdditiveUniformNoiseAttack = (props: AttackProps) => {
         attackTypes,
         norms: selectedNorms,
       });
+      setAttackPromises((currentState) => [...currentState, promise]);
     }
   };
 

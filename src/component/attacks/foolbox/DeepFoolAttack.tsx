@@ -1,9 +1,9 @@
 import { runFoolboxDeepFoolAttack } from "@/api/foolbox";
-import { datasetNameState, modelNameState } from "@/recoil/Atom";
+import { attackPromiseState, datasetNameState, modelNameState } from "@/recoil/Atom";
 import { FileSearchOutlined, InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, FormInstance, Row, Tooltip } from "antd";
 import { Ref, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 interface AttackProps {
   formEnabled: boolean;
@@ -23,9 +23,20 @@ const DeepFoolAttack = (props: AttackProps) => {
   const modelName = useRecoilValue(modelNameState);
   const datasetName = useRecoilValue(datasetNameState);
 
+  const setAttackPromises = useSetRecoilState(attackPromiseState);
+
   const onFinish = () => {
     if (formEnabled && subFormEnabled) {
-      runFoolboxDeepFoolAttack({ upperBound, lowerBound, epsilonRange, epsilonStep, modelName, datasetName, norms: selectedNorms });
+      const promise = runFoolboxDeepFoolAttack({
+        upperBound,
+        lowerBound,
+        epsilonRange,
+        epsilonStep,
+        modelName,
+        datasetName,
+        norms: selectedNorms,
+      });
+      setAttackPromises((currentState) => [...currentState, promise]);
     }
   };
 

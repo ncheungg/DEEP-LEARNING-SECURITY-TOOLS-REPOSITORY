@@ -1,9 +1,9 @@
 import { runAdditiveGaussianAttack } from "@/api/foolbox";
-import { datasetNameState, modelNameState } from "@/recoil/Atom";
+import { attackPromiseState, datasetNameState, modelNameState } from "@/recoil/Atom";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 interface AttackProps {
   formEnabled: boolean;
@@ -23,9 +23,12 @@ const AdditiveGaussianNoiseAttack = (props: AttackProps) => {
   const modelName = useRecoilValue(modelNameState);
   const datasetName = useRecoilValue(datasetNameState);
 
+  const setAttackPromises = useSetRecoilState(attackPromiseState);
+
   const onFinish = () => {
     if (formEnabled && subFormEnabled) {
-      runAdditiveGaussianAttack({ upperBound, lowerBound, epsilonRange, epsilonStep, modelName, datasetName, attackTypes });
+      const promise = runAdditiveGaussianAttack({ upperBound, lowerBound, epsilonRange, epsilonStep, modelName, datasetName, attackTypes });
+      setAttackPromises((currentState) => [...currentState, promise]);
     }
   };
 

@@ -34,14 +34,11 @@ const FoolboxLib = (props: FoolboxLibProps) => {
     setComponentEnabled(disabled);
   };
 
-  const [epsilonRange, setepsilonRange] = useState<[number, number]>([0, 0.5]);
+  const [epsilonRange, setepsilonRange] = useState<[number, number]>([0, 0.2]);
   const [lowerBound, setLowerBound] = useState<number>();
   const [upperBound, setUpperBound] = useState<number>();
 
   const onFinish = () => {
-    console.log("finished submitting parent component");
-
-    // submit all subforms
     deepFoolRef?.current?.submit();
     fastGradientRef?.current?.submit();
     basicIterativeRef?.current?.submit();
