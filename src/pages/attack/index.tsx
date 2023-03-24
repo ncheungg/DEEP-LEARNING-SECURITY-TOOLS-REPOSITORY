@@ -26,7 +26,7 @@ export default function Home() {
             Once the upload is complete, the file name will be displayed.
             <br />
             <br />
-            When you're finished, click the 'next' button to proceed.
+            When you&apos;re finished, click the &apos;next&apos; button to proceed.
           </span>
         );
       case 1:
@@ -35,13 +35,13 @@ export default function Home() {
             <b>Step 2:</b> Similarly, upload your TensorFlow-Dataset format test data by following the same steps as before.
             <br />
             <br />
-            Click the 'next' button once the upload is complete.
+            Click the &apos;next&apos; button once the upload is complete.
           </span>
         );
       case 2:
         return (
           <span>
-            <b>Step 3:</b> It's time to select the attacks you would like to perform on your model and insert the relevant parameters.
+            <b>Step 3:</b> It&apos;s time to select the attacks you would like to perform on your model and insert the relevant parameters.
             <br />
             <br />
             Choose an attack library from the provided list by enabling it through the appropriate checkboxes.
@@ -50,11 +50,11 @@ export default function Home() {
             Input global parameters and select specific attacks with their specific input parameters.
             <br />
             <br />
-            Once you've made your selections, click the 'Scan Model' button.
+            Once you&apos;ve made your selections, click the &apos;Scan Model&apos; button.
             <br />
             <br />
-            <b>Optional:</b> If you're interested, you can view additional attack information in the 'Documentation' page or by
-            hovering/clicking on the (i) icons beside the specific attacks.
+            <b>Optional:</b> If you&apos;re interested, you can view additional attack information in the &apos;Documentation&apos; page or
+            by hovering/clicking on the (i) icons beside the specific attacks.
           </span>
         );
       default:
@@ -91,7 +91,7 @@ export default function Home() {
           <a style={{ display: "flex", width: "100%", justifyContent: "right", paddingTop: "25px", paddingRight: "35px" }}>
             {/* Main tooltip object: */}
             <Tooltip title={getTooltipTitle()} color={"#39f"} visible={mainTooltipVisible} key={"#add"}>
-              <img style={{ width: 125, height: 164 }} src="https://www.dropbox.com/s/5uq16mvwsqs9dmy/eMiL.png?raw=1" alt="Logo" />
+              <img style={{ width: 167, height: 164 }} src="https://www.dropbox.com/s/i7lwp2rjh0835tr/eMiL.png?raw=1" alt="eMiL" />
             </Tooltip>
             {/* Dummy tooltip object: */}
             <Tooltip
@@ -99,13 +99,15 @@ export default function Home() {
               color={"#39f"}
               visible={dummyTooltipVisible}
               key={"#dummy"}
-              onMouseEnter={() => setDummyTooltipVisible(false)} // add this line
             >
               <img
-                style={{ position: "absolute", width: 125, height: 164 }}
-                src="https://www.dropbox.com/s/hklp58zg0by5fio/blank%20eMiL.png?raw=1"
-                alt="Logo"
-                onMouseEnter={() => setMainTooltipVisible(true)}
+                style={{ position: "absolute", width: 167, height: 164 }}
+                src="https://www.dropbox.com/s/t8uks5kjy6dj7rm/eMiL_blank.png?raw=1"
+                alt="eMiL blank"
+                onMouseEnter={() => {
+                  setMainTooltipVisible(true);
+                  setDummyTooltipVisible(false);
+                }}
                 onMouseLeave={() => setMainTooltipVisible(false)}
               />
             </Tooltip>
