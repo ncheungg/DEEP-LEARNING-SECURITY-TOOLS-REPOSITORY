@@ -11,7 +11,7 @@ import { sleep } from "utils";
 import useStickyState from "utils/useStickyState";
 import { useRouter } from "next/router";
 
-const AttackSteps: React.FC = () => {
+const AttackSteps: React.FC<{ setCurrentStep: (step: number) => void }> = ({ setCurrentStep }) => {
   const router = useRouter();
 
   const { token } = theme.useToken();
@@ -49,11 +49,17 @@ const AttackSteps: React.FC = () => {
   ];
 
   const next = () => {
-    setCurrent(current + 1);
+    setCurrent((prev) => {
+      setCurrentStep(prev + 1); // call setCurrentStep function from parent
+      return prev + 1;
+    });
   };
 
   const prev = () => {
-    setCurrent(current - 1);
+    setCurrent((prev) => {
+      setCurrentStep(prev - 1); // call setCurrentStep function from parent
+      return prev - 1;
+    });
   };
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
