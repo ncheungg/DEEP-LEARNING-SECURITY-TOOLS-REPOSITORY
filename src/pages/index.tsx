@@ -24,7 +24,10 @@ export default function Home() {
           //width: "80%"
         }}
       >
-        <Title /*style={{ color: "blue" }}*/>Welcome to DLSTR!</Title>
+        <Title>
+          Welcome to <span style={{ color: "#0078f9" }}>DLSTR</span>
+        </Title>
+
         <Title
           level={2}
           style={
