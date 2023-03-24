@@ -3,6 +3,7 @@ import Footer from "@/component/footer/Footer";
 import { Button, Layout } from "antd";
 import { Typography, Row, Col } from "antd";
 import { CloudSyncOutlined, DownloadOutlined, InfoCircleOutlined, MailOutlined } from "@ant-design/icons";
+import ThreeD from "@/component/3D/ThreeD";
 
 const { Title } = Typography;
 
@@ -34,10 +35,10 @@ export default function Home() {
         >
           Robust and convenient machine learning model security and privacy testing
         </Title>
-
-        <a style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+        <ThreeD />
+        {/* <a style={{ display: "flex", width: "100%", justifyContent: "center" }}>
           <img style={{ width: 300, height: 300 }} src="https://www.dropbox.com/s/98kvl2h5ggzxi7y/Untitled_Artwork.png?raw=1" alt="Logo" />
-        </a>
+        </a> */}
 
         <Button type="primary" icon={<CloudSyncOutlined />} size="large" href="/attack">
           Start Testing
@@ -47,7 +48,7 @@ export default function Home() {
           Tutorial
         </Title>
         <Title level={4} style={{ paddingBottom: "1rem" }}>
-          An end to end tutorial on how to test your Tensorflow models 
+          An end to end tutorial on how to test your Tensorflow models
         </Title>
         <Button type="primary" icon={<InfoCircleOutlined />} size="large" href="/tutorial">
           Learn More
@@ -57,7 +58,7 @@ export default function Home() {
           Documentation
         </Title>
         <Title level={4} style={{ paddingBottom: "1rem" }}>
-          Learn more about the security and privacy attacks we use 
+          Learn more about the security and privacy attacks we use
         </Title>
         <Button type="primary" icon={<InfoCircleOutlined />} size="large" href="/documentation">
           Read The Docs
