@@ -35,7 +35,7 @@ const CleverHansLib = (props: CleverHansLibProps) => {
   const [epsilonRange, setepsilonRange] = useState<[number, number]>([0.02, 0.06]);
   const [epsilonStep, setEpsilonStep] = useState<number>();
   const [attackIterations, setAttackIterations] = useState<number>();
-  const [norm, setNorm] = useState("1");
+  const [norm, setNorm] = useState("2");
 
   const onFinish = () => {
     basicIterativeRef?.current?.submit();
@@ -91,8 +91,6 @@ const CleverHansLib = (props: CleverHansLibProps) => {
           tooltip="A vectors norm is another way to refer to its length. L1, L2, and Linf are 3 different ways to calculate a vectors length. L1 norm is calculated as the sum of the absolute vector values from the origin (Manhattan distance). L2 norm is calculated by determining the distance of the vector from the origin (Euclidean distance). Linf norm is calculated by returning the max value of the vector."
         >
           <Radio.Group value={norm} onChange={(e) => setNorm(e.target.value)}>
-            <Radio value="0">0</Radio>
-            <Radio value="1">1</Radio>
             <Radio value="2">2</Radio>
             <Radio value="inf">∞</Radio>
           </Radio.Group>
