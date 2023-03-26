@@ -1,4 +1,4 @@
-import { runAdditiveUniformAttack } from "@/api/foolbox";
+import { runFoolboxAdditiveUniformAttack } from "@/api/foolbox";
 import { attackPromiseState, datasetNameState, modelNameState } from "@/recoil/Atom";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
@@ -28,7 +28,7 @@ const AdditiveUniformNoiseAttack = (props: AttackProps) => {
 
   const onFinish = () => {
     if (formEnabled && subFormEnabled) {
-      const promise = runAdditiveUniformAttack({
+      const promise = runFoolboxAdditiveUniformAttack({
         upperBound,
         lowerBound,
         epsilonRange,

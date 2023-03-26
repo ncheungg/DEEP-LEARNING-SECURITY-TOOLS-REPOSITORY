@@ -25,12 +25,18 @@ import {
   data4,
   options4,
 } from "@/component/Charts/Chart_1";
+import { useRecoilValue } from "recoil";
+import { attackPromiseState } from "@/recoil/Atom";
 // Chart.register(...registerables);
 // ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend);
 
 const { Title, Paragraph, Text, Link } = Typography;
 
-const ResultsAnchor: React.FC = () => {
+const ResultsAnchor = () => {
+  const attackResults = useRecoilValue(attackPromiseState);
+
+  console.log({ attackResults });
+
   return (
     <Row>
       <Col span={16}>
