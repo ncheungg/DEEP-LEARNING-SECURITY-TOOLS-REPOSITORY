@@ -89,6 +89,7 @@ const AttackSteps: React.FC = () => {
 
   const submitForms = () => {
     foolboxRef?.current?.submit();
+    cleverhansRef?.current?.submit();
   };
 
   const openLoadingModal = () => {

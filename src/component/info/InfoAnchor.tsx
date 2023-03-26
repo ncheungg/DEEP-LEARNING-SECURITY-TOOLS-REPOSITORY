@@ -306,7 +306,7 @@ const InfoAnchor: React.FC = () => {
               predictions and the predictions for the adversarial perturbation.
             </p>
             <p>
-              <b>Parameters:</b>{" "}
+              <b>Parameters:</b>
               <ul>
                 <li>Epsilons</li>
                 <li>Order of the Norm</li>
@@ -337,7 +337,7 @@ const InfoAnchor: React.FC = () => {
               direction until reaching a point within a specified distance from the original data that maximizes the loss of a target model.
             </p>
             <p>
-              <b>Parameters:</b>{" "}
+              <b>Parameters:</b>
               <ul>
                 <li>Epsilons</li>
                 <li>Epsilon Step Size</li>
@@ -372,7 +372,7 @@ const InfoAnchor: React.FC = () => {
               target model.
             </p>
             <p>
-              <b>Parameters:</b>{" "}
+              <b>Parameters:</b>
               <ul>
                 <li>Epsilon</li>
                 <li>Epsilon Step Size</li>
@@ -405,7 +405,7 @@ const InfoAnchor: React.FC = () => {
               momentum term to smooth the update direction and accelerate convergence towards the optimal adversarial example.
             </p>
             <p>
-              <b>Parameters:</b>{" "}
+              <b>Parameters:</b>
               <ul>
                 <li>Epsilon</li>
                 <li>Epsilon Step Size</li>
@@ -440,7 +440,7 @@ const InfoAnchor: React.FC = () => {
               technique to improve its robustness against future attacks.
             </p>
             <p>
-              <b>Parameters:</b>{" "}
+              <b>Parameters:</b>
               <ul>
                 <li>Epsilon</li>
                 <li>Epsilon Step Size</li>
@@ -474,7 +474,7 @@ const InfoAnchor: React.FC = () => {
               that is adaptively adjusted to maximize the loss of the target model.
             </p>
             <p>
-              <b>Parameters:</b>{" "}
+              <b>Parameters:</b>
               <ul>
                 <li>Epsilon</li>
                 <li>Model Lower Bound</li>
@@ -510,7 +510,7 @@ const InfoAnchor: React.FC = () => {
               model training dataset.
             </p>
             <p>
-              <b>Parameters:</b>{" "}
+              <b>Parameters:</b>
               <ul>
                 <li>Loss Function</li>
                 <li>Number of classes</li>

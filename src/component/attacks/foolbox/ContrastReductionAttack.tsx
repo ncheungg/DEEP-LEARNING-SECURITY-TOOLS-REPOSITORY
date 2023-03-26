@@ -1,4 +1,4 @@
-import { runContrastReductionAttack } from "@/api/foolbox";
+import { runFoolboxContrastReductionAttack } from "@/api/foolbox";
 import { attackPromiseState, datasetNameState, modelNameState } from "@/recoil/Atom";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
@@ -27,7 +27,7 @@ const ContrastReductionAttack = (props: AttackProps) => {
 
   const onFinish = () => {
     if (formEnabled && subFormEnabled) {
-      const promise = runContrastReductionAttack({
+      const promise = runFoolboxContrastReductionAttack({
         upperBound,
         lowerBound,
         epsilonRange,
