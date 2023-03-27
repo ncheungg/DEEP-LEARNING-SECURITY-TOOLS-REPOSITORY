@@ -26,14 +26,14 @@ import {
   options4,
 } from "@/component/Charts/Chart_1";
 import { useRecoilValue } from "recoil";
-import { attackPromiseState } from "@/recoil/Atom";
+import { attackPromiseState, attackResultState } from "@/recoil/Atom";
 // Chart.register(...registerables);
 // ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend);
 
 const { Title, Paragraph, Text, Link } = Typography;
 
 const ResultsAnchor = () => {
-  const attackResults = useRecoilValue(attackPromiseState);
+  const attackResults = useRecoilValue(attackResultState);
 
   console.log({ attackResults });
 
