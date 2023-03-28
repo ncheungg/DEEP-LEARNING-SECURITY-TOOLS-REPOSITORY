@@ -15,7 +15,7 @@ export const attackPromiseState = atom({
   default: [] as Promise<any>[],
 });
 
-// export const attackResultState = atom({
-//   key: "attackResultState",
-//   default: [],
-// });
+export const attackResultState = atom({
+  key: "attackResultState",
+  default: [] as any[],
+});
