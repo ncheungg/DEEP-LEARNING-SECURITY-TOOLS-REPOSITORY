@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { DatabaseOutlined, FileZipOutlined, InboxOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
 import { message, Upload, Space, Spin } from "antd";
+import { useSetRecoilState } from "recoil";
+import { datasetNameState } from "@/recoil/Atom";
 
 const { Dragger } = Upload;
 
 const UploadTest: React.FC = () => {
+  const setDatasetName = useSetRecoilState(datasetNameState);
+
   const props: UploadProps = {
     name: "dataset",
     multiple: false,
@@ -26,18 +30,24 @@ const UploadTest: React.FC = () => {
       //uploading means from users computer to client side
       if (status === "uploading") {
         console.log("uploading file");
+        setDatasetName(info.file.name.slice(0, -4));
         return;
       }
       if (status === "error") {
-        message.error(<>{info.file.name} dataset upload failed. <br />
-                      See&nbsp;
-                      <a href="https://www.tensorflow.org/datasets" target="_blank" rel="noopener noreferrer">https://www.tensorflow.org/datasets</a>
-                      &nbsp;for more information on the TensorFlow Datasets format.</>, 10);
+        message.error(
+          <>
+            {info.file.name} dataset upload failed. <br />
+            See&nbsp;
+            <a href="https://www.tensorflow.org/datasets" target="_blank" rel="noopener noreferrer">
+              https://www.tensorflow.org/datasets
+            </a>
+            &nbsp;for more information on the TensorFlow Datasets format.
+          </>,
+          10
+        );
         return;
       }
-      
     },
-
   };
 
   return (
@@ -48,7 +58,6 @@ const UploadTest: React.FC = () => {
       <br />
       <br />
       <p className="ant-upload-drag-icon">
-
         <FileZipOutlined />
       </p>
       <p className="ant-upload-text">Click or drag to upload model dataset here</p>
