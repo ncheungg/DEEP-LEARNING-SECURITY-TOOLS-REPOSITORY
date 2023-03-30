@@ -31,7 +31,7 @@ const UploadTest: React.FC = () => {
       if (status === "error") {
         message.error(<>{info.file.name} dataset upload failed. <br />
                       See&nbsp;
-                      <a href="https://www.tensorflow.org/datasets" target="_blank">https://www.tensorflow.org/datasets</a>
+                      <a href="https://www.tensorflow.org/datasets" target="_blank" rel="noopener noreferrer">https://www.tensorflow.org/datasets</a>
                       &nbsp;for more information on the TensorFlow Datasets format.</>, 10);
         return;
       }

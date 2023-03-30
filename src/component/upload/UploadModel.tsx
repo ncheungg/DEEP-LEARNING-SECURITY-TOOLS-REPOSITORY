@@ -35,7 +35,7 @@ const UploadModel: React.FC = () => {
       if (status === "error") {
         message.error(<>{info.file.name} model upload failed. <br />
                       See&nbsp;
-                      <a href="https://www.tensorflow.org/guide/saved_model" target="_blank">https://www.tensorflow.org/guide/saved_model</a>
+                      <a href="https://www.tensorflow.org/guide/saved_model" target="_blank" rel="noopener noreferrer">https://www.tensorflow.org/guide/saved_model</a>
                       &nbsp;for more information on the TensorFlow SavedModel format.</>, 10);
         return;
       }
