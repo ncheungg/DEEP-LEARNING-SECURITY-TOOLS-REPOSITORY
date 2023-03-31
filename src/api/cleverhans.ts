@@ -68,7 +68,7 @@ export const runCleverhansProjectedGradientDescentAttack = async (params: Projec
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return { library: "foolbox", attackname: "projected gradient descent", data };
+  return { library: "cleverhans", attackname: "projected gradient descent", data };
 };
 
 export const runCleverhansBasicIterativeAttack = async (params: BasicIterativeAttackParams) => {
@@ -92,7 +92,7 @@ export const runCleverhansBasicIterativeAttack = async (params: BasicIterativeAt
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return { library: "foolbox", attackname: "basic iterative", data };
+  return { library: "cleverhans", attackname: "basic iterative", data };
 };
 
 export const runCleverhansMadryEtAlAttack = async (params: MadryEtAlAttackParams) => {
@@ -116,7 +116,7 @@ export const runCleverhansMadryEtAlAttack = async (params: MadryEtAlAttackParams
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return { library: "foolbox", attackname: "madry et al", data };
+  return { library: "cleverhans", attackname: "madry et al", data };
 };
 
 export const runCleverhansMomentumIterativeAttack = async (params: MomentumIterativeAttackParams) => {
@@ -141,7 +141,7 @@ export const runCleverhansMomentumIterativeAttack = async (params: MomentumItera
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return { library: "foolbox", attackname: "momentum iterative", data };
+  return { library: "cleverhans", attackname: "momentum iterative", data };
 };
 
 export const runCleverhansSpsaAttack = async (params: SpsaAttackParams) => {
@@ -163,5 +163,5 @@ export const runCleverhansSpsaAttack = async (params: SpsaAttackParams) => {
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return { library: "foolbox", attackname: "spsa", data };
+  return { library: "cleverhans", attackname: "spsa", data };
 };

@@ -60,7 +60,7 @@ export const runFoolboxDeepFoolAttack = async (params: FoolboxDeepFoolAttackPara
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return { library: "foolbox", attackName: "deep fool", data };
+  return { library: "foolbox", attackname: "deep fool", data };
 };
 
 export const runFoolboxAdditiveGaussianAttack = async (params: AdditiveGaussianAttackParams) => {
