@@ -115,7 +115,7 @@ export const Demo = () => {
 
   return (
     <>
-      <Box width={300} style={{ marginTop: 50 }}>
+      <div>
         <Typography gutterBottom>Epsilon</Typography>
         <Slider
           size="small"
@@ -131,7 +131,7 @@ export const Demo = () => {
         <Button variant="contained" onClick={fetchUrls}>
           Fetch
         </Button>
-      </Box>
+      </div>
 
       {isLoading && <CircularProgress />}
 
