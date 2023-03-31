@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import { DatabaseOutlined, FileZipOutlined, InboxOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
 import { message, Upload, Space, Spin } from "antd";
+import { useSetRecoilState } from "recoil";
+import { datasetNameState } from "@/recoil/Atom";
 
 const { Dragger } = Upload;
 
 const UploadTest: React.FC = () => {
-  const [loading, setLoading] = useState(false);
+  const setDatasetName = useSetRecoilState(datasetNameState);
 
   const props: UploadProps = {
-    name: "file",
+    name: "dataset",
     multiple: false,
-    accept: "zip",
+    accept: ".zip",
     maxCount: 1,
     action: "https://upload-file-zvax3lpy2q-ue.a.run.app",
-    //progress: { strokeWidth: 4, showInfo: true },
+
     onChange(info) {
       //on change occurs anytime the status of the upload changes (file added/removed, upload finished)
 
@@ -26,41 +28,25 @@ const UploadTest: React.FC = () => {
         return;
       }
       //uploading means from users computer to client side
-      if (status == "uploading") {
-        setLoading(true);
+      if (status === "uploading") {
+        console.log("uploading file");
+        setDatasetName(info.file.name.slice(0, -4));
         return;
       }
       if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
+        message.error(
+          <>
+            {info.file.name} dataset upload failed. <br />
+            See&nbsp;
+            <a href="https://www.tensorflow.org/datasets" target="_blank" rel="noopener noreferrer">
+              https://www.tensorflow.org/datasets
+            </a>
+            &nbsp;for more information on the TensorFlow Datasets format.
+          </>,
+          10
+        );
         return;
       }
-
-      const formData = new FormData();
-      if (file.originFileObj) {
-        formData.append("file", file.originFileObj);
-      }
-
-      console.log("uploading file");
-      console.log(formData);
-      // fetch('https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/upload-file', {
-      //   method: 'POST',
-      //   body: formData,
-      // })
-      // .then((response) => {
-      //   if (response.ok) {
-      //     setLoading(false);
-      //     message.success(`${info.file.name} file uploaded successfully.`);
-      //     return response.json();
-      //   }
-      //   throw new Error('Network response was not ok.');
-      // })
-      // .then((data) => {
-      //   console.log('Upload successful');
-      //   console.log(data);
-      // })
-      // .catch((error) => {
-      //   console.error('Error uploading file:', error);
-      // });
     },
   };
 
@@ -72,8 +58,6 @@ const UploadTest: React.FC = () => {
       <br />
       <br />
       <p className="ant-upload-drag-icon">
-        {/* <InboxOutlined /> */}
-        {/* <DatabaseOutlined /> */}
         <FileZipOutlined />
       </p>
       <p className="ant-upload-text">Click or drag to upload model dataset here</p>
@@ -81,17 +65,6 @@ const UploadTest: React.FC = () => {
       <br />
       <br />
       <br />
-
-      {/* <Space direction="vertical" style={{ width: '100%', height: 40 }}>
-        
-        {loading && (
-          <Spin tip="Uploading File...">
-            <div style={{ height: 40 }}></div>
-          </Spin>
-        )}
-        
-      </Space> */}
-
       <br />
       <br />
     </Dragger>

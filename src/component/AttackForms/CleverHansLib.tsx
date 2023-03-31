@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { FileSearchOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import { Form, Input, Checkbox, Slider, FormInstance } from "antd";
-import { Tooltip } from "antd";
+import { Form, Input, Checkbox, Slider, FormInstance, Radio } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import type { MenuProps } from "antd";
 import FastGradientMethodAttack from "../attacks/cleverhans/FastGradientMethodAttack";
@@ -20,12 +19,12 @@ interface CleverHansLibProps {
 const CleverHansLib = (props: CleverHansLibProps) => {
   const { formRef } = props;
 
-  const basicIterativeRef = useRef();
-  const fastGradientRef = useRef();
-  const madryEtAlRef = useRef();
-  const momentumIterativeRef = useRef();
-  const projectedGradientDescentRef = useRef();
-  const spsaRef = useRef();
+  const basicIterativeRef = useRef<FormInstance<any>>();
+  const fastGradientRef = useRef<FormInstance<any>>();
+  const madryEtAlRef = useRef<FormInstance<any>>();
+  const momentumIterativeRef = useRef<FormInstance<any>>();
+  const projectedGradientDescentRef = useRef<FormInstance<any>>();
+  const spsaRef = useRef<FormInstance<any>>();
 
   // enable/disable form checkbox
   const [componentEnabled, setComponentEnabled] = useState<boolean>(false);
@@ -36,6 +35,16 @@ const CleverHansLib = (props: CleverHansLibProps) => {
   const [epsilonRange, setepsilonRange] = useState<[number, number]>([0.02, 0.06]);
   const [epsilonStep, setEpsilonStep] = useState<number>();
   const [attackIterations, setAttackIterations] = useState<number>();
+  const [norm, setNorm] = useState("2");
+
+  const onFinish = () => {
+    basicIterativeRef?.current?.submit();
+    fastGradientRef?.current?.submit();
+    madryEtAlRef?.current?.submit();
+    momentumIterativeRef?.current?.submit();
+    projectedGradientDescentRef?.current?.submit();
+    spsaRef?.current?.submit();
+  };
 
   return (
     <>
@@ -52,9 +61,9 @@ const CleverHansLib = (props: CleverHansLibProps) => {
         layout="horizontal"
         onValuesChange={onFormLayoutChange}
         disabled={!componentEnabled}
-        // style={{ maxWidth: 600 }}
+        style={{ textAlign: "left" }}
         initialValues={{ remember: true }}
-        // onFinish={onFinish}
+        onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
         ref={formRef}
@@ -76,26 +85,15 @@ const CleverHansLib = (props: CleverHansLibProps) => {
         </Form.Item>
 
         <Form.Item
-          label="Epsilon Step:"
-          required={componentEnabled}
-          rules={[{ required: true, message: "Please input the epsilon step value." }]}
-          tooltip="The value epsilon would increment by for each attack iteration."
-        >
-          <Input type="number" placeholder="0.01" onChange={(e) => setEpsilonStep(Number(e.target.value))} />
-        </Form.Item>
-
-        <Form.Item
           label="Order of the Norm:"
           required={componentEnabled}
           rules={[{ required: true, message: "Please input the desired order of the norms." }]}
           tooltip="A vectors norm is another way to refer to its length. L1, L2, and Linf are 3 different ways to calculate a vectors length. L1 norm is calculated as the sum of the absolute vector values from the origin (Manhattan distance). L2 norm is calculated by determining the distance of the vector from the origin (Euclidean distance). Linf norm is calculated by returning the max value of the vector."
         >
-          <Checkbox.Group style={{ width: "100%" }}>
-            <Checkbox value="0">0</Checkbox>
-            <Checkbox value="1">1</Checkbox>
-            <Checkbox value="2">2</Checkbox>
-            <Checkbox value="inf">∞</Checkbox>
-          </Checkbox.Group>
+          <Radio.Group value={norm} onChange={(e) => setNorm(e.target.value)}>
+            <Radio value="2">2</Radio>
+            <Radio value="inf">∞</Radio>
+          </Radio.Group>
         </Form.Item>
 
         <Form.Item
@@ -107,33 +105,46 @@ const CleverHansLib = (props: CleverHansLibProps) => {
           <Input type="number" onChange={(e) => setAttackIterations(Number(e.target.value))} />
         </Form.Item>
 
+        <Form.Item
+          label="Epsilon Step:"
+          required={componentEnabled}
+          rules={[{ required: true, message: "Please input the epsilon step value." }]}
+          tooltip="The value epsilon would increment by for each attack iteration."
+        >
+          <Input type="number" placeholder="0.01" onChange={(e) => setEpsilonStep(Number(e.target.value))} />
+        </Form.Item>
+
         <div style={{ textAlign: "left", marginTop: "5em" }}>
           <FastGradientMethodAttack
             formEnabled={componentEnabled}
             formRef={fastGradientRef}
-            {...{ epsilonRange, epsilonStep, attackIterations }}
+            {...{ epsilonRange, epsilonStep, attackIterations, norm, epsilonRangeStep: SLIDER_STEP }}
           />
           <ProjectedGradientDescentAttack
             formEnabled={componentEnabled}
             formRef={projectedGradientDescentRef}
-            {...{ epsilonRange, epsilonStep, attackIterations }}
+            {...{ epsilonRange, epsilonStep, attackIterations, norm, epsilonRangeStep: SLIDER_STEP }}
           />
           <BasicIterativeMethodAttack
             formEnabled={componentEnabled}
             formRef={basicIterativeRef}
-            {...{ epsilonRange, epsilonStep, attackIterations }}
+            {...{ epsilonRange, epsilonStep, attackIterations, norm, epsilonRangeStep: SLIDER_STEP }}
           />
           <MadryEtAlMethodAttack
             formEnabled={componentEnabled}
             formRef={madryEtAlRef}
-            {...{ epsilonRange, epsilonStep, attackIterations }}
+            {...{ epsilonRange, epsilonStep, attackIterations, norm, epsilonRangeStep: SLIDER_STEP }}
+          />
+          <SPSAAttack
+            formEnabled={componentEnabled}
+            formRef={spsaRef}
+            {...{ epsilonRange, epsilonStep, attackIterations, norm, epsilonRangeStep: SLIDER_STEP }}
           />
           <MomentumIterativeMethodAttack
             formEnabled={componentEnabled}
             formRef={momentumIterativeRef}
-            {...{ epsilonRange, epsilonStep, attackIterations }}
+            {...{ epsilonRange, epsilonStep, attackIterations, norm, epsilonRangeStep: SLIDER_STEP }}
           />
-          <SPSAAttack formEnabled={componentEnabled} formRef={spsaRef} {...{ epsilonRange, epsilonStep, attackIterations }} />
         </div>
       </Form>
     </>

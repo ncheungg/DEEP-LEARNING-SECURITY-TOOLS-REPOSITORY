@@ -20,7 +20,7 @@ const CleverHansCards: React.FC = () => (
           <b>Definition:</b> Reduces the contrast of the input using a perturbation of the given size.
         </p>
         <p>
-          <b>Parameters:</b>{" "}
+          <b>Parameters:</b>
           <ul>
             <li>Epsilon</li>
             <li>Step Size</li>
@@ -44,7 +44,7 @@ const CleverHansCards: React.FC = () => (
           and the predictions for the adversarial perturbation.
         </p>
         <p>
-          <b>Parameters:</b>{" "}
+          <b>Parameters:</b>
           <ul>
             <li>Epsilon</li>
             <li>Step Size</li>
@@ -66,7 +66,7 @@ const CleverHansCards: React.FC = () => (
           <b>Definition:</b> ...
         </p>
         <p>
-          <b>Parameters:</b>{" "}
+          <b>Parameters:</b>
           <ul>
             <li>Epsilon</li>
             <li>Order of the Norm</li>
@@ -87,7 +87,7 @@ const CleverHansCards: React.FC = () => (
           <b>Definition:</b> ...
         </p>
         <p>
-          <b>Parameters:</b>{" "}
+          <b>Parameters:</b>
           <ul>
             <li>Step Size</li>
             <li>Order of the Norm</li>
@@ -108,7 +108,7 @@ const CleverHansCards: React.FC = () => (
           <b>Definition:</b> Samples Gaussian noise with a fixed L2 size after clipping.
         </p>
         <p>
-          <b>Parameters:</b>{" "}
+          <b>Parameters:</b>
           <ul>
             <li>Epsilon</li>
             <li>Step Size</li>

@@ -60,10 +60,10 @@ export const runFoolboxDeepFoolAttack = async (params: FoolboxDeepFoolAttackPara
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return data;
+  return { library: "foolbox", attackname: "deep fool", data };
 };
 
-export const runAdditiveGaussianAttack = async (params: AdditiveGaussianAttackParams) => {
+export const runFoolboxAdditiveGaussianAttack = async (params: AdditiveGaussianAttackParams) => {
   const { modelName, datasetName, lowerBound, upperBound, attackTypes, epsilonRange, epsilonStep } = params;
 
   const requestBody = {
@@ -82,10 +82,10 @@ export const runAdditiveGaussianAttack = async (params: AdditiveGaussianAttackPa
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return data;
+  return { library: "foolbox", attackname: "additive gaussian", data };
 };
 
-export const runAdditiveUniformAttack = async (params: AdditiveUniformAttackParams) => {
+export const runFoolboxAdditiveUniformAttack = async (params: AdditiveUniformAttackParams) => {
   const { modelName, datasetName, lowerBound, upperBound, attackTypes, epsilonRange, epsilonStep, norms } = params;
 
   const requestBody = {
@@ -105,10 +105,10 @@ export const runAdditiveUniformAttack = async (params: AdditiveUniformAttackPara
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return data;
+  return { library: "foolbox", attackname: "additive uniform", data };
 };
 
-export const runFastGradientAttack = async (params: FastGradientAttackParams) => {
+export const runFoolboxFastGradientAttack = async (params: FastGradientAttackParams) => {
   const { modelName, datasetName, lowerBound, upperBound, epsilonRange, epsilonStep, norms, randomStart } = params;
 
   const requestBody = {
@@ -128,10 +128,10 @@ export const runFastGradientAttack = async (params: FastGradientAttackParams) =>
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return data;
+  return { library: "foolbox", attackname: "fast gradient", data };
 };
 
-export const runBasicIterativeAttack = async (params: BasicIterativeAttackParams) => {
+export const runFoolboxBasicIterativeAttack = async (params: BasicIterativeAttackParams) => {
   const { modelName, datasetName, lowerBound, upperBound, epsilonRange, epsilonStep, norms, randomStart } = params;
 
   const requestBody = {
@@ -151,10 +151,10 @@ export const runBasicIterativeAttack = async (params: BasicIterativeAttackParams
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return data;
+  return { library: "foolbox", attackname: "basic iterative", data };
 };
 
-export const runInversionAttack = async (params: InversionAttackParams) => {
+export const runFoolboxInversionAttack = async (params: InversionAttackParams) => {
   const { modelName, datasetName, lowerBound, upperBound, epsilonRange, epsilonStep } = params;
 
   const requestBody = {
@@ -167,15 +167,15 @@ export const runInversionAttack = async (params: InversionAttackParams) => {
     model_upper_bound: upperBound,
   };
   const requestHeaders = { "Content-Type": "application/json" };
-  const url = "https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/foolbox/inversion";
+  const url = "https://foolbox-inversion-attack-zvax3lpy2q-uc.a.run.app";
 
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return data;
+  return { library: "foolbox", attackname: "inversion", data };
 };
 
-export const runSaltAndPepperAttack = async (params: SaltAndPepperNoiseAttackParams) => {
+export const runFoolboxSaltAndPepperAttack = async (params: SaltAndPepperNoiseAttackParams) => {
   const { modelName, datasetName, lowerBound, upperBound, epsilonRange, epsilonStep } = params;
 
   const requestBody = {
@@ -188,15 +188,15 @@ export const runSaltAndPepperAttack = async (params: SaltAndPepperNoiseAttackPar
     model_upper_bound: upperBound,
   };
   const requestHeaders = { "Content-Type": "application/json" };
-  const url = "https://dlstr-cleverhans-api-gateway-1brzzfaf.ue.gateway.dev/foolbox/salt-and-pepper-noise";
+  const url = "https://foolbox-salt-and-pepper-noise-attack-zvax3lpy2q-uc.a.run.app";
 
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return data;
+  return { library: "foolbox", attackname: "salt and pepper", data };
 };
 
-export const runContrastReductionAttack = async (params: ContrastReductionAttackParams) => {
+export const runFoolboxContrastReductionAttack = async (params: ContrastReductionAttackParams) => {
   const { modelName, datasetName, lowerBound, upperBound, epsilonRange, epsilonStep, attackTypes } = params;
 
   const requestBody = {
@@ -215,5 +215,5 @@ export const runContrastReductionAttack = async (params: ContrastReductionAttack
   const res = await fetch(url, { method: "POST", mode: "cors", headers: requestHeaders, body: JSON.stringify(requestBody) });
   const data = await res.json();
 
-  return data;
+  return { library: "foolbox", attackname: "contrast reduction", data };
 };

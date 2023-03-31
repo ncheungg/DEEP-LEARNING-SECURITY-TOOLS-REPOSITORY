@@ -1,4 +1,4 @@
-import { runBasicIterativeAttack } from "@/api/foolbox";
+import { runFoolboxBasicIterativeAttack } from "@/api/foolbox";
 import { attackPromiseState, datasetNameState, modelNameState } from "@/recoil/Atom";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, FormInstance, Radio, Row, Tooltip } from "antd";
@@ -28,7 +28,7 @@ const BasicIterativeAttack = (props: AttackProps) => {
 
   const onFinish = () => {
     if (formEnabled && subFormEnabled) {
-      const promise = runBasicIterativeAttack({
+      const promise = runFoolboxBasicIterativeAttack({
         upperBound,
         lowerBound,
         epsilonRange,

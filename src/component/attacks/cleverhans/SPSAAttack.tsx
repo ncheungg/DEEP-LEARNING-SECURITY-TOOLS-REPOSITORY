@@ -1,21 +1,44 @@
+import { runCleverhansSpsaAttack } from "@/api/cleverhans";
+import { modelNameState, datasetNameState, attackPromiseState } from "@/recoil/Atom";
 import { InfoCircleOutlined, LinkOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Form, Input, Radio, Row, Tooltip } from "antd";
 import { useState } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 interface AttackProps {
   formEnabled: boolean;
   formRef: React.MutableRefObject<any>;
   epsilonRange: [number, number];
+  epsilonRangeStep: number;
   epsilonStep?: number;
   attackIterations?: number;
+  norm: string;
 }
 
 const SPSAAttack = (props: AttackProps) => {
-  const { formEnabled, formRef } = props;
+  const { formEnabled, formRef, epsilonRange, epsilonRangeStep, attackIterations, norm } = props;
 
   const [subFormEnabled, setSubFormEnabled] = useState(false);
-  const [lowerBound, setLowerBound] = useState<number>();
-  const [upperBound, setUpperBound] = useState<number>();
+
+  const modelName = useRecoilValue(modelNameState);
+  const datasetName = useRecoilValue(datasetNameState);
+
+  const setAttackPromises = useSetRecoilState(attackPromiseState);
+
+  const onFinish = () => {
+    if (formEnabled && subFormEnabled) {
+      const promise = runCleverhansSpsaAttack({
+        modelName,
+        datasetName,
+        epsilonRange,
+        epsilonRangeStep,
+        attackIterations,
+        norm,
+      });
+
+      setAttackPromises((currentState) => [...currentState, promise]);
+    }
+  };
 
   return (
     <>
@@ -28,37 +51,19 @@ const SPSAAttack = (props: AttackProps) => {
         </a>
       </Tooltip>
 
-      {/* attack inputs */}
       <Form
         labelCol={{ span: 8 }}
         // wrapperCol={{ span: 20 }}
         layout="horizontal"
         // onValuesChange={onFormLayoutChange}
         disabled={!subFormEnabled || !formEnabled}
-        style={{ maxWidth: 600 }}
+        style={{ maxWidth: 600, height: "2em" }}
         initialValues={{ remember: true }}
-        // onFinish={onFinish}
+        onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
-      >
-        <Form.Item
-          label="Model Lower Bound"
-          required={subFormEnabled}
-          rules={[{ required: true, message: "Please input the model's lower bound value." }]}
-          tooltip="The lower bound for the model's pixel values, usually (0, 1) or (0, 255)."
-        >
-          <Input type="number" placeholder="0" onChange={(e) => setLowerBound(Number(e.target.value))} />
-        </Form.Item>
-
-        <Form.Item
-          label="Model Upper Bound"
-          required={subFormEnabled}
-          rules={[{ required: true, message: "Please input the model's upper bound value." }]}
-          tooltip="The upper bound for the model's pixel values, usually (0, 1) or (0, 255)."
-        >
-          <Input type="number" placeholder="255" onChange={(e) => setLowerBound(Number(e.target.value))} />
-        </Form.Item>
-      </Form>
+        ref={formRef}
+      ></Form>
     </>
   );
 };

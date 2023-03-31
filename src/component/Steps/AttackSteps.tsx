@@ -5,7 +5,7 @@ import UploadTestCard from "./AttackCards/UploadTestCard";
 import AttacksLibCard from "./AttackCards/AttacksLibCard";
 import { PlayCircleFilled } from "@ant-design/icons";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { attackPromiseState } from "@/recoil/Atom";
+import { attackPromiseState, attackResultState } from "@/recoil/Atom";
 import LoadingModal from "./LoadingModal";
 import { sleep } from "utils";
 import useStickyState from "utils/useStickyState";
@@ -21,12 +21,15 @@ const AttackSteps: React.FC<{ setCurrentStep: (step: number) => void }> = ({ set
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTime, setModalTime] = useState(0);
 
-  const [attackResults, setAttackResults] = useStickyState({}, "attack-results");
+  // const [attackResults, setAttackResults] = useStickyState({}, "attack-results");
+
+  const setAttackResults = useSetRecoilState(attackResultState);
+
   const attackPromises = useRecoilValue(attackPromiseState);
   const [hasClickedButton, setHasClickedButton] = useState(false);
 
   useEffect(() => {
-    setAttackResults(null);
+    setAttackResults([]);
   }, []);
 
   const foolboxRef = useRef<FormInstance<any>>();
@@ -95,6 +98,7 @@ const AttackSteps: React.FC<{ setCurrentStep: (step: number) => void }> = ({ set
 
   const submitForms = () => {
     foolboxRef?.current?.submit();
+    cleverhansRef?.current?.submit();
   };
 
   const openLoadingModal = () => {
@@ -119,10 +123,18 @@ const AttackSteps: React.FC<{ setCurrentStep: (step: number) => void }> = ({ set
 
     // wait for all promises to resolve
     const values = await Promise.all(attackPromises);
+    const results = [];
+
+    for (const value of values) {
+      const valueResolved = await value;
+      console.log({ valueResolved });
+      results.push(valueResolved);
+    }
+
     if (signal.aborted) return;
 
     // do the actual shit
-    setAttackResults(values);
+    setAttackResults(results);
 
     // redirect to results page
     router.push("/results");
