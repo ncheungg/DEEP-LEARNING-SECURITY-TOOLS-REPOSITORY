@@ -624,6 +624,16 @@ const InfoAnchor: React.FC = () => {
               },
             ]}
           />
+          {/* <a style={{ position: "fixed", top: "55vh", paddingLeft: "20px" }}>
+            <Tooltip
+              title="Hi! I am AGGi, your ML attack aggregate documentation expert. I keep track of all the attacks run on our library's webapp, so you can focus on improving your models without worrying about the details! Hover over me whenever you want additional info about these attacks!"
+              color={"#39f"}
+              key={"#add"}
+              placement="bottom"
+            >
+              <img style={{ width: 225, height: 164 }} src="https://www.dropbox.com/s/hq7k5niy4x7kuvj/X.png?raw=1" alt="eMiL" />
+            </Tooltip>
+          </a> */}
         </Col>
       </Row>
     </div>
