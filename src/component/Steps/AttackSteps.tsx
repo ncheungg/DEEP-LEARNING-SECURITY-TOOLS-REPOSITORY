@@ -99,6 +99,7 @@ const AttackSteps: React.FC<{ setCurrentStep: (step: number) => void }> = ({ set
   const submitForms = () => {
     foolboxRef?.current?.submit();
     cleverhansRef?.current?.submit();
+    privRef?.current?.submit();
   };
 
   const openLoadingModal = () => {
