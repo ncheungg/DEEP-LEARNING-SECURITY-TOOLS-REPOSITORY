@@ -1,63 +1,9 @@
 import React, { useState } from "react";
 import { DownOutlined, FileSearchOutlined, InfoCircleOutlined, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import {
-  Form,
-  Input,
-  Button,
-  Radio,
-  Select,
-  Cascader,
-  DatePicker,
-  InputNumber,
-  TreeSelect,
-  Switch,
-  Checkbox,
-  MenuProps,
-  FormInstance,
-} from "antd";
-import { Tooltip } from "antd";
-import { CheckboxValueType } from "antd/es/checkbox/Group";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
-import { Dropdown, Space } from "antd";
-import { Collapse } from "antd";
-
-const items: MenuProps["items"] = [
-  {
-    key: "1",
-    label: "ML Privacy Meter",
-    children: [
-      {
-        key: "1-1",
-        label: "Population Attack",
-      },
-      // {
-      //   key: "1-2",
-      //   label: "4th menu item",
-      // },
-    ],
-  },
-];
-
-const handleChange = (value: string) => {
-  console.log(`selected ${value}`);
-};
-
-const { RangePicker } = DatePicker;
-const { TextArea } = Input;
-
-const CheckboxGroup = Checkbox.Group;
-
-const onChange = (checkedValues: CheckboxValueType[]) => {
-  console.log("checked = ", checkedValues);
-};
-
-const onFinish = (values: any) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
+import { Form, Input, Button, Radio, Select, Checkbox, MenuProps, FormInstance } from "antd";
+import { runPrivacyMeterPopulationAttack } from "@/api/privacyMeter";
+import { modelNameState, datasetNameState, attackPromiseState } from "@/recoil/Atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 interface PrivLibProps {
   formRef: React.MutableRefObject<FormInstance<any>>;
@@ -66,16 +12,30 @@ interface PrivLibProps {
 const PrivLib = (props: PrivLibProps) => {
   const { formRef } = props;
 
-  const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
+  // enable/disable form checkbox
+  const [componentEnabled, setComponentEnabled] = useState<boolean>(false);
   const onFormLayoutChange = ({ disabled }: { disabled: boolean }) => {
-    setComponentDisabled(disabled);
+    setComponentEnabled(disabled);
   };
 
-  // PrivLib.displayName = "FastGradientForm";
+  const [numClasses, setNumClasses] = useState<number>();
+  const [lossFunction, setLossFunction] = useState<string>();
+
+  const modelName = useRecoilValue(modelNameState);
+  const datasetName = useRecoilValue(datasetNameState);
+
+  const setAttackPromises = useSetRecoilState(attackPromiseState);
+
+  const onFinish = () => {
+    if (componentEnabled) {
+      const promise = runPrivacyMeterPopulationAttack({ modelName, datasetName, numClasses, lossFunction });
+      setAttackPromises((currentState) => [...currentState, promise]);
+    }
+  };
 
   return (
     <div style={{ paddingBottom: "1.3em" }}>
-      <Checkbox checked={componentDisabled} onChange={(e) => setComponentDisabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
+      <Checkbox checked={componentEnabled} onChange={(e) => setComponentEnabled(e.target.checked)} style={{ paddingBottom: "1.5em" }}>
         <b>Enable ML Privacy Meter</b>
       </Checkbox>
       <a href="/documentation#ml-privacy-meter" target="_blank" rel="noreferrer noopener">
@@ -86,11 +46,11 @@ const PrivLib = (props: PrivLibProps) => {
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 14 }}
         layout="horizontal"
-        // onValuesChange={onFormLayoutChange}
-        disabled={!componentDisabled}
+        onValuesChange={onFormLayoutChange}
+        disabled={!componentEnabled}
         style={{ maxWidth: 600 }}
         initialValues={{ remember: true }}
-        // onFinish={onFinish}
+        onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
         ref={formRef}
@@ -99,13 +59,13 @@ const PrivLib = (props: PrivLibProps) => {
           label="Num of Classes:"
           rules={[{ required: true, message: "Please input Epsilon value." }]}
           tooltip="Number of possible output classes"
-          required={componentDisabled}
+          required={componentEnabled}
         >
-          <Input type="number" placeholder="5" />
+          <Input type="number" placeholder="5" onChange={(e) => setNumClasses(Number(e.target.value))} />
         </Form.Item>
 
         <Form.Item
-          required={componentDisabled}
+          required={componentEnabled}
           label="Loss Function:"
           rules={[{ required: true, message: "Please input Order of the Norm value." }]}
           tooltip="Loss function used by ML Privacy Meter to perform audit"
@@ -113,12 +73,12 @@ const PrivLib = (props: PrivLibProps) => {
           <Select
             defaultValue="Select"
             // style={{ width: 230 }}
-            // onChange={handleChange}
+            onChange={(val) => setLossFunction(val)}
             options={[
-              { value: "bin_cross", label: "Binary Crossentropy" },
-              { value: "cat_cross", label: "Categorical Crossentropy" },
-              { value: "mean_abs", label: "Mean Absolute Error" },
-              { value: "mean_sq", label: "Mean Squared Error" },
+              { value: "Binary Crossentropy", label: "Binary Crossentropy" },
+              { value: "Categorical Crossentropy", label: "Categorical Crossentropy" },
+              { value: "Mean Absolute Error", label: "Mean Absolute Error" },
+              { value: "Mean Squared Error", label: "Mean Squared Error" },
             ]}
           />
         </Form.Item>
