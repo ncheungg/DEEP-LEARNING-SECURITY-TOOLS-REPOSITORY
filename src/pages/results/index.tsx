@@ -8,18 +8,34 @@ import CleverhansTable from "@/component/ResultTables/CleverhansTable";
 import FoolboxTable from "@/component/ResultTables/FoolboxTable";
 import MLPrivacyMeterTable from "@/component/ResultTables/MLPrivacyMeterTable";
 import DioptraTable from "@/component/ResultTables/DioptraTable";
-
+import { attackPromiseState, attackResultState } from "@/recoil/Atom";
 import useStickyState from "utils/useStickyState";
 import ResultsAnchor from "@/component/Charts/ResultsAnchor";
+import { useRecoilValue } from "recoil";
+import React, { useRef, useState, useMemo } from "react";
 
 const { Title } = Typography;
 
 const { Content } = Layout;
 
 export default function Home() {
-  const [attackResults, setAttackResults] = useStickyState(null, "attack-results");
+  // const [attackResults, setAttackResults] = useStickyState(null, "attack-results");
+  const attackResults = useRecoilValue(attackResultState);
 
+  // console.log({ attackResults });
   console.log({ attackResults });
+
+  const showfoolboxSummary = useMemo(() => {
+    return attackResults.some((result) => result.library === "foolbox");
+  }, [attackResults]);
+
+  const showCleverhansSummary = useMemo(() => {
+    return attackResults.some((result) => result.library === "cleverhans");
+  }, [attackResults]);
+
+  const showPrivacyMeterSummary = useMemo(() => {
+    return attackResults.some((result) => result.library === "privacy meter");
+  }, [attackResults]);
 
   return (
     <Layout style={{ alignItems: "center" }}>
@@ -38,18 +54,17 @@ export default function Home() {
         <br />
 
         <Title level={2}>Post-Attack Accuracy Summary Tables:</Title>
-        <Title level={3}>CleverHans:</Title>
-        <CleverhansTable />
-        <Title level={3}>Foolbox:</Title>
-        <FoolboxTable />
-        <Title level={3}>ML Privacy Meter (Population Attack Audit Results):</Title>
-        <MLPrivacyMeterTable />
+
+        {showCleverhansSummary && <Title level={3}>CleverHans:</Title>}
+        {showCleverhansSummary && <CleverhansTable />}
+        {showfoolboxSummary && <Title level={3}>Foolbox:</Title>}
+        {showfoolboxSummary && <FoolboxTable />}
+
+        {showPrivacyMeterSummary && <Title level={3}>ML Privacy Meter (Population Attack Audit Results):</Title>}
+        {showPrivacyMeterSummary && <MLPrivacyMeterTable />}
         {/* <Title level={3}>Dioptra:</Title>
         <DioptraTable /> */}
 
-        <Button type="primary" icon={<DownloadOutlined />} size="large" /*href=""*/>
-          Download PDF
-        </Button>
         <br />
         <br />
         <br />

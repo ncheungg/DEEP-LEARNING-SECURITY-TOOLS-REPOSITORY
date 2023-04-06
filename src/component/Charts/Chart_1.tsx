@@ -26,12 +26,18 @@ import { ChartData, ChartOptions, TooltipItem } from "chart.js/auto";
 import { registerables } from "chart.js";
 import "chartjs-adapter-date-fns";
 Chart.register(...registerables);
+import { useRecoilValue } from "recoil";
+import { attackPromiseState, attackResultState } from "@/recoil/Atom";
 
 // import { epsilonsFastGradientInfinity, accuracyFastGradientInfinity } from "@/component/Charts/Data";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend);
 
 const inter = Inter({ subsets: ["latin"] });
+// const attackResults = useRecoilValue(attackResultState);
+
+//   console.log({ attackResults });
+
 const data = {
   labels: [
     "L2 Fast Gradient Method Attack",

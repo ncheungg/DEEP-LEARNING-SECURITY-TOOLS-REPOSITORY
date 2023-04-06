@@ -43,7 +43,9 @@ import {
   AdditiveUniformChart,
   AdditiveGaussianChart,
 } from "./FoolboxCharts";
-
+import CleverhansTable from "../ResultTables/CleverhansTable";
+import FoolboxTable from "../ResultTables/FoolboxTable";
+import { PrivacyMeterChart } from "./PrivacyMeterChart";
 import { attackPromiseState, attackResultState } from "@/recoil/Atom";
 import { useMemo } from "react";
 
@@ -81,8 +83,8 @@ const ResultsAnchor = () => {
     return attackResults.some((result) => result.library === "foolbox" && result.attackname === "additive uniform");
   }, [attackResults]);
 
-  const showInverstionAttack = useMemo(() => {
-    return attackResults.some((result) => result.library === "foolbox" && result.attackname === "invertion");
+  const showInversionAttack = useMemo(() => {
+    return attackResults.some((result) => result.library === "foolbox" && result.attackname === "inversion");
   }, [attackResults]);
 
   const showSaltandPepperAttack = useMemo(() => {
@@ -123,6 +125,15 @@ const ResultsAnchor = () => {
     return attackResults.some((result) => result.library === "cleverhans" && result.attackname === "spsa");
   }, [attackResults]);
 
+  /////////////////////////
+  const showPrivacyMeterSummary = useMemo(() => {
+    return attackResults.some((result) => result.library === "privacy meter");
+  }, [attackResults]);
+
+  const showPrivacyMeterPopulation = useMemo(() => {
+    return attackResults.some((result) => result.library === "privacy meter" && result.attackname === "population");
+  }, [attackResults]);
+
   return (
     <Row>
       <Col span={16}>
@@ -131,14 +142,11 @@ const ResultsAnchor = () => {
             Foolbox Attacks Library
           </Title>
         )}
-        {showfoolboxSummary && (
+        {/* {showfoolboxSummary && (
           <Card id="Summary" title="Summary" style={{ marginBottom: "15px" }}>
             <p>A summary of the Foolbox Attack Results:</p>
-            <div className={styles.FoolboxSummaryChart} style={{ paddingTop: "2em", paddingBottom: "2em" }}>
-              <Bar data={data} options={options} height="300px" width="300px" />
-            </div>
           </Card>
-        )}
+        )} */}
         {/* <Card title="Fast Gradient Attack">
           <FastGradientChart height="300px" width="300px" />
         </Card> */}
@@ -167,7 +175,7 @@ const ResultsAnchor = () => {
             <AdditiveUniformChart height="300px" width="300px" />
           </Card>
         )}
-        {showInverstionAttack && <Card title="Inversion Attack" id="foolbox-inversion-attack" style={{ marginBottom: "15px" }}></Card>}
+        {showInversionAttack && <Card title="Inversion Attack" id="foolbox-inversion-attack" style={{ marginBottom: "15px" }}></Card>}
         {showSaltandPepperAttack && (
           <Card title="Salt & Pepper Noise Attack" id="foolbox-salt-and-pepper-noise-attack" style={{ marginBottom: "15px" }}></Card>
         )}
@@ -179,14 +187,14 @@ const ResultsAnchor = () => {
             CleverHans Attacks Library:
           </Title>
         )}
-        {showCleverhansSummary && (
+        {/* {showCleverhansSummary && (
           <Card id="CleverHansSummary" title="Summary" style={{ marginBottom: "15px" }}>
             <p>A summary of the CleverHans Attack Results:</p>
             <div className={styles.FoolboxSummaryChart} style={{ paddingTop: "2em", paddingBottom: "2em" }}>
               <Bar data={data2} options={options2} height="300px" width="300px" />
             </div>
           </Card>
-        )}
+        )} */}
         {showCleverHansFastGradient && (
           <Card title="Fast Gradient Method Attack" id="cleverhans-fast-gradient-method-attack" style={{ marginBottom: "15px" }}>
             <FastGradientChart height="300px" width="300px" />
@@ -226,16 +234,16 @@ const ResultsAnchor = () => {
             <SPSAChart height="300px" width="300px" />
           </Card>
         )}
-        <Title id="ml-privacy-meter" level={2}>
-          ML Privacy Meter Attacks Library:
-        </Title>
-        <Card id="MLSummary" title="Summary" style={{ marginBottom: "15px" }}>
-          <p>A summary of the ML Privacy Meter Attack Results:</p>
-          <div className={styles.FoolboxSummaryChart} style={{ paddingTop: "2em", paddingBottom: "2em" }}>
-            <Line data={data4} options={options4} height="300px" width="250px" />
-          </div>
-        </Card>
-        <Card title="SPSA Attack" id="ml-privacy-meter-population-attack" style={{ marginBottom: "15px" }}></Card>
+        {showPrivacyMeterSummary && (
+          <Title id="ml-privacy-meter" level={2}>
+            ML Privacy Meter Attacks Library:
+          </Title>
+        )}
+        {showPrivacyMeterPopulation && (
+          <Card title="ML Privacy Meter Attack" id="ml-privacy-meter-population-attack" style={{ marginBottom: "15px" }}>
+            <PrivacyMeterChart height="300px" width="300px" />
+          </Card>
+        )}
         {/* <p style={{ height: "100vh" }}></p> */}
       </Col>
       <Col span={8} style={{ paddingLeft: "2em" }}>
@@ -248,15 +256,15 @@ const ResultsAnchor = () => {
                     href: "#foolbox",
                     title: "Foolbox Attacks Library",
                     children: [
-                      ...(showfoolboxSummary
-                        ? [
-                            {
-                              key: "Summary",
-                              href: "#Summary",
-                              title: "Summary",
-                            },
-                          ]
-                        : []),
+                      // ...(showfoolboxSummary
+                      //   ? [
+                      //       {
+                      //         key: "Summary",
+                      //         href: "#Summary",
+                      //         title: "Summary",
+                      //       },
+                      //     ]
+                      //   : []),
                       ...(showDeepFool
                         ? [
                             {
@@ -303,7 +311,7 @@ const ResultsAnchor = () => {
                             },
                           ]
                         : []),
-                      ...(showInverstionAttack
+                      ...(showInversionAttack
                         ? [
                             {
                               key: "foolbox-inversion-attack",
@@ -341,15 +349,15 @@ const ResultsAnchor = () => {
                     href: "#cleverhans",
                     title: "CleverHans Attacks Library",
                     children: [
-                      ...(showCleverhansSummary
-                        ? [
-                            {
-                              key: "CleverHansSummary",
-                              href: "#CleverHansSummary",
-                              title: "Summary",
-                            },
-                          ]
-                        : []),
+                      // ...(showCleverhansSummary
+                      //   ? [
+                      //       {
+                      //         key: "CleverHansSummary",
+                      //         href: "#CleverHansSummary",
+                      //         title: "Summary",
+                      //       },
+                      //     ]
+                      //   : []),
                       ...(showCleverHansFastGradient
                         ? [
                             {
@@ -408,24 +416,33 @@ const ResultsAnchor = () => {
                   },
                 ]
               : []),
+            ...(showPrivacyMeterSummary
+              ? [
+                  {
+                    key: "ml-privacy-meter",
+                    href: "#ml-privacy-meter",
+                    title: "ML Privacy Meter Attacks Library",
+                    children: [
+                      // {
+                      //   key: "MLSummary",
+                      //   href: "#MLSummary",
+                      //   title: "Summary",
+                      // },
+                      ...(showPrivacyMeterPopulation
+                        ? [
+                            {
+                              key: "ml-privacy-meter-population-attack",
+                              href: "#ml-privacy-meter-population-attack",
+                              title: "Population Attack",
+                            },
+                          ]
+                        : []),
+                    ].filter(Boolean),
+                  },
+                ]
+              : []),
 
-            {
-              key: "ml-privacy-meter",
-              href: "#ml-privacy-meter",
-              title: "ML Privacy Meter Attacks Library",
-              children: [
-                {
-                  key: "MLSummary",
-                  href: "#MLSummary",
-                  title: "Summary",
-                },
-                {
-                  key: "ml-privacy-meter-population-attack",
-                  href: "#ml-privacy-meter-population-attack",
-                  title: "Population Attack",
-                },
-              ],
-            },
+            //
           ]}
         />
       </Col>
