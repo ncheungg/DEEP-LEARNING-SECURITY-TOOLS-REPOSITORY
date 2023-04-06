@@ -5,47 +5,123 @@ import { Button, Input, Space, Table } from "antd";
 import type { ColumnsType, ColumnType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
+import { attackPromiseState, attackResultState } from "@/recoil/Atom";
+import { useRecoilValue } from "recoil";
+import { useMemo } from "react";
 
 interface DataType {
   key: string;
   name: string;
   accuracy: number;
+  // lowestAccuracy: number; // add lowestAccuracy property
 }
 
-type DataIndex = keyof DataType;
+// type DataIndex = keyof DataType;
 
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "Fast Gradient Method Attack",
-    accuracy: 32,
-  },
-  {
-    key: "2",
-    name: "Basic Iterative Method Attack",
-    accuracy: 42,
-  },
-  {
-    key: "3",
-    name: "Momentum Iterative Method Attack",
-    accuracy: 32,
-  },
-  {
-    key: "4",
-    name: "Madry Et Al Method Attack",
-    accuracy: 32,
-  },
-  {
-    key: "5",
-    name: "SPSA Method Attack",
-    accuracy: 32,
-  },
-];
+// const data: DataType[] = [
+//   {
+//     key: "1",
+//     name: "Fast Gradient Method Attack",
+//     accuracy: lowestAccuracy["fast gradient"],
+//   },
+//   {
+//     key: "2",
+//     name: "Basic Iterative Method Attack",
+//     accuracy: 42,
+//   },
+//   {
+//     key: "3",
+//     name: "Momentum Iterative Method Attack",
+//     accuracy: 32,
+//   },
+//   {
+//     key: "4",
+//     name: "Madry Et Al Method Attack",
+//     accuracy: 32,
+//   },
+//   {
+//     key: "5",
+//     name: "SPSA Method Attack",
+//     accuracy: 32,
+//   },
+// ];
+
+type AttackResult = {
+  library: string;
+  attackname: string;
+  data: {
+    epsilons: number[];
+    accuracy: number[];
+  };
+};
+
+type DataIndex = keyof DataType;
 
 const FoolboxTable: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
+  const attackResults = useRecoilValue(attackResultState);
+  console.log({ attackResults });
+
+  const lowestAccuracy: { [key: string]: number } = {};
+  const foolboxAttackResults = attackResults.filter((result) => result.library === "foolbox");
+
+  foolboxAttackResults.forEach((result) => {
+    const { attackname, data } = result;
+    const accuracyData = data["2"] ?? data["inf"]; // Check if "2" or "inf" key exists
+    const minAccuracy = Math.min(...accuracyData.accuracy);
+
+    if (lowestAccuracy[attackname] === undefined || lowestAccuracy[attackname] > minAccuracy) {
+      lowestAccuracy[attackname] = minAccuracy;
+    }
+  });
+
+  // foolboxAttackResults.forEach((result) => {
+  //   const { attackname, data } = result;
+  //   const accuracyData = data["2"] || data["inf"]; // Check if "2" or "inf" key exists
+  //   const minAccuracy = Math.min(...data.accuracy.filter((val: number) => !isNaN(val)));
+
+  //   if (lowestAccuracy[attackname] === undefined || lowestAccuracy[attackname] > minAccuracy) {
+  //     lowestAccuracy[attackname] = minAccuracy;
+  //   }
+  // });
+
+  const showfoolboxSummary = useMemo(() => {
+    return attackResults.some((result) => result.library === "foolbox");
+  }, [attackResults]);
+
+  const showDeepFool = useMemo(() => {
+    return attackResults.some((result) => result.library === "foolbox" && result.attackname === "deep fool");
+  }, [attackResults]);
+
+  const showFoolboxFastGradient = useMemo(() => {
+    return attackResults.some((result) => result.library === "foolbox" && result.attackname === "fast gradient");
+  }, [attackResults]);
+
+  const showFoolboxBasicIterative = useMemo(() => {
+    return attackResults.some((result) => result.library === "foolbox" && result.attackname === "basic iterative");
+  }, [attackResults]);
+
+  const showAdditiveGaussian = useMemo(() => {
+    return attackResults.some((result) => result.library === "foolbox" && result.attackname === "additive gaussian");
+  }, [attackResults]);
+
+  const showAdditiveUniform = useMemo(() => {
+    return attackResults.some((result) => result.library === "foolbox" && result.attackname === "additive uniform");
+  }, [attackResults]);
+
+  const showInversionAttack = useMemo(() => {
+    return attackResults.some((result) => result.library === "foolbox" && result.attackname === "inversion");
+  }, [attackResults]);
+
+  const showSaltandPepperAttack = useMemo(() => {
+    return attackResults.some((result) => result.library === "foolbox" && result.attackname === "salt and pepper");
+  }, [attackResults]);
+
+  // const showContrastReductionAttack = useMemo(() => {
+  //   return attackResults.some((result) => result.library === "foolbox" && result.attackname === "contrast reduction");
+  // }, [attackResults]);
 
   const handleSearch = (selectedKeys: string[], confirm: (param?: FilterConfirmProps) => void, dataIndex: DataIndex) => {
     confirm();
@@ -152,6 +228,81 @@ const FoolboxTable: React.FC = () => {
     //   sorter: (a, b) => a.address.length - b.address.length,
     //   sortDirections: ["descend", "ascend"],
     // },
+  ];
+
+  const data: DataType[] = [
+    ...(showDeepFool
+      ? [
+          {
+            key: "1",
+            name: "Deep Fool Attack",
+            accuracy: lowestAccuracy["deep fool"],
+          },
+        ]
+      : []),
+    ...(showFoolboxFastGradient
+      ? [
+          {
+            key: "2",
+            name: "Fast Gradient Attack",
+            accuracy: lowestAccuracy["fast gradient"],
+          },
+        ]
+      : []),
+    ...(showFoolboxBasicIterative
+      ? [
+          {
+            key: "3",
+            name: "Basic Iterative Attack",
+            accuracy: lowestAccuracy["basic iterative"],
+          },
+        ]
+      : []),
+    ...(showAdditiveGaussian
+      ? [
+          {
+            key: "4",
+            name: "Additive Gaussian Noise Attack",
+            accuracy: lowestAccuracy["additive gaussian"],
+          },
+        ]
+      : []),
+    ...(showAdditiveUniform
+      ? [
+          {
+            key: "5",
+            name: "Additive Uniform Noise Attack",
+            accuracy: lowestAccuracy["additive uniform"],
+          },
+        ]
+      : []),
+    ...(showInversionAttack
+      ? [
+          {
+            key: "6",
+            name: "Inversion",
+            accuracy: lowestAccuracy["inversion"],
+          },
+        ]
+      : []),
+    ...(showSaltandPepperAttack
+      ? [
+          {
+            key: "7",
+            name: "Salt & Pepper Noise Attack",
+            accuracy: lowestAccuracy["salt and pepper"],
+          },
+        ]
+      : []),
+    // ...(showContrastReductionAttack
+    //   ? [
+    //       {
+    //         key: "8",
+    //         name: "Contrast Reduction",
+    //         accuracy: lowestAccuracy["inversion"],
+    //       },
+    //     ]
+    //   : []),
   ];
 
   return <Table columns={columns} dataSource={data} />;

@@ -47,9 +47,6 @@ export default function Home() {
         {/* <Title level={3}>Dioptra:</Title>
         <DioptraTable /> */}
 
-        <Button type="primary" icon={<DownloadOutlined />} size="large" /*href=""*/>
-          Download PDF
-        </Button>
         <br />
         <br />
         <br />

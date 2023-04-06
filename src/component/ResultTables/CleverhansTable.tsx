@@ -5,47 +5,103 @@ import { Button, Input, Space, Table } from "antd";
 import type { ColumnsType, ColumnType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
+import { attackPromiseState, attackResultState } from "@/recoil/Atom";
+import { useRecoilValue } from "recoil";
+import { useMemo } from "react";
 
 interface DataType {
   key: string;
   name: string;
   accuracy: number;
+  // lowestAccuracy: number; // add lowestAccuracy property
 }
 
-type DataIndex = keyof DataType;
+// type DataIndex = keyof DataType;
 
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "Fast Gradient Method Attack",
-    accuracy: 32,
-  },
-  {
-    key: "2",
-    name: "Basic Iterative Method Attack",
-    accuracy: 42,
-  },
-  {
-    key: "3",
-    name: "Momentum Iterative Method Attack",
-    accuracy: 32,
-  },
-  {
-    key: "4",
-    name: "Madry Et Al Method Attack",
-    accuracy: 32,
-  },
-  {
-    key: "5",
-    name: "SPSA Method Attack",
-    accuracy: 32,
-  },
-];
+// const data: DataType[] = [
+//   {
+//     key: "1",
+//     name: "Fast Gradient Method Attack",
+//     accuracy: lowestAccuracy["fast gradient"],
+//   },
+//   {
+//     key: "2",
+//     name: "Basic Iterative Method Attack",
+//     accuracy: 42,
+//   },
+//   {
+//     key: "3",
+//     name: "Momentum Iterative Method Attack",
+//     accuracy: 32,
+//   },
+//   {
+//     key: "4",
+//     name: "Madry Et Al Method Attack",
+//     accuracy: 32,
+//   },
+//   {
+//     key: "5",
+//     name: "SPSA Method Attack",
+//     accuracy: 32,
+//   },
+// ];
+
+type AttackResult = {
+  library: string;
+  attackname: string;
+  data: {
+    epsilons: number[];
+    accuracy: number[];
+  };
+};
+
+type DataIndex = keyof DataType;
 
 const CleverhansTable: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
+  const attackResults = useRecoilValue(attackResultState);
+  console.log({ attackResults });
+
+  const lowestAccuracy: { [key: string]: number } = {};
+  const cleverhansAttackResults = attackResults.filter((result) => result.library === "cleverhans");
+
+  cleverhansAttackResults.forEach((result) => {
+    const { attackname, data } = result;
+    const minAccuracy = Math.min(...data.accuracy);
+    if (lowestAccuracy[attackname] === undefined || lowestAccuracy[attackname] > minAccuracy) {
+      lowestAccuracy[attackname] = minAccuracy;
+    }
+  });
+
+  const showCleverhansSummary = useMemo(() => {
+    return attackResults.some((result) => result.library === "cleverhans");
+  }, [attackResults]);
+
+  const showCleverHansBasicIterative = useMemo(() => {
+    return attackResults.some((result) => result.library === "cleverhans" && result.attackname === "basic iterative");
+  }, [attackResults]);
+
+  const showCleverHansFastGradient = useMemo(() => {
+    return attackResults.some((result) => result.library === "cleverhans" && result.attackname === "fast gradient");
+  }, [attackResults]);
+
+  const showCleverHansMadryEtAl = useMemo(() => {
+    return attackResults.some((result) => result.library === "cleverhans" && result.attackname === "madry et al");
+  }, [attackResults]);
+
+  const showCleverHansMomentumIterative = useMemo(() => {
+    return attackResults.some((result) => result.library === "cleverhans" && result.attackname === "momentum iterative");
+  }, [attackResults]);
+
+  const showCleverHansProjectedGradienDescent = useMemo(() => {
+    return attackResults.some((result) => result.library === "cleverhans" && result.attackname === "projected gradient descent");
+  }, [attackResults]);
+
+  const showCleverHansSpsa = useMemo(() => {
+    return attackResults.some((result) => result.library === "cleverhans" && result.attackname === "spsa");
+  }, [attackResults]);
 
   const handleSearch = (selectedKeys: string[], confirm: (param?: FilterConfirmProps) => void, dataIndex: DataIndex) => {
     confirm();
@@ -152,6 +208,63 @@ const CleverhansTable: React.FC = () => {
     //   sorter: (a, b) => a.address.length - b.address.length,
     //   sortDirections: ["descend", "ascend"],
     // },
+  ];
+
+  const data: DataType[] = [
+    ...(showCleverHansFastGradient
+      ? [
+          {
+            key: "1",
+            name: "Fast Gradient Method Attack",
+            accuracy: lowestAccuracy["fast gradient"],
+          },
+        ]
+      : []),
+    ...(showCleverHansProjectedGradienDescent
+      ? [
+          {
+            key: "2",
+            name: "Projected Gradient Descent Attack",
+            accuracy: lowestAccuracy["projected gradient descent"],
+          },
+        ]
+      : []),
+    ...(showCleverHansBasicIterative
+      ? [
+          {
+            key: "3",
+            name: "Basic Iterative Method Attack",
+            accuracy: lowestAccuracy["basic iterative"],
+          },
+        ]
+      : []),
+    ...(showCleverHansMomentumIterative
+      ? [
+          {
+            key: "4",
+            name: "Momentum Iterative Method Attack",
+            accuracy: lowestAccuracy["momentum iterative"],
+          },
+        ]
+      : []),
+    ...(showCleverHansMomentumIterative
+      ? [
+          {
+            key: "5",
+            name: "Madry Et Al Method Attack",
+            accuracy: lowestAccuracy["madry et al"],
+          },
+        ]
+      : []),
+    ...(showCleverHansSpsa
+      ? [
+          {
+            key: "6",
+            name: "SPSA Method Attack",
+            accuracy: lowestAccuracy["spsa"],
+          },
+        ]
+      : []),
   ];
 
   return <Table columns={columns} dataSource={data} />;
