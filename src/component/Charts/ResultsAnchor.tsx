@@ -45,7 +45,7 @@ import {
 } from "./FoolboxCharts";
 import CleverhansTable from "../ResultTables/CleverhansTable";
 import FoolboxTable from "../ResultTables/FoolboxTable";
-
+import { PrivacyMeterChart } from "./PrivacyMeterChart";
 import { attackPromiseState, attackResultState } from "@/recoil/Atom";
 import { useMemo } from "react";
 
@@ -123,6 +123,15 @@ const ResultsAnchor = () => {
 
   const showCleverHansSpsa = useMemo(() => {
     return attackResults.some((result) => result.library === "cleverhans" && result.attackname === "spsa");
+  }, [attackResults]);
+
+  /////////////////////////
+  const showPrivacyMeterSummary = useMemo(() => {
+    return attackResults.some((result) => result.library === "privacy meter");
+  }, [attackResults]);
+
+  const showPrivacyMeterPopulation = useMemo(() => {
+    return attackResults.some((result) => result.library === "privacy meter" && result.attackname === "population");
   }, [attackResults]);
 
   return (
@@ -225,16 +234,16 @@ const ResultsAnchor = () => {
             <SPSAChart height="300px" width="300px" />
           </Card>
         )}
-        <Title id="ml-privacy-meter" level={2}>
-          ML Privacy Meter Attacks Library:
-        </Title>
-        {/* <Card id="MLSummary" title="Summary" style={{ marginBottom: "15px" }}>
-          <p>A summary of the ML Privacy Meter Attack Results:</p>
-          <div className={styles.FoolboxSummaryChart} style={{ paddingTop: "2em", paddingBottom: "2em" }}></div>
-        </Card> */}
-        <Card title="ML Privacy Meter Attack" id="ml-privacy-meter-population-attack" style={{ marginBottom: "15px" }}>
-          <Line data={data4} options={options4} height="300px" width="250px" />
-        </Card>
+        {showPrivacyMeterSummary && (
+          <Title id="ml-privacy-meter" level={2}>
+            ML Privacy Meter Attacks Library:
+          </Title>
+        )}
+        {showPrivacyMeterPopulation && (
+          <Card title="ML Privacy Meter Attack" id="ml-privacy-meter-population-attack" style={{ marginBottom: "15px" }}>
+            <PrivacyMeterChart height="300px" width="300px" />
+          </Card>
+        )}
         {/* <p style={{ height: "100vh" }}></p> */}
       </Col>
       <Col span={8} style={{ paddingLeft: "2em" }}>
@@ -407,24 +416,33 @@ const ResultsAnchor = () => {
                   },
                 ]
               : []),
+            ...(showPrivacyMeterSummary
+              ? [
+                  {
+                    key: "ml-privacy-meter",
+                    href: "#ml-privacy-meter",
+                    title: "ML Privacy Meter Attacks Library",
+                    children: [
+                      // {
+                      //   key: "MLSummary",
+                      //   href: "#MLSummary",
+                      //   title: "Summary",
+                      // },
+                      ...(showPrivacyMeterPopulation
+                        ? [
+                            {
+                              key: "ml-privacy-meter-population-attack",
+                              href: "#ml-privacy-meter-population-attack",
+                              title: "Population Attack",
+                            },
+                          ]
+                        : []),
+                    ].filter(Boolean),
+                  },
+                ]
+              : []),
 
-            {
-              key: "ml-privacy-meter",
-              href: "#ml-privacy-meter",
-              title: "ML Privacy Meter Attacks Library",
-              children: [
-                // {
-                //   key: "MLSummary",
-                //   href: "#MLSummary",
-                //   title: "Summary",
-                // },
-                {
-                  key: "ml-privacy-meter-population-attack",
-                  href: "#ml-privacy-meter-population-attack",
-                  title: "ML Privacy Meter Attack",
-                },
-              ],
-            },
+            //
           ]}
         />
       </Col>

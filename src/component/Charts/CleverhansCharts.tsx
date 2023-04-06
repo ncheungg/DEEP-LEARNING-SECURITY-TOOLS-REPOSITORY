@@ -594,4 +594,5 @@ function MomentumIterativeChart(props: { height: string; width: string }) {
 
   return <canvas ref={chartRef} height={props.height} width={props.width} />;
 }
+
 export { FastGradientChart, ProjectedGradientDescentChart, BasicIterativeChart, MadrytEtAlChart, SPSAChart, MomentumIterativeChart };

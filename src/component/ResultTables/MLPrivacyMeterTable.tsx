@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef } from "antd";
 import { Button, Input, Space, Table } from "antd";
 import type { ColumnsType, ColumnType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
+import { attackPromiseState, attackResultState } from "@/recoil/Atom";
+import { useRecoilValue } from "recoil";
 
 interface DataType {
   key: string;
@@ -19,63 +21,12 @@ interface DataType {
 
 type DataIndex = keyof DataType;
 
-const data: DataType[] = [
-  {
-    key: "1",
-    fpr: 0.0,
-    accuracy: 0.5,
-    roc: 0.5465198,
-    tn: 5000,
-    fp: 0,
-    fn: 5000,
-    tp: 0,
-  },
-  {
-    key: "2",
-    fpr: 0.25,
-    accuracy: 0.517,
-    roc: 0.5892376,
-    tn: 4555,
-    fp: 0.1876,
-    fn: 4746,
-    tp: 501,
-  },
-  {
-    key: "3",
-    fpr: 0.5,
-    accuracy: 0.525,
-    roc: 0.5879765,
-    tn: 4321,
-    fp: 0.2876,
-    fn: 2789,
-    tp: 1205,
-  },
-  {
-    key: "4",
-    fpr: 0.75,
-    accuracy: 0.548,
-    roc: 0.5987689,
-    tn: 2678,
-    fp: 0.1876,
-    fn: 5676,
-    tp: 2678,
-  },
-  {
-    key: "5",
-    fpr: 1.0,
-    accuracy: 0.588,
-    roc: 0.5298901,
-    tn: 1675,
-    fp: 0.1762,
-    fn: 2946,
-    tp: 3876,
-  },
-];
-
 const MLPrivacyMeterTable: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
+  const attackResults = useRecoilValue(attackResultState);
+  console.log({ attackResults });
 
   const handleSearch = (selectedKeys: string[], confirm: (param?: FilterConfirmProps) => void, dataIndex: DataIndex) => {
     confirm();
@@ -209,25 +160,39 @@ const MLPrivacyMeterTable: React.FC = () => {
       width: "20%",
       ...getColumnSearchProps("tp"),
     },
-    // key: string;
-    // fpr: number;
-    // accuracy: number;
-    // roc: number;
-    // tn: number;
-    // fp: number;
-    // fn: number;
-    // tp: number;
-    // {
-    //   title: "Address",
-    //   dataIndex: "address",
-    //   key: "address",
-    //   ...getColumnSearchProps("address"),
-    //   sorter: (a, b) => a.address.length - b.address.length,
-    //   sortDirections: ["descend", "ascend"],
-    // },
   ];
+  const privacyMeterResults = attackResults.filter((result) => {
+    return result.attackname === "population" && result.library === "privacy meter";
+  });
+  const data: DataType[] = [];
 
-  return <Table columns={columns} dataSource={data} />;
+  const dataSource: DataType[] = useMemo(() => {
+    if (privacyMeterResults.length > 0) {
+      const falsePositiveRate = privacyMeterResults[0].data.false_positive_rate;
+      const accuracy = privacyMeterResults[0].data.accuracy;
+      const roc = privacyMeterResults[0].data.roc_auc;
+      const tn = privacyMeterResults[0].data.true_negative;
+      const fp = privacyMeterResults[0].data.false_positives;
+      const fn = privacyMeterResults[0].data.false_negatives;
+      const tp = privacyMeterResults[0].data.true_positives;
+
+      const data = falsePositiveRate.map((fpr: number, index: number) => ({
+        key: index.toString(),
+        fpr,
+        accuracy: accuracy[index],
+        roc: roc[index],
+        tn: tn[index],
+        fp: fp[index],
+        fn: fn[index],
+        tp: tp[index],
+      }));
+
+      return data;
+    }
+    return data;
+  }, [privacyMeterResults]);
+
+  return <Table columns={columns} dataSource={dataSource} />;
 };
 
 export default MLPrivacyMeterTable;
