@@ -5,11 +5,12 @@ import UploadTestCard from "./AttackCards/UploadTestCard";
 import AttacksLibCard from "./AttackCards/AttacksLibCard";
 import { PlayCircleFilled } from "@ant-design/icons";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { attackPromiseState, attackResultState } from "@/recoil/Atom";
+import { attackPromiseState, attackResultState, datasetNameState, modelNameState } from "@/recoil/Atom";
 import LoadingModal from "./LoadingModal";
 import { sleep } from "utils";
 import useStickyState from "utils/useStickyState";
 import { useRouter } from "next/router";
+import { runOriginalAttack } from "@/api/original";
 
 const AttackSteps: React.FC<{ setCurrentStep: (step: number) => void }> = ({ setCurrentStep }) => {
   const router = useRouter();
@@ -96,7 +97,20 @@ const AttackSteps: React.FC<{ setCurrentStep: (step: number) => void }> = ({ set
     }, 10000);
   };
 
+  const modelName = useRecoilValue(modelNameState);
+  const datasetName = useRecoilValue(datasetNameState);
+
+  const setAttackPromises = useSetRecoilState(attackPromiseState);
+
   const submitForms = () => {
+    // add original attack to promise arr
+    const promise = runOriginalAttack({
+      modelName,
+      datasetName,
+    });
+    setAttackPromises((currentState) => [...currentState, promise]);
+
+    // submit all subforms
     foolboxRef?.current?.submit();
     cleverhansRef?.current?.submit();
     privRef?.current?.submit();
