@@ -150,7 +150,7 @@ function ProjectedGradientDescentChart(props: { height: string; width: string })
               data: Array(epsilons.length).fill(originalAccuracy),
               fill: false,
               backgroundColor: "rgba(75,192,192,0.4)",
-              borderColor: "rgba(75,192,192,1)",
+              borderColor: "rgba(75,192,100,1)",
             },
           ],
         };
