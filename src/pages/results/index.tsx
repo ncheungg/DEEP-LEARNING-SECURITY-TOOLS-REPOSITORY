@@ -54,11 +54,10 @@ export default function Home() {
         <br />
 
         <Title level={2}>Post-Attack Accuracy Summary Tables:</Title>
-
-        {showCleverhansSummary && <Title level={3}>CleverHans:</Title>}
-        {showCleverhansSummary && <CleverhansTable />}
         {showfoolboxSummary && <Title level={3}>Foolbox:</Title>}
         {showfoolboxSummary && <FoolboxTable />}
+        {showCleverhansSummary && <Title level={3}>CleverHans:</Title>}
+        {showCleverhansSummary && <CleverhansTable />}
 
         {showPrivacyMeterSummary && <Title level={3}>ML Privacy Meter (Population Attack Audit Results):</Title>}
         {showPrivacyMeterSummary && <MLPrivacyMeterTable />}
