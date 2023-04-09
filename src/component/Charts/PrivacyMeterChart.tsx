@@ -38,7 +38,7 @@ function PrivacyMeterChart(props: { height: string; width: string }) {
               borderDash: [5, 5], // this sets the border to a dotted line
             },
             {
-              label: "ROC",
+              label: "ROC Curve",
               data: truePositiveRate,
               fill: true,
               backgroundColor: "rgba(75,192,192,0.4)",
@@ -70,7 +70,7 @@ function PrivacyMeterChart(props: { height: string; width: string }) {
             legend: {},
             title: {
               display: true,
-              text: ["ROC of Population Attack", " "],
+              text: ["ROC Curve of Population Attack", " "],
             },
           },
           scales: {

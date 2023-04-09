@@ -16,19 +16,31 @@ function FastGradientChart(props: { height: string; width: string }) {
         return result.attackname === "fast gradient" && result.library === "cleverhans";
       });
 
+      const OriginalResults = attackResults.filter((result) => {
+        return result.attackname === "original" && result.library === "original";
+      });
+
       if (fastGradientResults.length > 0) {
         const epsilons = fastGradientResults[0].data.epsilons;
         const accuracy = fastGradientResults[0].data.accuracy;
+        const originalAccuracy = OriginalResults[0].data.accuracy;
 
         const data = {
           labels: epsilons,
           datasets: [
             {
-              label: "Accuracy vs Epsilon",
+              label: "Accuracy of Attacked Model",
               data: accuracy,
               fill: false,
-              backgroundColor: "rgba(75,192,192,0.4)",
-              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: "rgba(75,100,255,0.4)",
+              borderColor: "rgba(75,100,255,1)",
+            },
+            {
+              label: "Accuracy of Original Model",
+              data: Array(epsilons.length).fill(originalAccuracy),
+              fill: false,
+              backgroundColor: "rgba(0,192,75,0.4)",
+              borderColor: "rgba(75,192,100,1)",
             },
           ],
         };
@@ -114,16 +126,28 @@ function ProjectedGradientDescentChart(props: { height: string; width: string })
         return result.attackname === "projected gradient descent" && result.library === "cleverhans";
       });
 
+      const OriginalResults = attackResults.filter((result) => {
+        return result.attackname === "original" && result.library === "original";
+      });
+
       if (pgdResults.length > 0) {
         const epsilons = pgdResults[0].data.epsilons;
         const accuracy = pgdResults[0].data.accuracy;
+        const originalAccuracy = OriginalResults[0].data.accuracy;
 
         const data = {
           labels: epsilons,
           datasets: [
             {
-              label: "Accuracy vs Epsilon",
+              label: "Accuracy of Attacked Model",
               data: accuracy,
+              fill: false,
+              backgroundColor: "rgba(75,100,255,0.4)",
+              borderColor: "rgba(75,100,255,1)",
+            },
+            {
+              label: "Accuracy of Original Model",
+              data: Array(epsilons.length).fill(originalAccuracy),
               fill: false,
               backgroundColor: "rgba(75,192,192,0.4)",
               borderColor: "rgba(75,192,192,1)",
@@ -211,19 +235,31 @@ function BasicIterativeChart(props: { height: string; width: string }) {
         return result.attackname === "basic iterative" && result.library === "cleverhans";
       });
 
+      const OriginalResults = attackResults.filter((result) => {
+        return result.attackname === "original" && result.library === "original";
+      });
+
       if (basicIterativeResults.length > 0) {
         const epsilons = basicIterativeResults[0].data.epsilons;
         const accuracy = basicIterativeResults[0].data.accuracy;
+        const originalAccuracy = OriginalResults[0].data.accuracy;
 
         const data = {
           labels: epsilons,
           datasets: [
             {
-              label: "Accuracy vs Epsilon",
+              label: "Accuracy of Attacked Model",
               data: accuracy,
               fill: false,
-              backgroundColor: "rgba(75,192,192,0.4)",
-              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: "rgba(75,100,255,0.4)",
+              borderColor: "rgba(75,100,255,1)",
+            },
+            {
+              label: "Accuracy of Original Model",
+              data: Array(epsilons.length).fill(originalAccuracy),
+              fill: false,
+              backgroundColor: "rgba(0,192,75,0.4)",
+              borderColor: "rgba(75,192,75,1)",
             },
           ],
         };
@@ -309,20 +345,31 @@ function MadrytEtAlChart(props: { height: string; width: string }) {
       const MadryResults = attackResults.filter((result) => {
         return result.attackname === "madry et al" && result.library === "cleverhans";
       });
+      const OriginalResults = attackResults.filter((result) => {
+        return result.attackname === "original" && result.library === "original";
+      });
 
       if (MadryResults.length > 0) {
         const epsilons = MadryResults[0].data.epsilons;
         const accuracy = MadryResults[0].data.accuracy;
+        const originalAccuracy = OriginalResults[0].data.accuracy;
 
         const data = {
           labels: epsilons,
           datasets: [
             {
-              label: "Accuracy vs Epsilon",
+              label: "Accuracy of Attacked Model",
               data: accuracy,
               fill: false,
-              backgroundColor: "rgba(75,192,192,0.4)",
-              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: "rgba(75,100,255,0.4)",
+              borderColor: "rgba(75,100,255,1)",
+            },
+            {
+              label: "Accuracy of Original Model",
+              data: Array(epsilons.length).fill(originalAccuracy),
+              fill: false,
+              backgroundColor: "rgba(0,192,75,0.4)",
+              borderColor: "rgba(75,192,75,1)",
             },
           ],
         };
@@ -408,20 +455,31 @@ function SPSAChart(props: { height: string; width: string }) {
       const SPSAResults = attackResults.filter((result) => {
         return result.attackname === "spsa" && result.library === "cleverhans";
       });
+      const OriginalResults = attackResults.filter((result) => {
+        return result.attackname === "original" && result.library === "original";
+      });
 
       if (SPSAResults.length > 0) {
         const epsilons = SPSAResults[0].data.epsilons;
         const accuracy = SPSAResults[0].data.accuracy;
+        const originalAccuracy = OriginalResults[0].data.accuracy;
 
         const data = {
           labels: epsilons,
           datasets: [
             {
-              label: "Accuracy vs Epsilon",
+              label: "Accuracy of Attacked Model",
               data: accuracy,
               fill: false,
-              backgroundColor: "rgba(75,192,192,0.4)",
-              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: "rgba(75,100,255,0.4)",
+              borderColor: "rgba(75,100,255,1)",
+            },
+            {
+              label: "Accuracy of Original Model",
+              data: Array(epsilons.length).fill(originalAccuracy),
+              fill: false,
+              backgroundColor: "rgba(0,192,75,0.4)",
+              borderColor: "rgba(75,192,75,1)",
             },
           ],
         };
@@ -507,20 +565,31 @@ function MomentumIterativeChart(props: { height: string; width: string }) {
       const MomentumIterativeResults = attackResults.filter((result) => {
         return result.attackname === "momentum iterative" && result.library === "cleverhans";
       });
+      const OriginalResults = attackResults.filter((result) => {
+        return result.attackname === "original" && result.library === "original";
+      });
 
       if (MomentumIterativeResults.length > 0) {
         const epsilons = MomentumIterativeResults[0].data.epsilons;
         const accuracy = MomentumIterativeResults[0].data.accuracy;
+        const originalAccuracy = OriginalResults[0].data.accuracy;
 
         const data = {
           labels: epsilons,
           datasets: [
             {
-              label: "Accuracy vs Epsilon",
+              label: "Accuracy of Attacked Model",
               data: accuracy,
               fill: false,
-              backgroundColor: "rgba(75,192,192,0.4)",
-              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: "rgba(75,100,255,0.4)",
+              borderColor: "rgba(75,100,255,1)",
+            },
+            {
+              label: "Accuracy of Original Model",
+              data: Array(epsilons.length).fill(originalAccuracy),
+              fill: false,
+              backgroundColor: "rgba(0,192,75,0.4)",
+              borderColor: "rgba(75,192,75,1)",
             },
           ],
         };
