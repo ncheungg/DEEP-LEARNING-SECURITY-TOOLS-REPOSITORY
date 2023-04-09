@@ -64,13 +64,71 @@ const FoolboxTable: React.FC = () => {
   const attackResults = useRecoilValue(attackResultState);
   console.log({ attackResults });
 
+  // const lowestAccuracy: { [key: string]: number } = {};
+  // const foolboxAttackResults = attackResults.filter((result) => result.library === "foolbox");
+
+  // foolboxAttackResults.forEach((result) => {
+  //   const { attackname, data } = result;
+  //   const accuracyData = data["2"] ?? data["inf"]; // Check if "2" or "inf" key exists
+  //   const minAccuracy = Math.min(...accuracyData.accuracy);
+
+  //   if (lowestAccuracy[attackname] === undefined || lowestAccuracy[attackname] > minAccuracy) {
+  //     lowestAccuracy[attackname] = minAccuracy;
+  //   }
+  // });
+
   const lowestAccuracy: { [key: string]: number } = {};
   const foolboxAttackResults = attackResults.filter((result) => result.library === "foolbox");
 
   foolboxAttackResults.forEach((result) => {
     const { attackname, data } = result;
-    const accuracyData = data["2"] ?? data["inf"]; // Check if "2" or "inf" key exists
-    const minAccuracy = Math.min(...accuracyData.accuracy);
+    let minAccuracy;
+
+    if (attackname === "additive gaussian") {
+      let allData = [];
+      if (data["2"] !== undefined) {
+        const additiveData = data["2"]?.["additive"];
+        const clippingAwareData = data["2"]?.["clipping-aware-additive"];
+        const repeatedData = data["2"]?.["repeated-additive"];
+        const repeatedClippingData = data["2"]?.["clipping-aware-repeated-additive"];
+        allData = [additiveData, clippingAwareData, repeatedData, repeatedClippingData].filter(Boolean);
+      }
+      if (data["additive"] !== undefined) {
+        allData.push(data["additive"]);
+      }
+      if (data["clipping-aware-additive"] !== undefined) {
+        allData.push(data["clipping-aware-additive"]);
+      }
+      if (data["repeated-additive"] !== undefined) {
+        allData.push(data["repeated-additive"]);
+      }
+      if (data["clipping-aware-repeated-additive"] !== undefined) {
+        allData.push(data["clipping-aware-repeated-additive"]);
+      }
+      const minAccuracies = allData.map((d) => Math.min(...d.accuracy));
+      console.log("minAccuracies:", minAccuracies);
+      minAccuracy = Math.min(...minAccuracies);
+    } else if (attackname === "additive uniform") {
+      let allData = [];
+      if (data["2"] !== undefined) {
+        const additiveData = data["2"]?.["additive"];
+        const clippingAwareData = data["2"]?.["clipping-aware-additive"];
+        const repeatedData = data["2"]?.["repeated-additive"];
+        const repeatedClippingData = data["2"]?.["clipping-aware-repeated-additive"];
+        allData = [additiveData, clippingAwareData, repeatedData, repeatedClippingData].filter(Boolean);
+      }
+      if (data["inf"] !== undefined) {
+        const additiveData = data["inf"]?.["additive"];
+        const repeatedData = data["inf"]?.["repeated-additive"];
+        allData.push(additiveData, repeatedData);
+      }
+      const minAccuracies = allData.map((d) => Math.min(...d.accuracy));
+      console.log("minAccuracies:", minAccuracies);
+      minAccuracy = Math.min(...minAccuracies);
+    } else {
+      const accuracyData = data["2"] ?? data["inf"] ?? data;
+      minAccuracy = Math.min(...accuracyData.accuracy.filter((a: number) => isFinite(a)));
+    }
 
     if (lowestAccuracy[attackname] === undefined || lowestAccuracy[attackname] > minAccuracy) {
       lowestAccuracy[attackname] = minAccuracy;

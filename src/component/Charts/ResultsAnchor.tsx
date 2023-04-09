@@ -240,7 +240,7 @@ const ResultsAnchor = () => {
           </Title>
         )}
         {showPrivacyMeterPopulation && (
-          <Card title="ML Privacy Meter Attack" id="ml-privacy-meter-population-attack" style={{ marginBottom: "15px" }}>
+          <Card title="Population Attack" id="ml-privacy-meter-population-attack" style={{ marginBottom: "15px" }}>
             <PrivacyMeterChart height="300px" width="300px" />
           </Card>
         )}
