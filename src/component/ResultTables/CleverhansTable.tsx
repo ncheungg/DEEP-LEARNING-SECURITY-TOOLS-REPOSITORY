@@ -247,7 +247,7 @@ const CleverhansTable: React.FC = () => {
           },
         ]
       : []),
-    ...(showCleverHansMomentumIterative
+    ...(showCleverHansMadryEtAl
       ? [
           {
             key: "5",
