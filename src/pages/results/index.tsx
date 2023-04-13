@@ -12,7 +12,7 @@ import { attackPromiseState, attackResultState } from "@/recoil/Atom";
 import useStickyState from "utils/useStickyState";
 import ResultsAnchor from "@/component/Charts/ResultsAnchor";
 import { useRecoilValue } from "recoil";
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef, useState, useMemo, useEffect } from "react";
 
 const { Title } = Typography;
 
@@ -24,6 +24,18 @@ export default function Home() {
 
   // console.log({ attackResults });
   console.log({ attackResults });
+
+  const [originalAccuracy, setOriginalAccuracy] = useState(null);
+
+  useEffect(() => {
+    const originalResult = attackResults.find((result) => {
+      return result.attackname === "original" && result.library === "original";
+    });
+
+    if (originalResult?.data?.accuracy) {
+      setOriginalAccuracy(originalResult.data.accuracy);
+    }
+  }, [attackResults]);
 
   const showfoolboxSummary = useMemo(() => {
     return attackResults.some((result) => result.library === "foolbox");
@@ -52,8 +64,10 @@ export default function Home() {
         <Title>Summary of Attack Results:</Title>
         <Title level={2}>Here&apos;s what we found during the model scanning process:</Title>
         <br />
+        <Title level={3}>The Original Accuracy of your inputted model is: {originalAccuracy}%</Title>
 
         <Title level={2}>Post-Attack Accuracy Summary Tables:</Title>
+
         {showfoolboxSummary && <Title level={3}>Foolbox:</Title>}
         {showfoolboxSummary && <FoolboxTable />}
         {showCleverhansSummary && <Title level={3}>CleverHans:</Title>}
