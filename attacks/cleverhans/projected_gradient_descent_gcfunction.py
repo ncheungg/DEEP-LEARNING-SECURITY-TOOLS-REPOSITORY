@@ -48,7 +48,8 @@ def cleverhans_pgd_func(request):
     bucket_name = "dlstr-bucket"
     model_name = request_json['model_name']
     dataset_name = request_json['dataset_name']
-    
+    epsilons = request_json['epsilons']
+
     gcs_path = "gs://{}/{}".format(bucket_name, model_name)
     model = tf.keras.models.load_model(gcs_path)
     
@@ -62,34 +63,37 @@ def cleverhans_pgd_func(request):
     split = 'test'
     for i in dataset_info['splits']:
         if(i['name'] == "test"):
-            if(int(i['shardLengths'][0]) > 200):
-                absolute = min(200, int(i['shardLengths'][0]))
-                split = f'test[:{absolute}]'
-                print(split)
+            absolute = min(100,int(i['shardLengths'][0]))
+            split = f'test[:{absolute}]'
 
     builder = tfds.builder_from_directory(gcs_path)
     test_data = builder.as_dataset(split = split, batch_size=128)
    
-    test_acc_pgd = tf.metrics.SparseCategoricalAccuracy()
+    images = np.array([sample['image'] for sample in test_data])
+    labels = np.array([sample['label'] for sample in test_data])
+
+    images = process_data(images, dataset_info)
 
     order_of_norm_lookup = {"inf" : np.inf, "1" : 1, "2" : 2}
     order_of_norm = order_of_norm_lookup[request_json['order_of_norm']]
+    
+    accuracy_list = []
 
-    progress_bar_test = tf.keras.utils.Progbar(absolute)
-    for sample in test_data:
+    for eps in epsilons:
+        test_acc_pgd = tf.metrics.SparseCategoricalAccuracy()
+        for i in range(len(images)):
 
-        x = sample['image']
-        y = sample['label']
+            x = images[i]
+            y = labels[i]
 
-        x = process_data(x, dataset_info)
+            x_pgd = projected_gradient_descent(model_fn = model, x = x, eps = eps, eps_iter = request_json["epsilon_iter"], nb_iter = request_json["attack_iter"], norm = order_of_norm)
+            y_pred_pgd = model(x_pgd)
+            test_acc_pgd(y, y_pred_pgd)
+        
+        accuracy_list.append(round(float(test_acc_pgd.result()) * 100, 2))
 
-        x_pgd = projected_gradient_descent(model_fn = model, x = x, eps = request_json["epsilon"], eps_iter = request_json["epsilon_iter"], nb_iter = request_json["attack_iter"], norm = order_of_norm)
-        y_pred_pgd = model(x_pgd)
-        test_acc_pgd(y, y_pred_pgd)
-
-        progress_bar_test.add(x.shape[0])
-       
-    data = {"accuracy" : round(float(test_acc_pgd.result()) * 100, 2)}
+    data = {"epsilons" : epsilons,
+            "accuracy" : accuracy_list}
   
     # Set CORS headers for the main request
     headers = {

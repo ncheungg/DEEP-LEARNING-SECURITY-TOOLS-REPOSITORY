@@ -79,11 +79,12 @@ def mlpm_population_attack_func(request):
     for i in dataset_info['splits']:
         if(i['name'] == "test"):
             test_images = min(500,int(i['shardLengths'][0]))
+            train_images = min(500,int(i['shardLengths'][0]))
         if(i['name'] == "train"):
             train_images = min(500,int(i['shardLengths'][0]))
 
     builder = tfds.builder_from_directory(gcs_path)
-    test_data, train_data, population_data = builder.as_dataset(split=[f'test[:{test_images}]', f'train[:{train_images}]', f'test[{test_images}:{3*test_images}]'])
+    test_data, train_data, population_data = builder.as_dataset(split=[f'test[:{test_images}]', f'test[{3*test_images}:{3*test_images+train_images}]', f'test[{test_images}:{3*test_images}]'])
     
     fpr_tolerance_list = [
         0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0
@@ -174,4 +175,3 @@ def mlpm_population_attack_func(request):
         }
 
     return (json.dumps(data), 200, headers)
-

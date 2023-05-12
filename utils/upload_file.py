@@ -8,6 +8,9 @@ import logging
 import json
 
 bucket_name = "dlstr-bucket"
+dataset_files = ['dataset_info.json', 'features.json', 'label.labels.txt']
+model_files = ['.pb', '.index', '.data-00000-of-00001']
+
 
 @functions_framework.http
 def upload_file(request):
@@ -17,27 +20,55 @@ def upload_file(request):
         headers = {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'POST',
-            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Headers': '*',
             'Access-Control-Max-Age': '3600'
         }
 
         return '', 204, headers
 
-    if 'file' not in request.files:
-        return 'No file uploaded', 400
+    headers = {
+            'Access-Control-Allow-Origin': '*'
+        }
 
-    file = request.files['file']
+    model_dataset = True
 
-    # Save the file to a temporary file on disk
+    if 'model' in request.files:
+        file = request.files['model']
+    elif 'dataset' in request.files:
+        file = request.files['dataset']
+        model_dataset = False
+    else:
+        return ('No file uploaded', 400, headers)
+
+    if not file.filename.endswith('.zip'):
+        return ('Not a zip file', 400, headers)
+
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+
     with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
         file.save(tmp_file.name)
+        with zipfile.ZipFile(tmp_file.name, 'r') as zip_ref:
+            zip_ref.extractall(f'/tmp/{file.filename}')
+        # Get the name of the unzipped folder
+        unzipped_folder_name = zip_ref.namelist()[0].split("/")[0]
+        print(unzipped_folder_name)
+        # Copy the unzipped files to the same bucket
         
-        storage_client = storage.Client()
-        # Upload the file to Google Cloud Storage
-        bucket = storage_client.bucket(bucket_name)
-        blob = bucket.blob(file.filename)
-        with open(tmp_file.name, 'rb') as f:
-            blob.upload_from_file(f)
+        for file_name in zip_ref.namelist():
+            if os.path.isfile(f'/tmp/{file.filename}/{file_name}'):
+
+                if model_dataset:
+                    if not file_name.endswith(tuple(model_files)):
+                        print(file_name)
+                        return ("Inputted model is not is the right format, see https://www.tensorflow.org/guide/saved_model", 400, headers)
+                else:
+                    if not file_name.endswith(tuple(dataset_files)) and ".tfrecord" not in file_name:
+                        print(file_name)
+                        return ("Inputted dataset is not in the right format, see https://www.tensorflow.org/datasets", 400, headers)
+
+                unzipped_blob = bucket.blob(file_name)
+                unzipped_blob.upload_from_filename(f'/tmp/{file.filename}/{file_name}')
             
         # Delete the temporary file
         os.unlink(tmp_file.name)
