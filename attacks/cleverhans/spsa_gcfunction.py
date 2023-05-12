@@ -20,14 +20,12 @@ from cleverhans.tf2.attacks.spsa import spsa
 def process_data(x, dataset_info):
     if(dataset_info['schema']['feature'][1]['type'] == "INT"):
         x = tf.cast(x, tf.float32)
-        print(dataset_info['schema']['feature'][1]['type'])
 
     for i in dataset_info['splits'][0]['statistics']['features']:
         if(i['name'] == "image"):
             if(i['numStats']['max'] == 255):
                 x /= 127.5
                 x -= 1
-                print(dataset_info['splits'][0]['statistics']['features'][1]['numStats']['max'])
     return x
 
 @functions_framework.http
@@ -50,7 +48,8 @@ def cleverhans_spsa_func(request):
     bucket_name = "dlstr-bucket"
     model_name = request_json['model_name']
     dataset_name = request_json['dataset_name']
-    
+    epsilons = request_json['epsilons']
+
     gcs_path = "gs://{}/{}".format(bucket_name, model_name)
     model = tf.keras.models.load_model(gcs_path)
     
@@ -66,30 +65,34 @@ def cleverhans_spsa_func(request):
         if(i['name'] == "test"):
             absolute = min(20,int(i['shardLengths'][0]))
             split = f'test[:{absolute}]'
-            print(split)
 
     builder = tfds.builder_from_directory(gcs_path)
     #spsa attack requires batch size = 1
     test_data = builder.as_dataset(split = split, batch_size=1)
    
-    test_acc_spsa = tf.metrics.SparseCategoricalAccuracy()
+    images = np.array([sample['image'] for sample in test_data])
+    labels = np.array([sample['label'] for sample in test_data])
 
-    progress_bar_test = tf.keras.utils.Progbar(absolute)
-    for sample in test_data:
+    images = process_data(images, dataset_info)
 
-        x = sample['image']
-        y = sample['label']
+    accuracy_list = []
 
-        x = process_data(x, dataset_info)
+    for eps in epsilons:
+        test_acc_spsa = tf.metrics.SparseCategoricalAccuracy()
+        for i in range(len(images)):
 
-        x_spsa = spsa(model_fn = model, x = x, y = y, eps = request_json['epsilon'], nb_iter = request_json["attack_iter"], clip_min = -1.0, clip_max = 1.0)
-        y_pred_spsa = model(x_spsa)
-        test_acc_spsa(y, y_pred_spsa)
+            x = images[i]
+            y = labels[i]
 
-        progress_bar_test.add(x.shape[0])
-       
-    data = {"accuracy" : round(float(test_acc_spsa.result()) * 100, 2)}
-  
+            x_spsa = spsa(model_fn = model, x = x, y = y, eps = eps, nb_iter = request_json["attack_iter"], clip_min = -1.0, clip_max = 1.0)
+            y_pred_spsa = model(x_spsa)
+            test_acc_spsa(y, y_pred_spsa)
+        
+        accuracy_list.append(round(float(test_acc_spsa.result()) * 100, 2))
+
+    data = {"epsilons" : epsilons,
+            "accuracy" : accuracy_list}
+
     # Set CORS headers for the main request
     headers = {
             'Access-Control-Allow-Origin': '*',

@@ -20,14 +20,12 @@ from cleverhans.tf2.attacks.fast_gradient_method import fast_gradient_method
 def process_data(x, dataset_info):
     if(dataset_info['schema']['feature'][1]['type'] == "INT"):
         x = tf.cast(x, tf.float32)
-        print(dataset_info['schema']['feature'][1]['type'])
 
     for i in dataset_info['splits'][0]['statistics']['features']:
         if(i['name'] == "image"):
             if(i['numStats']['max'] == 255):
                 x /= 127.5
                 x -= 1
-                print(dataset_info['splits'][0]['statistics']['features'][1]['numStats']['max'])
     return x
 
 @functions_framework.http
@@ -50,7 +48,8 @@ def cleverhans_fgm_func(request):
     bucket_name = "dlstr-bucket"
     model_name = request_json['model_name']
     dataset_name = request_json['dataset_name']
-    
+    epsilons = request_json['epsilons']
+
     gcs_path = "gs://{}/{}".format(bucket_name, model_name)
     model = tf.keras.models.load_model(gcs_path)
     
@@ -64,34 +63,38 @@ def cleverhans_fgm_func(request):
     split = 'test'
     for i in dataset_info['splits']:
         if(i['name'] == "test"):
-            if(int(i['shardLengths'][0]) > 200):
-                percent = int(200/int(i['shardLengths'][0])*100)
-                split = f'test[:{percent}%]'
-                print(split)
+            absolute = min(100,int(i['shardLengths'][0]))
+            split = f'test[:{absolute}]'
+            print(split)
 
     builder = tfds.builder_from_directory(gcs_path)
     test_data = builder.as_dataset(split = split, batch_size=128)
-   
-    test_acc_fgm = tf.metrics.SparseCategoricalAccuracy()
+
+    images = np.array([sample['image'] for sample in test_data])
+    labels = np.array([sample['label'] for sample in test_data])
+
+    images = process_data(images, dataset_info)
 
     order_of_norm_lookup = {"inf" : np.inf, "1" : 1, "2" : 2}
     order_of_norm = order_of_norm_lookup[request_json['order_of_norm']]
 
-    progress_bar_test = tf.keras.utils.Progbar(200)
-    for sample in test_data:
+    accuracy_list = []
 
-        x = sample['image']
-        y = sample['label']
+    for eps in epsilons:
+        test_acc_fgm = tf.metrics.SparseCategoricalAccuracy()
+        for i in range(len(images)):
 
-        x = process_data(x, dataset_info)
+            x = images[i]
+            y = labels[i]
 
-        x_fgm = fast_gradient_method(model_fn = model, x = x, eps = request_json["epsilon"], norm = order_of_norm)
-        y_pred_fgm = model(x_fgm)
-        test_acc_fgm(y, y_pred_fgm)
+            x_fgm = fast_gradient_method(model_fn = model, x = x, eps = eps, norm = order_of_norm)
+            y_pred_fgm = model(x_fgm)
+            test_acc_fgm(y, y_pred_fgm)
+        
+        accuracy_list.append(round(float(test_acc_fgm.result()) * 100, 2))
 
-        progress_bar_test.add(x.shape[0])
-       
-    data = {"accuracy" : round(float(test_acc_fgm.result()) * 100, 2)}
+    data = {"epsilons" : epsilons,
+            "accuracy" : accuracy_list}
   
     # Set CORS headers for the main request
     headers = {
